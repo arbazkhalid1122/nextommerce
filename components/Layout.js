@@ -27,7 +27,7 @@ export default function Layout({ children }) {
   }, [router]);
 
   return (
-    <div className="content glob-trans relative min-h-screen bg-secondary">
+    <div className="content glob-trans relative min-h-screen bg-gray-100 ">
       <Loading loading={loading} />
       <Navbar />
       <Sidebar />

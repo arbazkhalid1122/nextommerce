@@ -17,7 +17,15 @@ export default function Login() {
   const submitHandler = async (form) => {
     // Store form data in localStorage
     localStorage.setItem("user", JSON.stringify(form));
-    router.push("/");
+    console.log("Form data: ", form);
+    
+    // router.push("/");
+    if(form.role === "buyer") {
+      router.push("/");
+    }else{
+      localStorage.setItem("isAdmin", true);
+      router.push("/admin/product/display");
+    }
     // const { name, lastname, phone, address } = form;
     // updateAccount({ name, lastname, phone, address, isAdmin: false });
   };

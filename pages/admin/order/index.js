@@ -48,28 +48,12 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="bg-secondary text-secondary py-12 px-5 relative w-full">
-      <div className="flex flex-col gap-y-6 justify-center lg:flex-row lg:justify-between">
-        <div className="flex flex-col gap-x-4 gap-y-6 md:flex-row align-middle w-3/4 mx-auto sm:w-full justify-start flex-wrap">
-          <input placeholder="name" className="bg-third rounded-full py-2 px-3" value={name} onChange={(e) => setName(e.target.value)} />
-          <input placeholder="lastname" className="bg-third rounded-full py-2 px-3" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-          <select className="rounded-full py-1 bg-third px-3" value={sent} onChange={(e) => setSent(e.target.value)}>
-            <option value="undefined">all</option>
-            <option value="true">sent orders</option>
-            <option value="false">in process orders</option>
-          </select>
-          <button className="flex py-1 bg-third text-secondary rounded-full px-4" onClick={() => setShowCalender(true)}>
-            <span className="mr-1 my-auto">calender</span>
-            <CalendarIcon className="my-auto" width={20} />
-          </button>
-        </div>
-      </div>
-
+    <div className="z-10 bg-gray-100 text-secondary px-5 relative w-full">
       <ul className="my-5 sm:mx-3 p-6 sm:p-10">
         {ordSt.map((order, i) => (
           <li
           key={i}
-          className={`relative px-9 py-6 my-4 rounded-2xl w-full shadow-lg transition-all duration-300
+          className={`relative px-9 py-6 my-4 rounded-2xl w-full shadow-lg transition-all duration-300 bg-white
             ${order.sent ? "bg-[#2ea3fa]/40 hover:bg-[#2ea3fa]/60" : "bg-[#f1970e]/40 hover:bg-[#f1970e]/60"} 
             backdrop-blur-md border border-white/10   text-black`}
         >

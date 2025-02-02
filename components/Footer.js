@@ -3,7 +3,7 @@ import Link from "next/link";
 import LangSelector from "./LangSelector";
 function footer() {
   return (<>
-  <div className="bg-secondary w-full pt-52 border-0"></div>
+  <div className="bg-primary w-full pt-40 border-0"></div>
     <footer className="text-primary bg-primary py-6 absolute bottom-0 left-0 right-0">
         <div className="flex justify-center sm:justify-end text-center w-full mb-6 sm:mb-3 pr-5 text-xs">
           <LangSelector/>

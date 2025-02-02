@@ -35,21 +35,21 @@ function CreateProduct() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen text-black p-6">
-      <form className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg" onSubmit={handleSubmit(submitHandler)}>
-        <h2 className="text-2xl font-bold mb-6">Create New Product</h2>
+    <div className="z-10 bg-gray-100 text-secondary px-5 relative w-full">
+      <form className="my-5 sm:mx-3 p-6 sm:p-10 bg-white rounded-lg shadow-lg" onSubmit={handleSubmit(submitHandler)}>
+        <h2 className="text-2xl text-black/90 font-bold mb-6">Create New Product</h2>
 
-        <label className="block mt-4 font-semibold">Product Name</label>
+        <label className="block mt-4 text-black/90 font-semibold">Product Name</label>
         <input
-          className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300"
+          className="w-full bg-gray-100 mt-2 p-2 rounded border border-gray-300 text-lg font-medium text-black"
           type="text"
           placeholder="Product name..."
           {...register("name", { required: "Enter product name" })}
         />
         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
 
-        <label className="block mt-4 font-semibold">Category</label>
-        <select className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300" {...register("category", { required: "Select a category" })}>
+        <label className="block mt-4 text-black/90 font-semibold">Category</label>
+        <select className="w-full bg-gray-100 mt-2 p-2 rounded border border-gray-300 text-lg font-medium text-black" {...register("category", { required: "Select a category" })}>
           <option value="">Select a category</option>
           {fakeCategories.map((cat, i) => (
             <option key={i} value={cat}>{cat}</option>
@@ -57,9 +57,9 @@ function CreateProduct() {
         </select>
         {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
 
-        <label className="block mt-4 font-semibold">Price ($)</label>
+        <label className="block mt-4 text-black/90 font-semibold">Price ($)</label>
         <input
-          className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300"
+          className="w-full bg-gray-100 mt-2 p-2 rounded border border-gray-300 text-lg font-medium text-black"
           type="number"
           placeholder="Price"
           {...register("price", { required: "Enter the price" })}
@@ -69,9 +69,9 @@ function CreateProduct() {
         <div className="p-4 rounded mt-6 bg-gray-50 border border-gray-300">
           {storeSt.map((store, index) => (
             <div key={index} className="mt-4">
-              <label className="block mt-4 font-semibold">Images</label>
+              <label className="block mt-4 text-black/90 font-semibold">Images</label>
               <input
-                className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300 hidden"
+                className="w-full bg-gray-100 mt-2 p-2 rounded border border-gray-300 hidden"
                 type="file"
                 multiple
                 onChange={(e) => handleImageChange(e, index)}
@@ -79,7 +79,8 @@ function CreateProduct() {
               />
               <button
                 type="button"
-                className="w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded"
+                className="mt-2 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded"
+                style={{ width: 'fit-content' }}
                 onClick={() => document.getElementById(`fileInput-${index}`).click()}
               >
                 Select Images
@@ -93,15 +94,15 @@ function CreateProduct() {
           ))}
         </div>
 
-        <label className="block mt-4 font-semibold">Description</label>
+        <label className="block mt-4 text-black/90 font-semibold">Description</label>
         <textarea
-          className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300"
+          className="w-full bg-gray-100 mt-2 p-2 rounded border border-gray-300 text-lg font-medium text-black"
           placeholder="Product description..."
           {...register("description", { required: "Enter a description" })}
         />
         {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
 
-        <button type="submit" className="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white p-3 rounded">
+        <button type="submit" className="mt-6 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded" style={{ width: 'fit-content', height: '2.5rem' }}>
           Submit
         </button>
       </form>
