@@ -7,32 +7,42 @@ const fakeCategories = ["Electronics", "Clothing", "Accessories", "Books", "Home
 
 function CreateProduct() {
   const router = useRouter();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-  const [storeSt, setStoreSt] = useState([
-    { color: "Red", colorCode: "#ff0000", sizeAmnt: [{ size: "M", amount: 10 }], imgUrls: [] },
-  ]);
-  
   const [finalPro, setFinalPro] = useState({});
-  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // State for the image preview
 
   const submitHandler = (form) => {
     const newProduct = {
-      ...form,
-      store: storeSt,
+      name: form.name,
+      category: form.category,
+      price: form.price,
+      description: form.description,
+      image: selectedImage, // Store the base64 image string
     };
-    setFinalPro(newProduct);
+  
+    // Save to localStorage
     const existingProducts = JSON.parse(localStorage.getItem('productData')) || [];
-    const updatedProducts = Array.isArray(existingProducts) ? [...existingProducts, newProduct] : [newProduct];
+    const updatedProducts = [...existingProducts, newProduct];
     localStorage.setItem('productData', JSON.stringify(updatedProducts));
+  
+    // Reset form and image
+    // reset();
+    // setSelectedImage(null);
   };
+  
 
-  const handleImageChange = (e, index) => {
-    const files = Array.from(e.target.files);
-    const updatedStoreSt = [...storeSt];
-    updatedStoreSt[index].imgUrls = files.map(file => URL.createObjectURL(file));
-    setStoreSt(updatedStoreSt);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result); // Store the base64 image string
+      };
+      reader.readAsDataURL(file); // Convert image to base64
+    }
   };
+  
 
   return (
     <div className="bg-gray-100 min-h-screen text-black p-6">
@@ -66,33 +76,6 @@ function CreateProduct() {
         />
         {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
 
-        <div className="p-4 rounded mt-6 bg-gray-50 border border-gray-300">
-          {storeSt.map((store, index) => (
-            <div key={index} className="mt-4">
-              <label className="block mt-4 font-semibold">Images</label>
-              <input
-                className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300 hidden"
-                type="file"
-                multiple
-                onChange={(e) => handleImageChange(e, index)}
-                id={`fileInput-${index}`}
-              />
-              <button
-                type="button"
-                className="w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded"
-                onClick={() => document.getElementById(`fileInput-${index}`).click()}
-              >
-                Select Images
-              </button>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {store.imgUrls.map((url, i) => (
-                  <img key={i} src={url} alt={`Product Image ${i}`} className="w-24 h-24 object-cover rounded" />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
         <label className="block mt-4 font-semibold">Description</label>
         <textarea
           className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300"
@@ -100,6 +83,23 @@ function CreateProduct() {
           {...register("description", { required: "Enter a description" })}
         />
         {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
+
+        <label className="block mt-4 font-semibold">Product Image</label>
+        <input
+          className="w-full bg-gray-200 mt-2 p-2 rounded border border-gray-300"
+          type="file"
+          onChange={handleImageChange} // Handle image change
+        />
+        {selectedImage && (
+          <div className="mt-2">
+            <img
+              src={selectedImage}
+              alt="Image preview"
+              className="w-24 h-24 object-cover rounded"
+            />
+          </div>
+        )}
+        {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
 
         <button type="submit" className="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white p-3 rounded">
           Submit
@@ -123,18 +123,12 @@ function CreateProduct() {
             <div>
               <strong>Description:</strong> {finalPro.description}
             </div>
-            <div className="flex flex-wrap gap-4">
-              {finalPro.store?.map((store, index) => (
-                <div key={index} className="flex flex-col">
-                  <div className="font-semibold">Color: {store.color}</div>
-                  <div className="flex flex-wrap gap-2">
-                    {store.imgUrls.map((url, i) => (
-                      <img key={i} src={url} alt={`Product Image ${i}`} className="w-24 h-24 object-cover rounded" />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {finalPro.image && (
+              <div>
+                <strong>Image:</strong>
+                <img src={finalPro.image} alt="Product Image" className="mt-2 w-32 h-32 object-cover rounded" />
+              </div>
+            )}
           </div>
         </div>
       )}
