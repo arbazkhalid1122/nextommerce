@@ -84,12 +84,5 @@ export async function getServerSideProps(context) {
     return {
       props: { allProducts, allCategories, query },
     };
-  } else {
-    return {
-      redirect: {
-        destination: "/admin/login",
-        permanent: false,
-      },
-    };
-  }
+  } 
 }

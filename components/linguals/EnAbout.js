@@ -17,7 +17,7 @@ export default function EnAbout() {
               user
             </li>
             <li className="text-sm">
-              <Link href="/admin/login">
+              <Link href="/vender/login">
                 <a className="text-accent">navigate to admin dashboard</a>
               </Link>{" "}
             </li>

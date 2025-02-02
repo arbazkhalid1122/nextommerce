@@ -22,7 +22,7 @@ export default function FaAbout() {
               محصولات،سفارشات و دیگر ادمین ها
             </li>
             <li className="text-sm">
-              <Link href="/admin/login">
+              <Link href="/vender/login">
                 <a className="text-accent">برو به پنل ادمین</a>
               </Link>{" "}
             </li>

@@ -18,16 +18,16 @@ export default function AdminNav() {
         console.log(data);
         if (data.message == "loged out") {
           updateAccount({});
-          router.push("/admin/login");
+          router.push("/vender/login");
         }
       };
     return(
         <section className="mt-[10px] px-5 bg-secondary border-t-[1px] border-b-[1px] border-hovercont text-primary text-sm">
             <ul className="flex flex-row justify-between">
                 <div className="flex flex-row justify-start gap-x-9  py-5">
-                <li ><Link href="/admin/product/create"><a>New product</a></Link></li>
-                <li ><Link href="/admin/product/display"><a>Your Products</a></Link></li>
-                <li ><Link href="/admin/order"><a>Orders</a></Link></li>
+                <li ><Link href="/vender/product/create"><a>New product</a></Link></li>
+                <li ><Link href="/vender/product/display"><a>Your Products</a></Link></li>
+                <li ><Link href="/vender/order"><a>Orders</a></Link></li>
                 </div>
                 <div className="flex flex-row justify-end gap-x-9 py-5">
                     <li onClick={()=>loggingOut()}>Log out</li>

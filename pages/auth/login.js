@@ -21,10 +21,11 @@ export default function Login() {
     
     // router.push("/");
     if(form.role === "buyer") {
+      localStorage.setItem("buyer", true);
       router.push("/");
     }else{
       localStorage.setItem("isAdmin", true);
-      router.push("/admin/product/display");
+      router.push("/vender/product/display");
     }
     // const { name, lastname, phone, address } = form;
     // updateAccount({ name, lastname, phone, address, isAdmin: false });

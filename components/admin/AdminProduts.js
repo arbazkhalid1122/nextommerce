@@ -51,7 +51,7 @@ export default function AdminProduts() {
       <AcceptModal showModal={showModal} setShowModal={setShowModal} />
       <div className="absolute right-10 flex flex-row">
         <TrashIcon width="20px" className="mr-4 cursor-pointer" onClick={() => setShowModal(true)} />
-        <PencilAltIcon width="20px" className="cursor-pointer" onClick={() => router.push(`/admin/product/edit/${fakeProduct._id}`)} />
+        <PencilAltIcon width="20px" className="cursor-pointer" onClick={() => router.push(`/vender/product/edit/${fakeProduct._id}`)} />
       </div>
       <p className="text-lg mb-4 w-max pb-1">
         <strong>name:</strong> {name.replace(/_/g, " ")}
