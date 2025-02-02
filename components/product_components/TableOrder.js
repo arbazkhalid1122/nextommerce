@@ -1,36 +1,43 @@
 export default function TableOrder({ cart }) {
   return (
     <>
-        <table className="text-left my-3 p-1 border-2 border-[#383434]">
-      <tr className="text-sm">
-        <th>Product Name</th>
-        <th>Color</th>
-        <th>Amount</th>
-        <th>Price</th>
-        <th>Subtotal</th>
+        <table className="w-full text-left my-3 border border-white/10 rounded-lg overflow-hidden shadow-md">
+  <thead className="bg-white/10 text-black text-sm">
+    <tr>
+      <th className="py-2 px-3">Product Name</th>
+      <th className="py-2 px-3">Color</th>
+      <th className="py-2 px-3">Amount</th>
+      <th className="py-2 px-3">Price</th>
+      <th className="py-2 px-3">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    {cart.map((item, i) => (
+      <tr
+        key={i}
+        className={`text-xs transition-all duration-300 ${
+          i % 2 === 0 ? "bg-white/10 hover:bg-white/20" : "bg-black/20 hover:bg-black/30"
+        }`}
+      >
+        <td className="py-3 px-4 text-gray-700">{item.name.replace(/_/g, " ")}</td>
+        <td className="py-3 px-4 text-gray-700">{item.color}</td>
+        <td className="py-3 px-4 text-gray-700">{item.amount}</td>
+        <td className="py-3 px-4 text-green-500 font-medium">{item.price}$</td>
+        <td className="py-3 px-4 text-green-500 font-medium">{item.price * item.amount}$</td>
       </tr>
-      {cart.map((item,i)=><tr className="text-xs" key={i}>
-        <td>{item.name.replace(/_/g, " ")}</td>
-        <td>{item.color}</td>
-        <td>{item.amount}</td>
-        <td>{item.price}$</td>
-        <td>{item.price*item.amount}$</td>
-      </tr>)}
-      <style jsx>{`
-      tr:nth-child(even){
-        background: #e0e0e0;
-        color:#000;
-      }
-      tr:nth-child(odd){
-        background: #4e4e4e;
-        color:#e0e0e0;
-      }
-      th, td{
-        border:1px solid #777;
-        padding: 3px 0 3px 3px;
-      }
-      `}</style>
-    </table>
+    ))}
+  </tbody>
+  <style jsx>{`
+    th, td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    th {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  `}</style>
+</table>
+
       </>
   );
 }

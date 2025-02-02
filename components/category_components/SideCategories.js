@@ -22,7 +22,7 @@ export default function SideCategories({ categories }) {
       <div className={`hidden relative sm:block w-[15%] ${lang===langs['fa']?"text-right":"text-left"}`}>
         <div className="absolute top-0 right-0 ">
           <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">
-            {t("Categories")}
+            {("Categories")}
           </h4>
           <div className="flex flex-col gap-y-2 mt-3 mr-0.5">
             <div onClick={() => setSort("relevence")}>
@@ -34,7 +34,7 @@ export default function SideCategories({ categories }) {
                       : "text-third"
                   } cursor-pointer hover:text-primary`}
                 >
-                  {t("all_products")}
+                  {("all_products")}
                 </a>
               </Link>
             </div>
@@ -48,7 +48,7 @@ export default function SideCategories({ categories }) {
                         : "text-third"
                     } cursor-pointer hover:text-primary`}
                   >
-                    {t(item)}
+                    {(item)}
                   </a>
                 </Link>
               );

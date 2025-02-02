@@ -7,7 +7,7 @@ const connectDB = (handler) => async (req, res) => {
       return handler(req, res);
     }
     // Use new db connection
-    mongoose.connect(process.env.MONGODB_URI, {
+    mongoose.connect('mongodb+srv://arbazkhann2106:<arbazkhann2106>@ecommerce.uwxmnoj.mongodb.net/', {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });

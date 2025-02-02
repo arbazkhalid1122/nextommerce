@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -28,6 +28,15 @@ function Navbar() {
   } = useGlobalContext();
   // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (isAdmin) {
+      setIsAdmin(true);
+    }
+  }, []);
+  
   return (
     <>
       <nav
@@ -35,18 +44,10 @@ function Navbar() {
         className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 navbar text-primary glob-trans"
       >
         <div className="flex ">
-          <button className="mx-3" onClick={sideToggler}>
-            <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-accent" />
-          </button>
           <div className="hidden sm:flex">
             <div className="mx-3 hover:text-accent">
               <Link href="/">
-                <a>{t("home")}</a>
-              </Link>
-            </div>
-            <div className="mx-3 hover:text-accent">
-              <Link href="/search">
-                <a>{t("categories")}</a>
+                <a>{("Home")}</a>
               </Link>
             </div>
           </div>
@@ -67,7 +68,7 @@ function Navbar() {
                 }
               }}
               type="text"
-              placeholder={t("search")}
+              placeholder={("search")}
               className="mt-[1px] w-full mx-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
             />
           </div>
@@ -93,8 +94,8 @@ function Navbar() {
             </button>
         </div>
       </nav>
-      <div className="absolute w-full py-10 top-0 bg-secondary glob-trans"></div>
-      {router.pathname.split("/")[1] === "admin" ? <AdminNav /> : null}
+      <div className="absolute w-full py-10 top-0  bg-secondary glob-trans" ></div>
+      {isAdmin ? <AdminNav /> : null}
     </>
   );
 }

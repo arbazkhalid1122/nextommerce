@@ -26,11 +26,10 @@ export default function AdminNav() {
             <ul className="flex flex-row justify-between">
                 <div className="flex flex-row justify-start gap-x-9  py-5">
                 <li ><Link href="/admin/product/create"><a>New product</a></Link></li>
-                <li ><Link href="/admin/product/hat"><a>display products</a></Link></li>
-                <li ><Link href="/admin/order"><a>orders</a></Link></li>
+                <li ><Link href="/admin/product/display"><a>Your Products</a></Link></li>
+                <li ><Link href="/admin/order"><a>Orders</a></Link></li>
                 </div>
                 <div className="flex flex-row justify-end gap-x-9 py-5">
-                  <li><Link href="/admin/signup"><a>signup new admin</a></Link></li>
                     <li onClick={()=>loggingOut()}>Log out</li>
                 </div>
             </ul>

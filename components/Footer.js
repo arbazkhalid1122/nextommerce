@@ -23,17 +23,6 @@ function footer() {
         ))}
       </ul>
         <div className="container mx-auto pt-3 px-5 flex justify-center">
-          <p className="text-secondary text-sm text-center sm:text-left">
-            © {new Date().getFullYear()} Nextommerce —
-            <a
-              href="https://twitter.com/mamad_coder"
-              className="text-gray-500 ml-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @AminMeraji
-            </a>
-          </p>
       </div>
     </footer>
   </>

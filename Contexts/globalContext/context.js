@@ -73,7 +73,8 @@ const ContextProvider = ({ initialTheme, children }) => {
   };
   // translator
   const translate = (word) => {
-    let key = word.toLowerCase();
+    const words = 'aaaaa'
+    let key = words?.toLowerCase();
     key = key.replace(/-/g, "_");
     if (!LangStrings[lang][key]) {
       console.warn(`No string '${key}' for locale '${lang}'`);
@@ -174,7 +175,7 @@ const ContextProvider = ({ initialTheme, children }) => {
   // side bar display condition
   const [showSide, setShowSide] = useState(false);
   function sideToggler() {
-    setShowSide(!showSide);
+    // setShowSide(!showSide);
   }
   // cart display condition
   const [showCart, setShowCart] = useState(false);

@@ -7,7 +7,8 @@ import { server } from "../../../../config";
 import authHandler from "../../../../shared/utils/auth/authHandler";
 
 function edit({ id, product, allCategories }) {
-  const router = useRouter();
+
+console.log("allCategories", allCategories);  const router = useRouter();
   const {
     name,
     category,
@@ -35,33 +36,6 @@ function edit({ id, product, allCategories }) {
   // modal state
   const [showModal, setShowModal] = useState(false);
 
-  // fetch data just after click on save  button
-  useEffect(async () => {
-    if (save) {
-      const res = await fetch("/api/product/crud", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(finalPro),
-      });
-
-      const athorized = res.headers.get("authorized") === "true";
-      const data = await res.json();
-
-      if (athorized) {
-        if (data.message == "updated") {
-          alert("changes saved successfuly");
-        router.back();
-      } else {
-        alert("something went wrong try again later");
-      }
-      setSave(false);
-    }else{
-      router.push("/admin/login");
-    }
-  }
-  }, [save]);
 
   const submitHandler = (form) => {
     // make a product model to send
@@ -250,34 +224,37 @@ function edit({ id, product, allCategories }) {
 
 export default edit;
 
+
 export async function getServerSideProps(context) {
-  const { authorized } = await authHandler(context.req, context.res, true);
-  if (authorized) {
-    const id = context.params.id;
-    const productData = await fetch(`${server}/api/product/crud?id=${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const { id } = context.params;
 
-    const catsData = await fetch(`${server}/api/product/categories`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+  // Fake data for product and categories
+  const product = {
+    id,
+    name: "Sample_Product",
+    category: "Electronics",
+    price: 299.99,
+    store: [
+      {
+        color: "Red",
+        colorCode: "#FF0000",
+        sizeAmnt: [{ size: "M", amount: 10 }],
+        imgUrls: ["https://via.placeholder.com/150"],
       },
-    });
+    ],
+    description: "This is a sample product description.",
+    sale: true,
+    newArival: false,
+    available: true,
+  };
 
-    const product = await productData.json();
-    const allCategories = await catsData.json();
+  const allCategories = ["Electronics", "Books", "Clothing", "Home Appliances"];
 
-    return { props: { id, product, allCategories } };
-  } else {
-    return {
-      redirect: {
-        destination: "/admin/login",
-        permanent: false,
-      },
-    };
-  }
+  return {
+    props: {
+      id,
+      product,
+      allCategories,
+    },
+  };
 }

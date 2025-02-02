@@ -16,7 +16,7 @@ export default function Item({ item, index }) {
           <p className="text-lg">{name.replace(/_/g, " ")}</p>
           <div className="flex flex-row mt-0.5">
             <p>
-              {t('color')}:
+              {('color')}:
               <span
                 style={{
                   backgroundColor: colorCode!==null ? colorCode : "transparent",
@@ -28,7 +28,7 @@ export default function Item({ item, index }) {
             </p>
             {size ? (
               <p className="ml-3">
-                {t("size")}:{" "}
+                {("size")}:{" "}
                 <span className="ml-0.5 p-1 border-[1px] border-primarycont rounded-[50%] text-xs">
                   {size}
                 </span>

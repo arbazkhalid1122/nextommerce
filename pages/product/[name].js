@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useGlobalContext } from "../../Contexts/globalContext/context";
 
 export default function id({ product, relateds }) {
-  const { translate: t } = useGlobalContext();
+
+console.log("product", product);  const { translate: t } = useGlobalContext();
   return (
     <>
       <article className="bg-secondary text-secondary">
@@ -14,7 +15,7 @@ export default function id({ product, relateds }) {
           <SingleProduct product={product} />
         </section>
         {/* related section */}
-        <section
+        {/* <section
           style={{ zIndex: 0 }}
           className="border-t-[1px] border-gray-300 mt-10"
         >
@@ -31,42 +32,58 @@ export default function id({ product, relateds }) {
               <a>{t("All_Products")}</a>
             </Link>
           </button>
-        </div>
+        </div> */}
       </article>
     </>
   );
 }
 
 export async function getServerSideProps(cnx) {
-  const name = cnx.params.name;
-  const productRes = await fetch(`${server}/api/product/crud?name=${name}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+var cat = cnx.query?.cat;
+if (
+  cat === "hat" ||
+  cat === "accessory" ||
+  cat === null ||
+  cat === undefined
+) {
+  cat = "t-shirt";
+}
 
-  var cat = cnx.query?.cat;
-  if (
-    cat === "hat" ||
-    cat === "accessory" ||
-    cat === null ||
-    cat === undefined
-  ) {
-    cat = "t-shirt";
-  }
-  const relatedsRes = await fetch(
-    `${server}/api/product/crud?filter=category&value=${cat}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+const data = {
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+  "name": "nextommerce",
+  "short_name": "nextommerce",
+  "description": "PWA next.js e-commerce",
+  "icons": [
+      {
+          "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+          "sizes": "192x192",
+          "type": "image/png"
       },
-    }
-  );
+      {
+          "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+          "sizes": "256x256",
+          "type": "image/png"
+      },
+      {
+          "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+          "sizes": "384x384",
+          "type": "image/png"
+      },
+      {
+          "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ]
+}
 
-  const product = await productRes.json();
-  const relateds = await relatedsRes.json();
+const product = data;
+const relateds = data;
 
   return {
     props: {

@@ -20,7 +20,7 @@ export default function Intro() {
   return (
     <div className="text-secondary curier">
       <div className="h-[100vh]">
-        <div className="relative h-screen -top-10 left-0 right-0">
+        <div className="relative h-screen top-10 left-0 right-0">
           <div className="relative w-screen h-screen">
             <Image
               data-aos="fade"
@@ -34,11 +34,11 @@ export default function Intro() {
             data-aos="fade-up"
             className="absolute left-0 right-0 text-center top-[65%] sm:top-[75%] text-lg"
           >
-            {t('moto1')}
+            {('moto1')}
           </p>
         </div>
       </div>
-      <div className="h-[50vh]">
+      {/* <div className="h-[50vh]">
         <div className="relative h-[50vh] left-0 right-0">
           <p
             data-aos="fade"
@@ -47,9 +47,9 @@ export default function Intro() {
             {t("moto2")}
           </p>
         </div>
-      </div>
+      </div> */}
       {/* banner */}
-
+{/* 
       <div className="bg-third animation w-full whitespace-nowrap overflow-scroll scrollbar-hide">
         {bannerImages.map((item, i) => (
           <Link key={i} href={`/product/${item.name.replace(/\s/g, "_")}?cat=${item.cat}`}>
@@ -63,7 +63,7 @@ export default function Intro() {
           </a>
           </Link>
         ))}
-      </div>
+      </div> */}
       <style jsx>{`
         .animation div {
           width: 300px;

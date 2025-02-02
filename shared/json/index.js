@@ -57,56 +57,58 @@ export const sortView = [
   },
 ];
 
+const url = "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg";
+
 export const bannerImages = [
   {
     name: "cotton hat",
     cat: "hat",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F115%2F491%2FHat-front-white__31525.1602591510.png&w=640&q=85",
+    url: url,
   },
   {
     name: "light weight jacket",
     cat: "jacket",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F116%2F512%2FMen-Jacket-Front-Black__15466.1603283963.png&w=1920&q=85",
+    url: url,
   },
   {
     name: "vercel t-shirt",
     cat: "t-shirt",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F117%2F532%2FMen-TShirt-White-Front__99616.1603284781.png&w=640&q=85",
+    url: url,
   },
   {
     name: "mask",
     cat: "accessory",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F118%2F508%2FSurgical-Mask-Black__89554.1603756821.png&w=750&q=85",
+    url: url,
   },
   {
     name: "champion packable jacket",
     cat: "jacket",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F124%2F415%2Fmockup-c2bbbaf4__00019.1601229493.png&w=1920&q=85",
+    url: url,
   },
   {
     name: "unisex skinny joggers",
     cat: "pants",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F127%2F431%2Fmockup-9fc4c1cf__88683.1601229845.png&w=1920&q=85",
+    url: url,
   },
   {
     name: "long sleeve shirt",
     cat: "shirt",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F136%2F459%2Fmockup-ae9a83b0__49881.1603746586.png&w=1920&q=85",
+    url: url,
   },
   {
     name: "cotton hat",
     cat: "hat",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F115%2F491%2FHat-front-white__31525.1602591510.png&w=640&q=85",
+    url: url,
   },
   {
     name: "light weight jacket",
     cat: "jacket",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F116%2F512%2FMen-Jacket-Front-Black__15466.1603283963.png&w=1920&q=85",
+    url: url,
   },
   {
     name: "vercel t-shirt",
     cat: "t-shirt",
-    url: "https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F117%2F532%2FMen-TShirt-White-Front__99616.1603284781.png&w=640&q=85",
+    url: url,
   },
 ];
 

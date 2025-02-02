@@ -25,7 +25,7 @@ const adminSchema = new mongoose.Schema(
     },
     root: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     suspend:{
       type:Boolean,

@@ -42,7 +42,7 @@ function Sidebar() {
             <Link href={item.url} className="text-md w-full">
               <a className="px-2 w-full flex my-2 h-10  rounded-full hover:mx-4 w-[55%] hover:w-full hover:text-primary hover:bg-hover glob-trans ">
                 <item.icon width="20px" />
-                <span className="py-2">{t(item.name)}</span>
+                <span className="py-2">{(item.name)}</span>
               </a>
             </Link>
           </li>

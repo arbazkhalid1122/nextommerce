@@ -5,12 +5,44 @@ import GridProducts from "../components/product_components/GridProducts";
 import Moto1 from "../components/home_components/Moto1";
 import Link from "next/link";
 import { useGlobalContext } from "../Contexts/globalContext/context";
-export default function Home({ newArivals, sales }) {
+export default function Home() {
+
+  const sales = {
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+    "name": "nextommerce",
+    "short_name": "nextommerce",
+    "description": "PWA next.js e-commerce",
+    "icons": [
+        {
+            "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "https://www.shutterstock.com/shutterstock/photos/2233924609/display_1500/stock-vector-short-and-custom-urls-url-shortener-technology-and-generator-scissor-cut-an-address-bar-or-link-2233924609.jpg",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+  } 
   const { translate } = useGlobalContext();
-  return (
+return (
     <div className="bg-secondary">
       <Intro />
-      {newArivals.length > 0 ? (
         <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
           <motion.p
             initial={{ y: 0, opacity: 0 }}
@@ -21,10 +53,10 @@ export default function Home({ newArivals, sales }) {
           >
             {translate("latest_arivals")}
           </motion.p>
-          <GridProducts products={newArivals} limit={6} />
+          <GridProducts  />
         </div>
-      ) : null}
-      <Moto1 />
+      
+      {/* <Moto1 /> */}
       {sales.length > 0 ? (
         <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-10">
           <motion.h4
@@ -39,38 +71,8 @@ export default function Home({ newArivals, sales }) {
           <GridProducts products={sales} limit={6} />
         </div>
       ) : null}
-      <div className="w-full flex justify-center pb-10">
-        <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
-          <Link href="/search">
-            <a>{translate("View_Products")}</a>
-          </Link>
-        </button>
-      </div>
-    </div>
-  );
+     
+  </div>
+);
 }
 
-export async function getServerSideProps() {
-  const newArivals = await getProductsFromDB("newArival", true);
-  const sales = await getProductsFromDB("sale", true);
-  return {
-    props: {
-      newArivals,
-      sales,
-    },
-    // revalidate: 900, //every 15 minutes
-  };
-}
-
-async function getProductsFromDB(prop, value) {
-  const data = await fetch(
-    `${server}/api/product/crud?filter=${prop}&value=${value}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  return await data.json();
-}

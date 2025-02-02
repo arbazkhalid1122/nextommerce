@@ -100,7 +100,7 @@ export default function checkout() {
           className="flex flex-col capitalize"
         >
           <label className="mb-1 text-primary text-lg" htmlFor="name">
-            {t("name")}:
+            {("name")}:
           </label>
           <input
             className="rounded-full px-2 mb-6 bg-secondary"
@@ -122,7 +122,7 @@ export default function checkout() {
           )}
 
           <label className="mb-1 text-primary text-lg" htmlFor="lastname">
-            {t("lastname")}:
+            {("lastname")}:
           </label>
           <input
             className="rounded-full px-2 mb-6 bg-secondary"
@@ -144,7 +144,7 @@ export default function checkout() {
           )}
 
           <label className="mb-1 text-primary text-lg" htmlFor="phone">
-            {t("phone")}:
+            {("phone")}:
           </label>
           <input
             className="rounded-full px-2 mb-6 bg-secondary"
@@ -165,7 +165,7 @@ export default function checkout() {
           )}
 
           <label className="mb-1 text-primary text-lg" htmlFor="address">
-            {t("address")}:
+            {("address")}:
           </label>
           <input
             className="rounded-full px-2 mb-6 bg-secondary"
@@ -180,11 +180,11 @@ export default function checkout() {
             <p className="text-red-700 -mt-4 mb-4">* enter your address</p>
           )}
 
-          <h3 className="text-lg mt-5 text-primary">{t("cart_table")}</h3>
+          <h3 className="text-lg mt-5 text-primary">{("cart_table")}</h3>
           <TableOrder cart={cart} />
           <div className="w-1/2 flex flex-col items-center mx-auto mt-7">
             <button className="rounded-full w-full mx-auto text-xl py-3 bg-accent text-white shadow-md my-8">
-              {t("SUBMIT")}
+              {("SUBMIT")}
             </button>
           </div>
         </form>
@@ -192,14 +192,14 @@ export default function checkout() {
           onClick={() => router.back()}
           className="text-center rounded-full w-1/3 mx-auto text-sm py-1 bg-danger text-white"
         >
-          {t("cancel")}
+          {("cancel")}
         </button>
       </div>
       {/* modal */}
       {send === true ? (
         <div className="absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center bg-[#000000d3]">
           <div className="rounded-2xl bg-white w-3/4 min-w-[200px] max-w-[350px] pt-12 pb-9 text-center">
-            <h5 className="text-xl text-gray-900 mb-14">{t("asure_q")}</h5>
+            <h5 className="text-xl text-gray-900 mb-14">{("asure_q")}</h5>
             <div className="flex flex-row justify-around text-white w-full">
               <button
                 onClick={() => {
@@ -207,7 +207,7 @@ export default function checkout() {
                 }}
                 className="bg-danger py-2 w-[40%] rounded-full"
               >
-                {t("return")}
+                {("return")}
               </button>
               <button
                 onClick={() => {
@@ -216,7 +216,7 @@ export default function checkout() {
                 }}
                 className="bg-accent py-2 w-[45%] rounded-full"
               >
-                {t("continue")}
+                {("continue")}
               </button>
             </div>
           </div>

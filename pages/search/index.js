@@ -6,8 +6,6 @@ import { useGlobalContext } from "../../Contexts/globalContext/context";
 import GridProducts from "../../components/product_components/GridProducts";
 import SideCategories from "../../components/category_components/SideCategories";
 import SortItems from "../../components/category_components/SortItems";
-// values, icons, etc...
-import { server } from "../../config";
 
 export default function index({ products, allCategories }) {
   const router = useRouter();
@@ -40,7 +38,7 @@ export default function index({ products, allCategories }) {
       <div className="bg-secondary text-secondary glob-trans">
         <div className="flex flex-row pt-36 sm:pt-5 relative">
           {/* selecting categories */}
-          <SideCategories categories={allCategories} />
+          {/* <SideCategories categories={allCategories} /> */}
           {/* showing result for search */}
           <div className="w-[85%] sm:w-[66%] mx-auto sm:-mt-5">
             <h4 className="mb-4">
@@ -62,25 +60,18 @@ export default function index({ products, allCategories }) {
   );
 }
 
-export async function getServerSideProps(cnx) {
-  const query = cnx.query?.q;
-  const data = await fetch(
-    `${server}/api/product/crud?filter=name&value=${query}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+export async function getServerSideProps() {
+  const products = [
+    { name: "Product 1", price: 100 },
+    { name: "Product 2", price: 200 },
+    // Add more products as needed
+  ];
 
-  const rewCats = await fetch(`${server}/api/product/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const products = await data.json();
-  const allCategories = await rewCats.json();
+  const allCategories = [
+    { name: "Category 1" },
+    { name: "Category 2" },
+    // Add more categories as needed
+  ];
 
   return {
     props: { products, allCategories },
