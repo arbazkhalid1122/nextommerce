@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaShoppingBag, FaTrashAlt } from "react-icons/fa";
-import PaymentCard from "../components/payment/paymentCard";
-import ShoppingCart from "../components/payment/addToCart";
+import PaymentCard from "../../components/payment/paymentCard";
+import ShoppingCart from "../../components/payment/addToCart";
 
 const fakeProducts = [
   {

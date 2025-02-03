@@ -76,7 +76,7 @@ function Navbar() {
           <div className="flex items-center space-x-4">
             <button
               className="hover:text-yellow-400 relative"
-              onClick={()=> router.push("/cart")}
+              onClick={()=> router.push("/user/cart")}
             >
               <FaShoppingBag className="w-6 h-6" />
               {amount !== 0 && (

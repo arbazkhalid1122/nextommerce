@@ -119,7 +119,7 @@ const router = useRouter();
               Add to Cart
             </button>
             <button
-              onClick={() => router.push("/cart")}
+              onClick={() => router.push("/user/cart")}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               Buy Now
