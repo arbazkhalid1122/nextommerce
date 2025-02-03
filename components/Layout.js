@@ -4,7 +4,7 @@ import { useGlobalContext } from "../Contexts/globalContext/context";
 import Loading from "./Loading";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import Cart from "./cart/Cart";
+// import Cart from "./cart/Cart";
 import Profile from "./Profile";
 import Footer from "./Footer";
 
@@ -31,7 +31,7 @@ export default function Layout({ children }) {
       <Loading loading={loading} />
       <Navbar />
       <Sidebar />
-      <Cart />
+      {/* <Cart /> */}
       <Profile />
       {children}
       <Footer />
