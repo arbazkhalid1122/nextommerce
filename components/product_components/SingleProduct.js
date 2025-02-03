@@ -6,7 +6,7 @@ import { FaStar, FaStarHalfAlt, FaRegStar, FaHeart, FaRegHeart } from "react-ico
 export default function SingleProduct() {
   const { query } = useRouter();
   const { name } = query;
-
+const router = useRouter();
   const [product, setProduct] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);  // Track if the product is favorite
   const { translate: t, addItem, cartToggler, theme } = useGlobalContext();

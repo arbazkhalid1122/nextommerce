@@ -1,14 +1,10 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
-import {shimmer, toBase64} from "../../shared/utils/imgPlaceholder";
 import { useEffect } from "react";
-import Link from "next/link";
-import { bannerImages } from "../../shared/json";
 import { useGlobalContext } from "../../Contexts/globalContext/context";
 
 export default function Intro() {
-  const {translate: t} = useGlobalContext();
 
   useEffect(() => {
     AOS.init({
@@ -38,32 +34,6 @@ export default function Intro() {
           </p>
         </div>
       </div>
-      {/* <div className="h-[50vh]">
-        <div className="relative h-[50vh] left-0 right-0">
-          <p
-            data-aos="fade"
-            className="absolute  left-0 right-0 text-center top-1/2 text-4xl"
-          >
-            {t("moto2")}
-          </p>
-        </div>
-      </div> */}
-      {/* banner */}
-{/* 
-      <div className="bg-third animation w-full whitespace-nowrap overflow-scroll scrollbar-hide">
-        {bannerImages.map((item, i) => (
-          <Link key={i} href={`/product/${item.name.replace(/\s/g, "_")}?cat=${item.cat}`}>
-          <a>
-            <div  className={`${i===0?"first":null}`}>
-            <Image width={300} height={300} src={item.url} alt={item.name} className="object-contain" 
-            placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(300, 300))}`}
-            />
-            </div>
-          </a>
-          </Link>
-        ))}
-      </div> */}
       <style jsx>{`
         .animation div {
           width: 300px;

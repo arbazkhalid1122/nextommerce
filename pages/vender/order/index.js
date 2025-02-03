@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import TableOrder from "../../../components/product_components/TableOrder";
-import { TruckIcon, ReplyIcon, CalendarIcon, SearchIcon } from "@heroicons/react/outline";
-import DatePicker from "../../../components/admin/DatePicker";
+import { TruckIcon, ReplyIcon } from "@heroicons/react/outline";
 import format from "date-fns/format";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // For rating stars
 
 export default function OrderPage() {
-  const router = useRouter();
-
-  // Static orders data with user ratings for the products
   const staticOrders = [
     {
       _id: "1",
@@ -38,13 +33,6 @@ export default function OrderPage() {
   ];
 
   const [ordSt, setOrdSt] = useState(staticOrders);
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [sent, setSent] = useState("undefined");
-  const [dateQuery, setDateQuery] = useState("");
-  const [showCalender, setShowCalender] = useState(false);
-  const [date, setDate] = useState([{ startDate: new Date(), endDate: null, key: "selection" }]);
-
 
   // Simulating order update
   const UpdateSent = (id) => {
@@ -145,24 +133,6 @@ export default function OrderPage() {
         ))}
       </ul>
 
-      {showCalender && (
-        <div className="z-50 absolute flex flex-col justify-center w-full h-screen bg-[#000000e3] top-0">
-          <div className="w-min mx-auto">
-            <DatePicker state={date} setState={setDate} />
-          </div>
-          <button
-            className="mt-8 px-6 py-2 bg-success mx-auto text-center rounded-full text-black text-xl"
-            onClick={() => {
-              setDateQuery(
-                `${format(new Date(date[0].startDate), "yyyy-MM-dd'T'HH:mm:ss.SSS")}to${format(new Date(date[0].endDate), "yyyy-MM-dd'T'HH:mm:ss.SSS")}`
-              );
-              setShowCalender(false);
-            }}
-          >
-            Set Date
-          </button>
-        </div>
-      )}
     </div>
   );
 }
