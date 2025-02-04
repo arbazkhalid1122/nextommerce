@@ -23,7 +23,7 @@ const Products = () => {
         <div className="grid grid-cols-3 gap-6 mt-6">
           {products.map((product, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
-              <img className="w-full h-32 object-contain" src={product.img} alt={product.title} />
+              <img className="w-full h-32 object-cover" src={'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600'} alt={product.title} />
               <div className="mt-4">
                 <div className="flex items-center gap-1 text-yellow-400">
                   ⭐ {product.rating} (218)

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import Loading from "./Loading";
-import Profile from "./Profile";
 import Footer from "./Footer";
 import Sidebar from "./admin/SideBar";
+import Navbar from "./admin/Navbar";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -25,15 +25,14 @@ export default function Layout({ children }) {
   }, [router]);
 
   return (
-<div className="content glob-trans relative min-h-screen bg-gray-100 ">
-  <Loading loading={loading} />
-  <div className="flex">
-  <Sidebar />
-  <div className="flex-1">{children}</div> {/* Ensure main content takes the rest of the space */}
-</div>
-
-  <Footer />
-</div>
-
+    <div className="content glob-trans relative min-h-screen bg-gray-100 ">
+      <Loading loading={loading} />
+      <Navbar />
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1">{children}</div>
+      </div>
+      <Footer />
+    </div>
   );
 }
