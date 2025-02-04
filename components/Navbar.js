@@ -109,7 +109,7 @@ function Navbar() {
       )}
 
       {/* Admin View */}
-      {isAdmin && (
+      {/* {isAdmin && (
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <Link href="/vender/product/create">
@@ -144,7 +144,7 @@ function Navbar() {
             <FaUserCircle className="w-6 h-6" />
           </button>
         </div>
-      )}
+      )} */}
     </nav>
   );
 }

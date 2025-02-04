@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 
-const Sidebar = ({ setActiveComponent, activeComponent }) => {
+const Sidebar = () => {
+  const router = useRouter();
+
   const menuItems = [
-    { icon: "../assets/order.png", text: "Orders" },
-    { icon: "../assets/products.png", text: "Products" },
-    { icon: "../assets/payment.png", text: "Payment Methods" },
-    { icon: "../assets/rating.png", text: "Rating" },
+    { icon: "../assets/order.png", text: "Orders", route: "/vender/order" },
+    { icon: "../assets/products.png", text: "Products", route: "/vender/product" },
+    { icon: "../assets/payment.png", text: "Payment Methods", route: "/admin/payment-methods" },
+    { icon: "../assets/rating.png", text: "Rating", route: "/admin/rating" },
   ];
+
+  const handleItemClick = (item) => {
+    router.push(item.route);
+  };
 
   return (
     <div className="w-1/5 h-screen flex flex-col items-end border-r p-4 gap-4">
@@ -21,10 +28,8 @@ const Sidebar = ({ setActiveComponent, activeComponent }) => {
         {menuItems.map((item, index) => (
           <li
             key={index}
-            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer ${
-              activeComponent === item.text ? "bg-gray-300" : "hover:bg-gray-200"
-            }`}
-            onClick={() => setActiveComponent(item.text)}  // ✅ Updates active component in Admin
+            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer`}
+            onClick={() => handleItemClick(item)}
           >
             <img className="w-5 h-5" src={item.icon} alt={item.text} />
             {item.text}
