@@ -25,12 +25,12 @@ export default function Layout({ children }) {
   }, [router]);
 
   return (
-    <div className="content glob-trans relative min-h-screen bg-gray-100 ">
+    <div className="content glob-trans relative min-h-screen bg-white ">
       <Loading loading={loading} />
       <Navbar />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 p-8">{children}</div>
       </div>
       <Footer />
     </div>

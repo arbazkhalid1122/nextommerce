@@ -1,4 +1,9 @@
+import { useState } from "react";
+import AddProductModal from "../../../components/product/addProductModal";
+
 const Products = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
     const products = [
       { img: "../assets/watch.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
       { img: "../assets/phone.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
@@ -13,14 +18,14 @@ const Products = () => {
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-semibold">Products</h2>
           <div className="flex items-center gap-2">
-            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg">Add Product</button>
+            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={()=>setIsOpen(true)}>Add Product</button>
             <select className="border px-3 py-2 rounded-lg">
               <option>By Date</option>
             </select>
           </div>
         </div>
   
-        <div className="grid grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-4 gap-6 mt-6">
           {products.map((product, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
               <img className="w-full h-32 object-cover" src={'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600'} alt={product.title} />
@@ -42,6 +47,7 @@ const Products = () => {
           <button className="px-3 py-1 border rounded">3</button>
           <button className="px-3 py-1 border rounded">4</button>
         </div>
+        <AddProductModal isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     );
   };
