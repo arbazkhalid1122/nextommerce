@@ -13,6 +13,7 @@ if (router.pathname === "/auth/login" || router.pathname === "/auth/signup" || r
   </ContextProvider>
 }
 
+
 return (
   <ContextProvider>
     {router.pathname === "/auth/login" ? <Component {...pageProps} />

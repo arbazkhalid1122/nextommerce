@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import { useGlobalContext } from "../Contexts/globalContext/context";
-import { useGlobalContext } from "../Contexts/globalContext/newcontext";
+// import { useGlobalContext } from "../Contexts/globalContext/newcontext";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -28,7 +28,7 @@ function Navbar() {
   // } = useGlobalContext();
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   const [isAdmin, setIsAdmin] = useState(false);
-  const { amount } = useGlobalContext(); 
+  const { amount } = 0 
   console.log(amount);
   
 
@@ -81,7 +81,7 @@ function Navbar() {
 
           {/* Icons Section */}
           <div className="flex items-center space-x-4">
-          <button className="relative hover:text-[#00C6FF] transition" onClick={() => router.push("/cart")}>
+          <button className="relative hover:text-[#00C6FF] transition" onClick={() => router.push("/user/cart")}>
       <FaShoppingBag className="w-6 h-6" />
       {amount > 0 && (
         <div className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center text-xs font-bold text-white bg-red-500 rounded-full">
@@ -100,7 +100,7 @@ function Navbar() {
             </button>
             <button
               className="hover:text-[#00C6FF] transition"
-              onClick={() => setDisplayProf(!displayProf)}
+              // onClick={() => setDisplayProf(!displayProf)}
             >
               <FaUserCircle className="w-6 h-6" />
             </button>
@@ -138,7 +138,7 @@ function Navbar() {
             </Link>
           </div>
           <button
-            onClick={() => setDisplayProf(!displayProf)}
+            // onClick={() => setDisplayProf(!displayProf)}
             className="hover:text-[#00C6FF] transition"
           >
             <FaUserCircle className="w-6 h-6" />
