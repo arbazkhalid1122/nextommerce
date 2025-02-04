@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import Loading from "./Loading";
-import Navbar from "./Navbar";
-// import Sidebar from "./Sidebar";
-import SideBar from "./admin/SideBar";
-import Profile from "./Profile";
 import Footer from "./Footer";
-import Admin from "./admin/admin";
+import Sidebar from "./admin/SideBar";
+import Navbar from "./admin/Navbar";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -15,8 +12,8 @@ export default function Layout({ children }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // setShowSide(false);
-    setShowCart(true);
+    setShowSide(false);
+    setShowCart(false);
     setDisplayProf(false);
 
     const handleStart = (url) => setLoading(true);
@@ -28,14 +25,13 @@ export default function Layout({ children }) {
   }, [router]);
 
   return (
-    <div className="content glob-trans relative  min-h-screen bg-gray-100 ">
+    <div className="content glob-trans relative min-h-screen bg-white ">
       <Loading loading={loading} />
       <Navbar />
-      <Admin />
-      {/* <Sidebar />  */}
-      {/* side bar is not visible and set to true  */}
-      <Profile />
-      {children}
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 p-8">{children}</div>
+      </div>
       <Footer />
     </div>
   );
