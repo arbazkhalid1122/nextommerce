@@ -71,11 +71,11 @@ const ICONS = {
 //   );
 // };
 
-const Dashboard = () => {
+const Dashboard = ({children}) => {
   return (
     <div className="flex w-full h-screen">
   <SideBar />
-  <ProfileForm />
+  {<ProfileForm />}
 </div>
 
     

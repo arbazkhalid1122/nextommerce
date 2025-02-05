@@ -77,7 +77,10 @@ const Sidebar = () => {
       <div className="flex items-center gap-2 p-2 text-gray-600 rounded-lg font-semibold">
         Account Management
       </div>
-      <div className="flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg">
+      <div className={`flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg  
+       ${router.pathname ==="/user/profile" ? "bg-gray-300" : "hover:bg-gray-200"}  `}
+        
+      >
         <RxPerson className="w-6 h-6" />
         Personal Information
       </div>
