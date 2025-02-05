@@ -45,7 +45,7 @@ function Navbar() {
       className="z-50 sticky top-0 w-full flex justify-between items-center px-4 py-5 sm:px-6  bg-gray-900 text-white shadow-lg"
     >
       {/* Non-Admin View */}
-      { !isAdmin && (
+      { isAdmin && (
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <Link href="/">
@@ -109,7 +109,7 @@ function Navbar() {
       )}
 
       {/* Admin View */}
-      {isAdmin && (
+      {!isAdmin && (
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <Link href="/vender/product/create">
