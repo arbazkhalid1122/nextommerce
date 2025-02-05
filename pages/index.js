@@ -15,12 +15,12 @@ export default function Home() {
       router.push("/vender/product/display");
     }
   }, []);
-  const { translate } = useGlobalContext();
+  // const { translate } = useGlobalContext();
 return (
     <div className="bg-gray-100 ">
-      <Intro />
-        <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
-          <motion.p
+      {/* <Intro /> */}
+        {/* <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20"> */}
+          {/* <motion.p
             initial={{ y: 0, opacity: 0 }}
             whileInView={{ y: -40, opacity: 1 }}
             viewport={{ once: true }}
@@ -28,9 +28,9 @@ return (
             className="capitalize text-3xl text-secondary text-center"
           >
             {translate("latest_arivals")}
-          </motion.p>
+          </motion.p> */}
           <GridProducts  />
-        </div>     
+        {/* </div>      */}
   </div>
 );
 }

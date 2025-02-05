@@ -9,31 +9,31 @@ import Navbar from "./admin/Navbar";
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const { setShowCart, setShowSide, setDisplayProf } = useGlobalContext();
+  // const { setShowCart, setShowSide, setDisplayProf } = useGlobalContext();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setShowSide(false);
-    setShowCart(false);
-    setDisplayProf(false);
+  // useEffect(() => {
+  //   setShowSide(false);
+  //   setShowCart(false);
+  //   setDisplayProf(false);
 
-    const handleStart = (url) => setLoading(true);
-    const handleComplete = (url) => setLoading(false);
+  //   const handleStart = (url) => setLoading(true);
+  //   const handleComplete = (url) => setLoading(false);
 
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
-  }, [router]);
+  //   router.events.on("routeChangeStart", handleStart);
+  //   router.events.on("routeChangeComplete", handleComplete);
+  //   router.events.on("routeChangeError", handleComplete);
+  // }, [router]);
 
   return (
     <div className="content glob-trans relative min-h-screen bg-white ">
       <Loading loading={loading} />
       <Navbar />
       <div className="flex">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className="flex-1 p-8">{children}</div>
       </div>
-      <Footer />
+     
     </div>
   );
 }
