@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import Footer from "./Footer";
 import Sidebar from "./admin/SideBar";
 import Navbar from "./admin/Navbar";
+// import Navbar from "./Navbar";
 
 export default function Layout({ children }) {
   const router = useRouter();
