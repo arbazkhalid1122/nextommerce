@@ -5,11 +5,11 @@ import Layout from "../components/Layout";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ContextProvider>
+    // <ContextProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </ContextProvider>
+    // </ContextProvider>
   );
 };
 
