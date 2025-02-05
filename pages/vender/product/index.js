@@ -1,8 +1,9 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Products = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+const router = useRouter();
     const products = [
       { img: "../assets/watch.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
       { img: "../assets/phone.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
@@ -26,7 +27,7 @@ const Products = () => {
   
         <div className="grid grid-cols-4 gap-6 mt-6">
           {products.map((product, index) => (
-            <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
+            <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition" onClick={() => router.push(`/vender/product/${index}`)}>
               <img className="w-full h-32 object-cover" src={'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600'} alt={product.title} />
               <div className="mt-4">
                 <div className="flex items-center gap-1 text-yellow-400">

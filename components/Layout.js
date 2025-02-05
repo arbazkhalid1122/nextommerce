@@ -11,9 +11,8 @@ export default function Layout({ children }) {
       <Loading loading={loading} />
       <Navbar />
       <div className="flex">
-        <Sidebar>
+        <Sidebar />
         <div className="flex-1 p-8">{children}</div>
-        </Sidebar>
       </div>
     </div>
   );
