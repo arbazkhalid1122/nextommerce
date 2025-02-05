@@ -8,6 +8,8 @@ import { MdOutlineLogout } from "react-icons/md";
 
 const Sidebar = () => {
   const router = useRouter();
+   
+   let admin = false
 
   const menuItems = [
     { icon: <PiShoppingBagThin />, text: "Orders", route: "/vender/order" },
@@ -26,24 +28,49 @@ const Sidebar = () => {
       <div className="flex items-center gap-4 pb-2">
         <RxAvatar className="w-10 h-10 rounded-full" />
         <div>
-          <p className="text-lg font-semibold">Seller Name</p>
-          <p className="text-gray-500">Seller</p>
+          <p className="text-lg font-semibold">{admin?"Seller Name":'Customer Name'}</p>
+          <p className="text-gray-500">{admin?"Seller":"customer"}</p>
         </div>
       </div>
 
       {/* Sidebar Menu */}
-      <ul className="w-full flex flex-col gap-2">
-        {menuItems.map((item, index) => (
+      <ul className="w-full flex flex-col gap-2">  
           <li
-            key={index}
             className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
-              ${router.pathname === item.route ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => handleItemClick(item.route)}
+              ${router.pathname ==="Orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
+            onClick={() => admin? handleItemClick('/vender/order'):handleItemClick('/user/order')}
           >
-            {item.icon}
-            {item.text}
+           <PiShoppingBagThin />
+          {admin?'Orders':'My Orders'} 
           </li>
-        ))}
+          {admin &&
+          <li
+          className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
+            ${router.pathname ==="Orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
+          onClick={() =>  handleItemClick('/vender/order')}
+        >
+          <PiTrashSimple />
+        Products
+        </li>
+          }
+          
+          <li
+            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
+              ${router.pathname ==="Payment Methods" ? "bg-gray-300" : "hover:bg-gray-200"}`}
+            onClick={() => admin? handleItemClick('/vender/payment-methods'):handleItemClick('/user/payment-methods')}
+          >
+           <SlCreditCard />
+          Payment Method
+          </li>
+          <li
+            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
+              ${router.pathname ==="Reviews" ? "bg-gray-300" : "hover:bg-gray-200"}`}
+            onClick={() => admin? handleItemClick('/vender/rating'):handleItemClick('/user/reviews')}
+          >
+           <ImStarEmpty  />
+          {admin?'Rating':'My Reviews'} 
+          </li>
+        
       </ul>
 
       {/* Account Management */}
