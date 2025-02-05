@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import Loading from "./Loading";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import Sidebar from "./admin/SideBar";
 import Navbar from "./admin/Navbar";
 // import Navbar from "./Navbar";
@@ -31,7 +31,7 @@ export default function Layout({ children }) {
       <Navbar />
       <div className="flex">
         {/* <Sidebar /> */}
-        <div className="flex-1 p-8">{children}</div>
+        <div className="flex-1 ">{children}</div>
       </div>
      
     </div>

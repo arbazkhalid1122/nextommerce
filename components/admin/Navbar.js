@@ -31,7 +31,7 @@ const Navbar = () => {
           />
           <FaUser 
             className='text-gray-700 text-xl cursor-pointer hover:text-gray-900'
-            onClick={() => router.push('/user')}
+            onClick={() => router.push('/user/profile')}
           />
         </div>
       )}
