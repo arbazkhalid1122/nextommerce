@@ -4,7 +4,7 @@ import { FaShoppingCart, FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
   const router = useRouter();
-  let isAdmin = false
+  let isAdmin = true
 
   return (
     <div className='w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8'>
