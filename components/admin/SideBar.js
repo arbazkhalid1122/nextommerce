@@ -1,91 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { PiTrashSimple, PiShoppingBagThin } from "react-icons/pi";
 import { SlCreditCard } from "react-icons/sl";
 import { ImStarEmpty } from "react-icons/im";
 import { RxAvatar, RxPerson } from "react-icons/rx";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdOutlineLogout, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const Sidebar = () => {
+const Sidebar = ({collapsed,setCollapsed}) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  let admin = false;
+  const [admin, setAdmin] = useState(false);
+
+console.log("admin", admin);
+  useEffect(() => {
+    if (localStorage.getItem("isAdmin")) {
+      setAdmin(true);
+    }
+  }, []);
 
   const handleItemClick = (route) => {
+
+console.log("route", route);    if(route === "/auth/login") {
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("buyer");
+    }
     router.push(route);
-    setIsOpen(false);
   };
 
+  const isActive = (route) => router.pathname === route;
+
   return (
-    <div className="relative z-30">
-      {/* Menu Button for Mobile */}
+    <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
+      {/* Collapse Button */}
       <button 
-        className="p-2 m-4 bg-gray-200 rounded-lg md:hidden"
-        onClick={() => setIsOpen(true)}
+        className="absolute top-6 right-[-10px] bg-gray-200 rounded-full p-1 shadow-md"
+        onClick={() => setCollapsed(!collapsed)}
       >
-        ☰
+        {collapsed ? <MdOutlineKeyboardArrowRight size={24} /> : <MdOutlineKeyboardArrowLeft size={24} />}
       </button>
-      
+
       {/* Sidebar */}
-      <div
-        className={`fixed top-0 left-0 h-full w-[100%] bg-white p-4 shadow-lg transform transition-transform duration-300 overflow-y-auto
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:relative md:translate-x-0 md:w-[100%] md:flex md:flex-col md:items-start`}
-      >
-        {/* Close Button for Mobile */}
-        <button 
-          className="p-2 bg-gray-200 rounded-lg md:hidden self-end"
-          onClick={() => setIsOpen(false)}
-        >
-          ✖
-        </button>
-        
+      <div className="h-full flex flex-col items-start p-4">
         {/* User Info */}
-        <div className="flex items-center gap-4 pb-4 border-b border-gray-200">
+        <div className="flex items-center gap-4 pb-4 border-b border-gray-200 w-full">
           <RxAvatar className="w-10 h-10 rounded-full" />
-          <div>
-            <p className="text-lg font-semibold truncate">{admin ? "Seller Name" : "Customer Name"}</p>
-            <p className="text-gray-500 text-sm">{admin ? "Seller" : "Customer"}</p>
-          </div>
+          {!collapsed && (
+            <div>
+              <p className="text-lg font-semibold truncate">
+                {admin ? "Seller Name" : "Customer Name"}
+              </p>
+              <p className="text-gray-500 text-sm">
+                {admin ? "Seller" : "Customer"}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Sidebar Menu */}
-        <ul className="w-full flex flex-col gap-2 mt-4">  
-          <li className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200"
-            onClick={() => handleItemClick(admin ? '/vender/order' : '/user/myorders')}
-          >
-            <PiShoppingBagThin /> {admin ? 'Orders' : 'My Orders'}
+        <ul className="w-full flex flex-col gap-2 mt-4">
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/order" : "/user/myorders") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/order" : "/user/myorders")}>
+            <PiShoppingBagThin size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "Orders" : "My Orders")}
           </li>
-          
-          <li className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200"
-            onClick={() => handleItemClick(admin ? '/vender/product' : '/user/product')}
-          >
-            <PiTrashSimple /> {admin ? 'My Products' : 'Products'} 
+
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/product" : "/user/product") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/product" : "/user/product")}>
+            <PiTrashSimple size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "My Products" : "Products")}
           </li>
-          
-          <li className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200"
-            onClick={() => handleItemClick(admin ? '/vender/payment-methods' : '/user/payment-methods')}
-          >
-            <SlCreditCard /> Payment Method
+
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/payment-methods" : "/user/payment-methods") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/payment-methods" : "/user/payment-methods")}>
+            <SlCreditCard size={collapsed ? 30 : 20} /> {!collapsed && "Payment Method"}
           </li>
-          
-          <li className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200"
-            onClick={() => handleItemClick(admin ? '/vender/rating' : '/user/myreview')}
-          >
-            <ImStarEmpty /> {admin ? 'Rating' : 'My Reviews'}
+
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/rating" : "/user/myreview") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/rating" : "/user/myreview")}>
+            <ImStarEmpty size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "Rating" : "My Reviews")}
           </li>
         </ul>
 
         {/* Account Management */}
-        <div className="flex items-center gap-2 p-2 mt-4 text-gray-600 font-semibold">
-          Account Management
+        {!collapsed && <div className="mt-4 text-gray-600 font-semibold">Account Management</div>}
+        <div className={`flex items-center mt-4 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
+          <RxPerson size={collapsed ? 30 : 20} /> {!collapsed && "Personal Information"}
         </div>
-        <div className="flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
-          onClick={() => handleItemClick(admin ? '/vender/profile' : '/user/profile')}
-        >
-          <RxPerson /> Personal Information
-        </div>
-        <div className="flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg">
-          <MdOutlineLogout /> Logout
+        <div className="flex items-center mt-2 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200" onClick={() => handleItemClick("/auth/login")}>
+          <MdOutlineLogout size={collapsed ? 30 : 20} /> {!collapsed && "Logout"}
         </div>
       </div>
     </div>

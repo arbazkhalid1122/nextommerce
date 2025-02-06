@@ -1,11 +1,8 @@
-import { useState } from "react";
-// import AddProductModal from "../../../components/product/addProductModal";
 import { useRouter } from "next/router";
 import ProductCard from "../../../components/Product";
 
 const Products = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const router  =useRouter();
+  const router = useRouter();
 
     const products = [
       { img: "../assets/watch.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
@@ -19,7 +16,7 @@ const Products = () => {
     return (
       <div>
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-semibold">Products</h2>
+          <h2 className="text-2xl font-bold">Products</h2>
           <div className="flex items-center gap-2">
             <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={()=>setIsOpen(true)}>Add Product</button>
             <select className="border px-3 py-2 rounded-lg">

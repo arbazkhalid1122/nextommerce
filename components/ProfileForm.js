@@ -56,10 +56,10 @@ const ProfileForm = () => {
   };
 
   return (
-<div className="flex-1 p-6 ">
+<div className="flex-1 mt-2">
           <div className="flex flex-col md:flex-row justify-between items-start gap-8">
         <div className="w-full md:w-2/3">
-          <h1 className="text-2xl font-semibold mb-8">Profile</h1>
+          <h1 className="text-2xl font-bold mb-8">Profile</h1>
 
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">

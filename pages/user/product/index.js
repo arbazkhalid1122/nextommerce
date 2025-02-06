@@ -1,11 +1,8 @@
-import { useState } from "react";
-// import AddProductModal from "../../../components/product/addProductModal";
 import { useRouter } from "next/router";
 import ProductCard from "../../../components/Product";
 
 const Products = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const router  =useRouter();
+  const router = useRouter();
 
     const products = [
       { img: "../assets/watch.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
@@ -17,31 +14,20 @@ const Products = () => {
     ];
   
     return (
-      <div className="mt-4 flex flex-col justify-center">
-        <div className="flex justify-between w-[90%] items-center">
-          <h2 className="text-2xl font-semibold m-4">Products</h2>
+      <div>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold">Products</h2>
           <div className="flex items-center gap-2">
             <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={()=>setIsOpen(true)}>Add Product</button>
-            <select className="border px-3 py-2 lef rounded-lg">
+            <select className="border px-3 py-2 rounded-lg">
               <option>By Date</option>
             </select>
           </div>
         </div>
   
-        <div className="flex flex-wrap justify-center gap-6 mt-6">
+        <div className="flex flex-wrap justify-center gap-10 mt-6">
           {products.map((product, index) => (
-
-             <ProductCard product={product} key={index} />
-            // <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition"  onClick={()=>{router.push(`product/${index}`)}}>
-            //   <img className="w-full h-32 object-cover" src={'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600'} alt={product.title} />
-            //   <div className="mt-4">
-            //     <div className="flex items-center gap-1 text-yellow-400">
-            //       ⭐ {product.rating} (218)
-            //     </div>
-            //     <p className="mt-2 font-semibold">{product.title}</p>
-            //     <p className="text-lg font-bold">{product.price}</p>
-            //   </div>
-            // </div>
+            <ProductCard  product={product} key={index} onClick={()=>{router.push(`product/${index}`)}}/>
           ))}
         </div>
   

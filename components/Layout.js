@@ -1,24 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Loading from "./Loading";
+// import React, { useState } from "react";
+// import Sidebar from "./admin/SideBar";
+// import Navbar from "./admin/Navbar";
+// import { useRouter } from "next/router";
+
+// export default function Layout({ children }) {
+//   const [collapsed, setCollapsed] = useState(false);
+// const router = useRouter();
+//   return (
+//     <div className="content glob-trans relative min-h-screen bg-white">
+//       <Navbar />
+//       <div className="flex mt-16">
+//           <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />        
+//         <div className={`flex-1 p-4 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+import React, { useState } from "react";
 import Sidebar from "./admin/SideBar";
 import Navbar from "./admin/Navbar";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
+  const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
- 
-
   return (
-    <div className="content glob-trans relative min-h-screen bg-white ">
-      <Loading loading={loading} />
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 ">{children}</div>
-      </div>
-     
-    </div>
+    <>
+      {(router.pathname !== '/auth/login' && router.pathname !== '/auth/signup' && router.pathname !== '/auth/forgotPassword') ? (
+        <div className="content glob-trans relative min-h-screen bg-white">
+          <Navbar />
+          <div className="flex mt-16">
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <div className={`flex-1 p-2 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
+          </div>
+        </div>
+      ) : (
+        <div className="content glob relative min-h-screen bg-white">{children}</div>
+      )}
+    </>
   );
 }
+

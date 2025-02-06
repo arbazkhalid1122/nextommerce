@@ -83,10 +83,10 @@ const ProductRating = () => {
     };
 
     return (
-        <div className="w-full mx-auto">
+        <div className="w-full mx-auto ">
             <div className="flex justify-between items-center mb-4">
                 <div className="space-y-1">
-                    <h2 className="text-xl font-semibold">Rating</h2>
+                    <h2 className="text-2xl mt-2 font-bold">Rating</h2>
                     <p className="text-sm text-gray-500">4.9 (100 reviews)</p>
                 </div>
                 <div className="flex items-center gap-4">

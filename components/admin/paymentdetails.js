@@ -11,7 +11,7 @@ const PaymentDetails = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="">
       <h2 className="text-2xl font-semibold mb-6">Payment Methods</h2>
       
       <div className="flex gap-4 mb-8">
