@@ -1,62 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { PiTrashSimple, PiShoppingBagThin } from "react-icons/pi";
 import { SlCreditCard } from "react-icons/sl";
 import { ImStarEmpty } from "react-icons/im";
 import { RxAvatar, RxPerson } from "react-icons/rx";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdOutlineLogout, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const Sidebar = () => {
+const Sidebar = ({collapsed,setCollapsed}) => {
   const router = useRouter();
+  const [admin, setAdmin] = useState(false);
 
-  const menuItems = [
-    { icon: <PiShoppingBagThin />, text: "Orders", route: "/vender/order" },
-    { icon: <PiTrashSimple />, text: "Products", route: "/vender/product" },
-    { icon: <SlCreditCard />, text: "Payment Methods", route: "/vender/payment-methods" },
-    { icon: <ImStarEmpty />, text: "Rating", route: "/vender/rating" },
-  ];
+console.log("admin", admin);
+  useEffect(() => {
+    if (localStorage.getItem("isAdmin")) {
+      setAdmin(true);
+    }
+  }, []);
 
   const handleItemClick = (route) => {
+
+console.log("route", route);    if(route === "/auth/login") {
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("buyer");
+    }
     router.push(route);
   };
 
+  const isActive = (route) => router.pathname === route;
+
   return (
-    <div className="w-1/5 h-screen flex flex-col items-start p-4 gap-4">
-      {/* User Info */}
-      <div className="flex items-center gap-4 pb-2">
-        <RxAvatar className="w-10 h-10 rounded-full" />
-        <div>
-          <p className="text-lg font-semibold">Seller Name</p>
-          <p className="text-gray-500">Seller</p>
+    <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
+      {/* Collapse Button */}
+      <button 
+        className="absolute top-6 right-[-10px] bg-gray-200 rounded-full p-1 shadow-md"
+        onClick={() => setCollapsed(!collapsed)}
+      >
+        {collapsed ? <MdOutlineKeyboardArrowRight size={24} /> : <MdOutlineKeyboardArrowLeft size={24} />}
+      </button>
+
+      {/* Sidebar */}
+      <div className="h-full flex flex-col items-start p-4">
+        {/* User Info */}
+        <div className="flex items-center gap-4 pb-4 border-b border-gray-200 w-full">
+          <RxAvatar className="w-10 h-10 rounded-full" />
+          {!collapsed && (
+            <div>
+              <p className="text-lg font-semibold truncate">
+                {admin ? "Seller Name" : "Customer Name"}
+              </p>
+              <p className="text-gray-500 text-sm">
+                {admin ? "Seller" : "Customer"}
+              </p>
+            </div>
+          )}
         </div>
-      </div>
 
-      {/* Sidebar Menu */}
-      <ul className="w-full flex flex-col gap-2">
-        {menuItems.map((item, index) => (
-          <li
-            key={index}
-            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
-              ${router.pathname === item.route ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => handleItemClick(item.route)}
-          >
-            {item.icon}
-            {item.text}
+        {/* Sidebar Menu */}
+        <ul className="w-full flex flex-col gap-2 mt-4">
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/order" : "/user/myorders") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/order" : "/user/myorders")}>
+            <PiShoppingBagThin size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "Orders" : "My Orders")}
           </li>
-        ))}
-      </ul>
 
-      {/* Account Management */}
-      <div className="flex items-center gap-2 p-2 text-gray-600 rounded-lg font-semibold">
-        Account Management
-      </div>
-      <div className="flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg">
-        <RxPerson className="w-6 h-6" />
-        Personal Information
-      </div>
-      <div className="flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg">
-        <MdOutlineLogout className="w-6 h-6" />
-        Logout
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/product" : "/user/product") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/product" : "/user/product")}>
+            <PiTrashSimple size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "My Products" : "Products")}
+          </li>
+
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/payment-methods" : "/user/payment-methods") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/payment-methods" : "/user/payment-methods")}>
+            <SlCreditCard size={collapsed ? 30 : 20} /> {!collapsed && "Payment Method"}
+          </li>
+
+          <li className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/rating" : "/user/myreview") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/rating" : "/user/myreview")}>
+            <ImStarEmpty size={collapsed ? 30 : 20} /> {!collapsed && (admin ? "Rating" : "My Reviews")}
+          </li>
+        </ul>
+
+        {/* Account Management */}
+        {!collapsed && <div className="mt-4 text-gray-600 font-semibold">Account Management</div>}
+        <div className={`flex items-center mt-4 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
+          <RxPerson size={collapsed ? 30 : 20} /> {!collapsed && "Personal Information"}
+        </div>
+        <div className="flex items-center mt-2 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200" onClick={() => handleItemClick("/auth/login")}>
+          <MdOutlineLogout size={collapsed ? 30 : 20} /> {!collapsed && "Logout"}
+        </div>
       </div>
     </div>
   );
