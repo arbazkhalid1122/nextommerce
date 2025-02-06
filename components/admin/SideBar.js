@@ -43,14 +43,14 @@ const Sidebar = () => {
            <PiShoppingBagThin />
           {admin?'Orders':'My Orders'} 
           </li>
-          {admin &&
+          {
           <li
           className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
-            ${router.pathname ==="Orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-          onClick={() =>  handleItemClick('/vender/product')}
+            ${router.pathname ==="/vendor/product" ? "bg-gray-300" : "hover:bg-gray-200"}`}
+          onClick={() => admin? handleItemClick('/vender/product'):handleItemClick('/user/product')}
         >
           <PiTrashSimple />
-        Products
+          {admin?'My Products':'Products'} 
         </li>
           }
           
