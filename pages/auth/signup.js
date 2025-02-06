@@ -1,13 +1,11 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useGlobalContext } from "../../Contexts/globalContext/context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaGoogle } from "react-icons/fa";
 
 export default function Signup() {
-  const { updateAccount } = useGlobalContext();
   const router = useRouter();
   const {
     register,
