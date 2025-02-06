@@ -38,7 +38,7 @@ const Sidebar = () => {
           <li
             className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
               ${router.pathname ==="Orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => admin? handleItemClick('/vender/order'):handleItemClick('/user/order')}
+            onClick={() => admin? handleItemClick('/vender/order'):handleItemClick('/user/myorders')}
           >
            <PiShoppingBagThin />
           {admin?'Orders':'My Orders'} 
@@ -47,7 +47,7 @@ const Sidebar = () => {
           <li
           className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
             ${router.pathname ==="Orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-          onClick={() =>  handleItemClick('/vender/order')}
+          onClick={() =>  handleItemClick('/vender/product')}
         >
           <PiTrashSimple />
         Products
@@ -65,7 +65,7 @@ const Sidebar = () => {
           <li
             className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer 
               ${router.pathname ==="Reviews" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => admin? handleItemClick('/vender/rating'):handleItemClick('/user/reviews')}
+            onClick={() => admin? handleItemClick('/vender/rating'):handleItemClick('/user/myreview')}
           >
            <ImStarEmpty  />
           {admin?'Rating':'My Reviews'} 
@@ -78,8 +78,10 @@ const Sidebar = () => {
         Account Management
       </div>
       <div className={`flex gap-2 cursor-pointer hover:bg-gray-200 p-2 rounded-lg  
-       ${router.pathname ==="/user/profile" ? "bg-gray-300" : "hover:bg-gray-200"}  `}
-        
+       ${router.pathname ==="/user/profile"  ? "bg-gray-300" : "hover:bg-gray-200"}  `}
+         
+       onClick={()=>admin? handleItemClick('/vender/profile'):handleItemClick('/user/profile')
+       }
       >
         <RxPerson className="w-6 h-6" />
         Personal Information

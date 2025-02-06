@@ -74,8 +74,7 @@ const ICONS = {
 const Dashboard = ({children}) => {
   return (
     <div className="flex w-full h-screen">
-  <SideBar />
-  {<ProfileForm />}
+       <ProfileForm/>
 </div>
 
     

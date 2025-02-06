@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddProductModal from "../../../components/product/addProductModal";
+// import AddProductModal from "../../../components/product/addProductModal";
 
 const Products = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +47,7 @@ const Products = () => {
           <button className="px-3 py-1 border rounded">3</button>
           <button className="px-3 py-1 border rounded">4</button>
         </div>
-        <AddProductModal isOpen={isOpen} setIsOpen={setIsOpen} />
+        {/* <AddProductModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
       </div>
     );
   };
