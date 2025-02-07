@@ -1,4 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
+import { useRouter } from "next/router";   
+
 
 const product = {
   image: "https://appleman.pk/cdn/shop/products/iPhone-11-Pro-1.jpg?v=1667561295&width=1200",
@@ -8,9 +10,13 @@ const product = {
   price: "450"
 };
 
-const ProductCard = () => {
+const ProductCard = ({index}) => {
+const router  = useRouter();
+
   return (
-    <div className="border rounded-lg shadow-md p-4 w-80 bg-white flex flex-col relative">
+    <div className="border rounded-lg shadow-md p-4 w-80 bg-white flex flex-col relative"
+    onClick={()=>{router.push(`product/${index}`)}}
+    >
       <div className="w-full h-52 flex justify-center items-center">
         <img
           src={product.image}

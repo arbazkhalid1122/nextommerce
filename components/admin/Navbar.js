@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
   const router = useRouter();
-  const [isAdmin, setIsAdmin] = React.useState(false);
-
-  useEffect(() => {
-    if (!localStorage.getItem('isAdmin')) {
-      setIsAdmin(true);
-    }
-  }, []);
+  let isAdmin = false
 
   return (
-    <div className='w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8 fixed top-0 left-0 z-50 bg-white'>
+    <div className='w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8 '>
       {/* Logo */}
       <div className='w-24 h-10 bg-gray-600 text-white flex items-center justify-center rounded-md'>
         Logo

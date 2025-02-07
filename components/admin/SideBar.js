@@ -29,14 +29,14 @@ console.log("route", route);    if(route === "/auth/login") {
   const isActive = (route) => router.pathname === route;
 
   return (
-    <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
+    <div className={` top-18  z-20 left-0 pl-2 h-[100%] bg-white transition-all duration-300 `}>
       {/* Collapse Button */}
-      <button 
+      {/* <button 
         className="absolute top-6 right-[-10px] bg-gray-200 rounded-full p-1 shadow-md"
         onClick={() => setCollapsed(!collapsed)}
       >
         {collapsed ? <MdOutlineKeyboardArrowRight size={24} /> : <MdOutlineKeyboardArrowLeft size={24} />}
-      </button>
+      </button> */}
 
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-4">

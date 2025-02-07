@@ -14,11 +14,13 @@ const Products = () => {
     ];
   
     return (
-      <div>
-        <div className="flex justify-between items-center">
+      <div className="flex  flex-col  overflow-scroll">
+        <div className="flex justify-between items-center w-[90%]">
           <h2 className="text-2xl font-bold">Products</h2>
           <div className="flex items-center gap-2">
-            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={()=>setIsOpen(true)}>Add Product</button>
+            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" 
+            // onClick={()=>setIsOpen(true)}
+            >Add Product</button>
             <select className="border px-3 py-2 rounded-lg">
               <option>By Date</option>
             </select>
@@ -27,7 +29,7 @@ const Products = () => {
   
         <div className="flex flex-wrap justify-center gap-10 mt-6">
           {products.map((product, index) => (
-            <ProductCard  product={product} key={index} onClick={()=>{router.push(`product/${index}`)}}/>
+            <ProductCard index={index} product={product} key={index} onClick={()=>{router.push(`product/${index}`)}}/>
           ))}
         </div>
   
