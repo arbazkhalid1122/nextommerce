@@ -13,7 +13,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className='w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8 fixed top-0 left-0 z-1 bg-white'>
+    <div className='w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8 fixed top-0 left-0 z-10 bg-white'>
       {/* Logo */}
       <div className='w-24 h-10 bg-gray-600 text-white flex items-center justify-center rounded-md'>
         Logo

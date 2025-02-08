@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { PiTrashSimple, PiShoppingBagThin } from "react-icons/pi";
 import { SlCreditCard } from "react-icons/sl";
@@ -8,35 +8,23 @@ import { MdOutlineLogout, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRigh
 
 const Sidebar = ({collapsed,setCollapsed}) => {
   const router = useRouter();
-  const [admin, setAdmin] = useState(false);
-
-console.log("admin", admin);
-  useEffect(() => {
-    if (localStorage.getItem("isAdmin")) {
-      setAdmin(true);
-    }
-  }, []);
+  let admin = false;
 
   const handleItemClick = (route) => {
-
-console.log("route", route);    if(route === "/auth/login") {
-      localStorage.removeItem("isAdmin");
-      localStorage.removeItem("buyer");
-    }
     router.push(route);
   };
 
   const isActive = (route) => router.pathname === route;
 
   return (
-    <div className={` top-18  z-20 left-0 pl-2 h-[100%] bg-white transition-all duration-300 `}>
+    <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
       {/* Collapse Button */}
-      {/* <button 
-        className="absolute top-6 right-[-10px] bg-gray-200 rounded-full p-1 shadow-md"
+      <button 
+        className="absolute top-6 right-[-20px] bg-gray-200 rounded-full p-1 shadow-md"
         onClick={() => setCollapsed(!collapsed)}
       >
         {collapsed ? <MdOutlineKeyboardArrowRight size={24} /> : <MdOutlineKeyboardArrowLeft size={24} />}
-      </button> */}
+      </button>
 
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-4">
@@ -76,10 +64,10 @@ console.log("route", route);    if(route === "/auth/login") {
 
         {/* Account Management */}
         {!collapsed && <div className="mt-4 text-gray-600 font-semibold">Account Management</div>}
-        <div className={`flex items-center mt-4 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
+        <div className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
           <RxPerson size={collapsed ? 30 : 20} /> {!collapsed && "Personal Information"}
         </div>
-        <div className="flex items-center mt-2 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200" onClick={() => handleItemClick("/auth/login")}>
+        <div className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200">
           <MdOutlineLogout size={collapsed ? 30 : 20} /> {!collapsed && "Logout"}
         </div>
       </div>

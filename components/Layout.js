@@ -31,7 +31,7 @@ export default function Layout({ children }) {
       {(router.pathname !== '/auth/login' && router.pathname !== '/auth/signup' && router.pathname !== '/auth/forgotPassword') ? (
         <div className="content glob-trans relative min-h-screen bg-white">
           <Navbar />
-          <div className="flex mt-4 relative h-[88vh] overflow-hidden">
+          <div className="flex mt-16">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
             <div className={`flex-1 p-2 pr-6 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
           </div>
