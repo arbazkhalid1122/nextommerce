@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react';
 import OrderSummary from '../OrderSummary';
 
-const CheckoutForm = ({ items }) => {
+const CheckoutForm = () => {
   const [paymentMethod, setPaymentMethod] = React.useState('stripe');
   
   const handleSubmit = (e) => {

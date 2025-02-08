@@ -53,9 +53,9 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-sm breadcrumbs mb-8">
-        <span className="text-gray-500">Home / cart</span>
+    <div className="container mx-auto p-3">
+      <div className="text-sm breadcrumbs mb-4">
+        <span className="text-2xl font-bold">Cart</span>
       </div>
 
       <div className="lg:flex lg:gap-8">

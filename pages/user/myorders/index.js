@@ -1,143 +1,181 @@
 import React, { useState } from 'react';
+import { TiWatch } from "react-icons/ti";
+import { productImage } from '../../../components/constant';
 
-const sampleOrders = [
+const ordersData = [
   {
-    id: "6754327DA23",
-    date: "Feb 02, 2025 07:34 pm",
-    status: "delivered",
+    id: '6754327DA23',
+    date: 'Feb 02, 2025 07:34 pm',
+    status: 'pending',
     amount: 2034.00,
-    items: 6
-  },
-  {
-    id: "6754328DB24",
-    date: "Feb 01, 2025 03:22 pm",
-    status: "pending",
-    amount: 1299.99,
-    items: 3
-  },
-  {
-    id: "6754329DC25",
-    date: "Jan 31, 2025 11:15 am",
-    status: "canceled",
-    amount: 499.99,
-    items: 2
-  },
-  {
-    id: "6754330DD26",
-    date: "Jan 30, 2025 09:45 pm",
-    status: "delivered",
-    amount: 3299.00,
-    items: 4
-  },
-  {
-    id: "6754331DE27",
-    date: "Jan 29, 2025 02:30 pm",
-    status: "pending",
-    amount: 899.99,
-    items: 2
-  },
-  {
-    id: "6754332DF28",
-    date: "Jan 28, 2025 05:17 pm",
-    status: "delivered",
-    amount: 1599.00,
-    items: 5
-  },
-  {
-    id: "6754333DG29",
-    date: "Jan 27, 2025 10:20 am",
-    status: "canceled",
-    amount: 799.99,
-    items: 3
-  },
-  {
-    id: "6754334DH30",
-    date: "Jan 26, 2025 04:55 pm",
-    status: "pending",
-    amount: 2499.00,
-    items: 4
+    items: [
+      { id: 1, name: 'Product Name', price: 230.00, image: '/product1.jpg', quantity: 1 },
+      { id: 2, name: 'Product Name', price: 230.00, image: '/product2.jpg', quantity: 1 },
+      { id: 3, name: 'Product Name', price: 230.00, image: '/product3.jpg', quantity: 1 }
+    ],
+    customerDetails: {
+      name: 'Coach Name',
+      email: 'coachemail@gmail.com',
+      phone: '+1 234 5678 901',
+      address: 'Street No # House No Town, City, Zip Code',
+      shipping: 7.2,
+      gst: 7.2
+    }
   }
 ];
 
-const Order = () => {
-  const [selectedStatus, setSelectedStatus] = useState("");
-
-  const filteredOrders = selectedStatus 
-    ? sampleOrders.filter(order => order.status === selectedStatus)
-    : sampleOrders;
+const OrderItem = ({ order }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [items, setItems] = useState(order.items);
 
   const getStatusColor = (status) => {
-    switch(status) {
-      case 'delivered':
-        return 'bg-green-500';
-      case 'pending':
-        return 'bg-yellow-500';
-      case 'canceled':
-        return 'bg-red-500';
-      default:
-        return 'bg-gray-500';
+    switch (status) {
+      case 'pending': return 'bg-yellow-400';
+      case 'in-process': return 'bg-blue-400';
+      case 'delivered': return 'bg-green-400';
+      default: return 'bg-gray-400';
     }
   };
 
+  const calculateSubtotal = (items) => {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  const calculateTotalAmount = (order) => {
+    const subtotal = calculateSubtotal(items);
+    return subtotal + order.customerDetails.shipping + order.customerDetails.gst;
+  };
+
+  const handleQuantityChange = (index, delta) => {
+    const newItems = [...items];
+    newItems[index].quantity += delta;
+    if (newItems[index].quantity < 1) newItems[index].quantity = 1;
+    setItems(newItems);
+  };
+
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
+  const subtotal = calculateSubtotal(items);
+  const totalAmount = calculateTotalAmount(order);
+
   return (
-    <div className="rounded-lg w-full">
-      <div className="flex justify-between items-center border-b pb-4 mb-4">
-        <h2 className="text-2xl font-bold">Orders</h2>
-        <div className="relative">
-          <select 
-            className="border rounded-md p-2 outline-none cursor-pointer"
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          >
-            <option value="">All Orders</option>
-            <option value="pending">Pending</option>
-            <option value="delivered">Delivered</option>
-            <option value="canceled">Canceled</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="w-full overflow-x-auto">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Order#</th>
-              <th className="p-2">Placed Date</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Total amount</th>
-              <th className="p-2">Items</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredOrders.map((order) => (
-              <tr key={order.id} className="border-b hover:bg-gray-100">
-                <td className="p-2">{order.id}</td>
-                <td className="p-2">{order.date}</td>
-                <td className="p-2 flex items-center">
-                  <span className={`h-2 w-2 ${getStatusColor(order.status)} rounded-full mr-2`}></span>
-                  {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                </td>
-                <td className="p-2">${order.amount.toFixed(2)}</td>
-                <td className="p-2 flex items-center gap-2">
-                  <img src="https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXRlbXN8ZW58MHx8MHx8fDA%3D" alt="watch" className="h-6" />
-                  <img src="https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGl0ZW1zfGVufDB8fDB8fHww" alt="phone" className="h-6" />
-                  <img src="https://images.unsplash.com/photo-1587334106798-799c53ac09d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE2fHxpdGVtc3xlbnwwfHwwfHx8MA%3D%3D" alt="laptop" className="h-6" />
-                  <span className="text-gray-600">+{order.items - 3}</span>
-                </td>
-              </tr>
+    <div className="border rounded-lg mb-4 overflow-x-auto">
+      <div className="flex items-center justify-between p-4 min-w-max">
+        <div className="flex gap-8 w-full">
+          <span className="text-gray-600 mt-1 flex-1">{order.id}</span>
+          <span className="text-gray-600 mt-1 flex-1">{order.date}</span>
+          <div className="flex items-center gap-2 flex-1">
+            <span className={`w-2 h-2 rounded-full ${getStatusColor(order.status)}`}></span>
+            <span className="capitalize">{order.status}</span>
+          </div>
+          <span className='mt-1 flex-1'>${totalAmount.toFixed(2)}</span>
+          <div className="flex items-center gap-2 flex-1">
+            {items.slice(0, 2).map((item, idx) => (
+              <div key={idx} className="w-8 h-8 bg-gray-200 rounded overflow-hidden">
+                <img src={productImage} alt="product" className="w-full h-full object-cover" />
+              </div>
             ))}
-          </tbody>
-        </table>
+            {items.length > 2 && (
+              <span className="text-sm text-gray-600">+{items.length - 2}</span>
+            )}
+          </div>
+        </div>
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="p-2"
+        >
+          <svg 
+            className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <button className="px-3 py-1 mx-1 bg-gray-800 text-white rounded">1</button>
-        <button className="px-3 py-1 mx-1 bg-gray-200 rounded">2</button>
-        <button className="px-3 py-1 mx-1 bg-gray-200 rounded">3</button>
-        <button className="px-3 py-1 mx-1 bg-gray-200 rounded">4</button>
+      {isExpanded && (
+        <div className="p-4 border-t overflow-x-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 min-w-max">
+            <div className="space-y-2">
+              <h3 className="font-medium">Order Details</h3>
+              <p>Order Placed By: {order.customerDetails.name}</p>
+              <p>Email: {order.customerDetails.email}</p>
+              <p>Phone No: {order.customerDetails.phone}</p>
+              <p>Shipping Address: {order.customerDetails.address}</p>
+              <p>Shipping Cost: ${order.customerDetails.shipping.toFixed(2)}</p>
+              <p>GST: ${order.customerDetails.gst.toFixed(2)}</p>
+              <p>Subtotal: ${subtotal.toFixed(2)}</p>
+              <p>Total Items: {totalItems}</p>
+              <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+            </div>
+            <div>
+              <h3 className="font-medium mb-4">Items</h3>
+              <div className="space-y-4">
+                {items.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gray-100 rounded overflow-hidden">
+                        <img src={productImage} alt="product" className="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{item.name}</p>
+                        <p>${item.price.toFixed(2)}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button 
+                        onClick={() => handleQuantityChange(idx, -1)} 
+                        className="px-2 border rounded"
+                      >
+                        -
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button 
+                        onClick={() => handleQuantityChange(idx, 1)} 
+                        className="px-2 border rounded"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const MyOrders = () => {
+  const [selectedStatus, setSelectedStatus] = useState('all');
+
+  return (
+    <div className="">
+      <div className="flex flex-wrap justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">My Orders</h1>
+        <select 
+          value={selectedStatus}
+          onChange={(e) => setSelectedStatus(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="all">Select status</option>
+          <option value="pending">Pending</option>
+          <option value="in-process">In Process</option>
+          <option value="delivered">Delivered</option>
+        </select>
+      </div>
+
+      <div className="space-y-4">
+        {Array(8).fill(ordersData[0]).map((order, index) => (
+          <OrderItem key={index} order={order} />  
+        ))}
       </div>
     </div>
   );
 };
 
-export default Order;
+export default MyOrders;

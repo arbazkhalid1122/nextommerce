@@ -27,7 +27,7 @@ const Products = () => {
   
         <div className="flex flex-wrap justify-center gap-10 mt-6">
           {products.map((product, index) => (
-            <ProductCard  product={product} key={index} onClick={()=>{router.push(`product/${index}`)}}/>
+            <ProductCard  product={product} key={index} type={'buyer'} onClick={()=>{router.push(`product/${index}`)}}/>
           ))}
         </div>
   

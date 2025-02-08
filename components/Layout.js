@@ -33,7 +33,7 @@ export default function Layout({ children }) {
           <Navbar />
           <div className="flex mt-16">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-            <div className={`flex-1 p-2 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
+            <div className={`flex-1 p-2 pr-6 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
           </div>
         </div>
       ) : (

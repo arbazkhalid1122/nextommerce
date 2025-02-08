@@ -8,9 +8,9 @@ const product = {
   price: "450"
 };
 
-const ProductCard = () => {
+const ProductCard = ({onClick}) => {
   return (
-    <div className="border rounded-lg shadow-md p-4 w-80 bg-white flex flex-col relative">
+    <div className="border rounded-lg shadow-md p-4 w-80 bg-white flex flex-col relative" onClick={onClick}>
       <div className="w-full h-52 flex justify-center items-center">
         <img
           src={product.image}
