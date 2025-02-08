@@ -18,14 +18,7 @@ const Sidebar = ({collapsed,setCollapsed}) => {
 
   return (
     <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
-      {/* Collapse Button */}
-      <button 
-        className="absolute top-6 right-[-20px] bg-gray-200 rounded-full p-1 shadow-md"
-        onClick={() => setCollapsed(!collapsed)}
-      >
-        {collapsed ? <MdOutlineKeyboardArrowRight size={24} /> : <MdOutlineKeyboardArrowLeft size={24} />}
-      </button>
-
+  
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-4">
         {/* User Info */}

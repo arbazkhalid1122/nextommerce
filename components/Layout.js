@@ -1,23 +1,3 @@
-// import React, { useState } from "react";
-// import Sidebar from "./admin/SideBar";
-// import Navbar from "./admin/Navbar";
-// import { useRouter } from "next/router";
-
-// export default function Layout({ children }) {
-//   const [collapsed, setCollapsed] = useState(false);
-// const router = useRouter();
-//   return (
-//     <div className="content glob-trans relative min-h-screen bg-white">
-//       <Navbar />
-//       <div className="flex mt-16">
-//           <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />        
-//         <div className={`flex-1 p-4 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 import React, { useState } from "react";
 import Sidebar from "./admin/SideBar";
 import Navbar from "./admin/Navbar";
@@ -25,21 +5,40 @@ import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
+
   return (
     <>
-      {(router.pathname !== '/auth/login' && router.pathname !== '/auth/signup' && router.pathname !== '/auth/forgotPassword') ? (
-        <div className="content glob-trans relative min-h-screen bg-white">
-          <Navbar />
-          <div className="flex mt-16">
+      {!["/auth/login", "/auth/signup", "/auth/forgotPassword"].includes(
+        router.pathname
+      ) ? (
+        <div className="relative min-h-screen bg-white">
+          <Navbar setIsDrawerOpen={setIsDrawerOpen} />
+
+          {/* Sidebar for Large Screens */}
+          <div className="hidden sm:block fixed top-16 left-0 h-full w-64">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-            <div className={`flex-1 p-2 pr-6 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
           </div>
+
+          {/* Page Content (Add margin when sidebar is visible) */}
+          <div className={`flex-1 p-4 sm:ml-64 mt-16`}>{children}</div>
+
+          {/* Sidebar as Drawer for Small Screens */}
+          {isDrawerOpen && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-50 sm:hidden"
+              onClick={() => setIsDrawerOpen(false)}
+            >
+              <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg">
+                <Sidebar collapsed={false} setCollapsed={setCollapsed} />
+              </div>
+            </div>
+          )}
         </div>
       ) : (
-        <div className="content glob relative min-h-screen bg-white">{children}</div>
+        <div className="relative min-h-screen bg-white">{children}</div>
       )}
     </>
   );
 }
-
