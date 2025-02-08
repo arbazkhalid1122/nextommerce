@@ -33,7 +33,7 @@ export default function Layout({ children }) {
           <Navbar />
           <div className="flex mt-4 relative h-[88vh] overflow-hidden">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-          {children}
+            <div className={`flex-1 p-2 pr-6 pl-6 ${collapsed ? 'ml-20' : 'ml-64'}`}>{children}</div>
           </div>
         </div>
       ) : (

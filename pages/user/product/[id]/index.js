@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaStar, FaStripe, FaPaypal } from 'react-icons/fa';
 
 const ProductPage = () => {
   const [selectedImage, setSelectedImage] = React.useState(0);
+  const [isAdmin, setIsAdmin] = React.useState(false);  
+
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('isAdmin'));
+    if (user) {
+      setIsAdmin(true);
+    }
+  }, []);
   const images = [
     '/api/placeholder/400/400',
     '/api/placeholder/400/400',
@@ -72,9 +80,14 @@ const ProductPage = () => {
               </p>
             </div>
 
-            <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
+           {isAdmin ? <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
               Edit Product
-            </button>
+            </button>:
+            <><button className="w-full bg-black text-white py-3 rounded-lg font-medium">
+                Buy Now
+              </button><button className="w-full bg-white text-black border py-3 rounded-lg font-medium">
+                  Add to Cart
+                </button></>}
 
             <div>
               <p className="font-medium mb-2">Payment Methods</p>
