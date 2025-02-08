@@ -1,4 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
+import { useRouter } from "next/router";   
+
 
 const product = {
   image: "https://appleman.pk/cdn/shop/products/iPhone-11-Pro-1.jpg?v=1667561295&width=1200",
