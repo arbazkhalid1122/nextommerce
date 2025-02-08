@@ -80,7 +80,7 @@ const Order = () => {
   };
 
   return (
-    <div className="p-6 rounded-lg w-full">
+    <div className="rounded-lg w-full">
       <div className="flex justify-between items-center border-b pb-4 mb-4">
         <h2 className="text-2xl font-bold">Orders</h2>
         <div className="relative">

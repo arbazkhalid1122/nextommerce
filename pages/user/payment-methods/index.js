@@ -2,8 +2,10 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { SiMastercard } from "react-icons/si";
 import { SiVisa } from "react-icons/si";
+import PaymentModal from '../../../components/payment/addPaymentModal';
 
 const PaymentMethods = () => {
+  const [paymentModal, setPaymentModal] = React.useState(false);
     const router = useRouter();
   const transactions = [
     {
@@ -68,7 +70,7 @@ const PaymentMethods = () => {
         </div>
 
         {/* Add New Card */}
-        <div className="border rounded-lg p-4 shadow-sm flex items-center justify-center">
+        <div className="border rounded-lg p-4 shadow-sm flex items-center justify-center" onClick={() => setPaymentModal(true)}>
           <button className="text-gray-600">+Add new payment method</button>
         </div>
       </div>
@@ -107,6 +109,7 @@ const PaymentMethods = () => {
           </table>
         </div>
       </div>
+      {paymentModal &&<PaymentModal setPaymentModal={setPaymentModal} />}
     </div>
   );
 };

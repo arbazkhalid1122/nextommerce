@@ -1,6 +1,8 @@
 import React from 'react';
+import PaymentModal from '../payment/addPaymentModal';
 
 const PaymentDetails = () => {
+  const [showPaymentModal, setShowPaymentModal] = React.useState(false);
   const transactions = [
     { id: 'T234786AFDE', order: '6754', price: 200.00, qty: 3, total: 600.00, delivery: 2.00, gst: 7.20, status: 609.20 },
     { id: 'T234786AFDE', order: '6754', price: 200.00, qty: 3, total: 600.00, delivery: 2.00, gst: 7.20, status: 609.20 },
@@ -11,7 +13,7 @@ const PaymentDetails = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="">
       <h2 className="text-2xl font-semibold mb-6">Payment Methods</h2>
       
       <div className="flex gap-4 mb-8">
@@ -44,7 +46,7 @@ const PaymentDetails = () => {
         </div>
 
         {/* Add New Payment Method Button */}
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={() => setShowPaymentModal(true)}>
           <button className="text-blue-500 hover:text-blue-600">+ Add new payment method</button>
         </div>
       </div>
@@ -99,6 +101,7 @@ const PaymentDetails = () => {
           </div>
         </div>
       </div>
+      {showPaymentModal && <PaymentModal setPaymentModal={showPaymentModal} />}
     </div>
   );
 };

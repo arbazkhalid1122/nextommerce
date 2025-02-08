@@ -1,10 +1,10 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useGlobalContext } from "../../Contexts/globalContext/context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaGoogle } from "react-icons/fa";
+import { ro } from "date-fns/locale";
 
 export default function Login() {
   const router = useRouter();
@@ -15,24 +15,21 @@ export default function Login() {
   } = useForm();
 
   const submitHandler = async (form) => {
-    // Store form data in localStorage
     localStorage.setItem("user", JSON.stringify(form));
     console.log("Form data: ", form);
     
-    // router.push("/");
     if(form.role === "buyer") {
       localStorage.setItem("buyer", true);
-      router.push("/");
+      router.push("/user/product");
     }else{
       localStorage.setItem("isAdmin", true);
-      router.push("/vender/product/display");
-    }
-    // const { name, lastname, phone, address } = form;
-    // updateAccount({ name, lastname, phone, address, isAdmin: false });
+      router.push("/vender/product");
+  }
+    
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
       <div className="w-full max-w-md space-y-6">
         <form
           className="bg-white p-8 rounded-3xl shadow-2xl border border-gray-200"
