@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TiWatch } from "react-icons/ti";
 import { productImage } from '../../../components/constant';
 
 const ordersData = [
@@ -97,7 +96,7 @@ const OrderItem = ({ order }) => {
 
       {isExpanded && (
         <div className="p-4 border-t overflow-x-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 min-w-max">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 min-w-max">
             <div className="space-y-2">
               <h3 className="font-medium">Order Details</h3>
               <p>Order Placed By: {order.customerDetails.name}</p>

@@ -81,9 +81,8 @@ const Order = () => {
 
   return (
     <div className="rounded-lg w-full">
-      <div className="flex justify-between items-center border-b pb-4 mb-4">
-        <h2 className="text-2xl font-bold">Orders</h2>
-        <div className="relative">
+      <div className="flex justify-between items-center border-b w-full pb-4 mb-4">
+        <h2 className="text-2xl font-bold mb-4 md:mb-0">Orders</h2>
           <select 
             className="border rounded-md p-2 outline-none cursor-pointer"
             value={selectedStatus}
@@ -95,17 +94,16 @@ const Order = () => {
             <option value="canceled">Canceled</option>
           </select>
         </div>
-      </div>
 
       <div className="w-full overflow-x-auto">
-        <table className="w-full border-collapse text-left">
+        <table className="w-full min-w-max border-collapse text-left">
           <thead>
             <tr className="border-b">
-              <th className="p-2">Order#</th>
-              <th className="p-2">Placed Date</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Total amount</th>
-              <th className="p-2">Items</th>
+              <th className="p-2 min-w-[150px]">Order#</th>
+              <th className="p-2 min-w-[150px]">Placed Date</th>
+              <th className="p-2 min-w-[150px]">Status</th>
+              <th className="p-2 min-w-[150px]">Total amount</th>
+              <th className="p-2 min-w-[150px]">Items</th>
             </tr>
           </thead>
           <tbody>

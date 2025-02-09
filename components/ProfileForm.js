@@ -69,7 +69,7 @@ const ProfileForm = () => {
                   <div>
                     <label className="block text-sm mb-2">Full Name</label>
                     <input
-                      type="text"
+                      type="text" 
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
@@ -170,14 +170,6 @@ const ProfileForm = () => {
                 <label className="text-sm">Use this Address for shipping</label>
               </div>
 
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-                >
-                  Save Changes
-                </button>
-              </div>
             </div>
           </form>
         </div>
@@ -215,6 +207,15 @@ const ProfileForm = () => {
           </label>
         </div>
       </div>
+      
+      <div className="flex justify-start mt-10">
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+                >
+                  Save Changes
+                </button>
+              </div>
     </div>
   );
 };

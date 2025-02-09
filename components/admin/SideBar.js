@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { PiTrashSimple, PiShoppingBagThin } from "react-icons/pi";
 import { SlCreditCard } from "react-icons/sl";
@@ -8,12 +8,23 @@ import { MdOutlineLogout, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRigh
 
 const Sidebar = ({collapsed,setCollapsed}) => {
   const router = useRouter();
-  let admin = false;
+  const [admin, setAdmin] = useState(false);
+
+  console.log("admin", admin);
+  useEffect(() => {
+    if (localStorage.getItem("isAdmin")) {
+      setAdmin(true);
+    }
+  }, []);
 
   const handleItemClick = (route) => {
-    router.push(route);
-  };
 
+    console.log("route", route);    if(route === "/auth/login") {
+          localStorage.removeItem("isAdmin");
+          localStorage.removeItem("buyer");
+        }
+        router.push(route);
+      };
   const isActive = (route) => router.pathname === route;
 
   return (
@@ -57,10 +68,10 @@ const Sidebar = ({collapsed,setCollapsed}) => {
 
         {/* Account Management */}
         {!collapsed && <div className="mt-4 text-gray-600 font-semibold">Account Management</div>}
-        <div className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
+        <div className={`flex items-center mt-4 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${isActive(admin ? "/vender/profile" : "/user/profile") ? "bg-gray-300" : ""}`} onClick={() => handleItemClick(admin ? "/vender/profile" : "/user/profile")}>
           <RxPerson size={collapsed ? 30 : 20} /> {!collapsed && "Personal Information"}
         </div>
-        <div className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200">
+        <div className="flex items-center mt-2 gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200" onClick={() => handleItemClick("/auth/login")}>
           <MdOutlineLogout size={collapsed ? 30 : 20} /> {!collapsed && "Logout"}
         </div>
       </div>

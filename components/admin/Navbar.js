@@ -22,17 +22,16 @@ const Navbar = ({ setIsDrawerOpen }) => {
         <FaBars />
       </button>
 
-      {/* Logo */}
-      <div className="w-24 h-10 bg-gray-600 text-white flex items-center justify-center rounded-md">
-        Logo
-      </div>
+        <div className="w-24 h-10 bg-gray-600 text-white hidden sm:flex items-center justify-center rounded-md">
+          Logo
+        </div>
 
-      {/* Search Bar */}
+        {/* Search Bar */}
       <div className="flex-grow flex justify-center">
         <input
           type="text"
           placeholder="Search products"
-          className="w-3/4 md:w-1/3 h-10 bg-gray-300 text-gray-700 rounded-lg px-3 outline-none"
+          className="w-3/4 md:w-1/3 h-10 bg-gray-100 text-gray-700 rounded-lg px-3 outline-none"
         />
       </div>
 

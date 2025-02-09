@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { productImage } from '../../../components/constant';
 // import { X } from 'lucide-react';
 
 const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
@@ -101,8 +102,13 @@ const ReviewItem = ({ item, onAddReview }) => {
     <div className="border-b py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-gray-200 rounded"></div>
-          <span className="flex-1">{item.productName}</span>
+          <div className="w-12 h-12 bg-gray-200 rounded">
+            <img src={productImage} alt={item.productName} className="w-full h-full object-cover" />
+          </div>
+          <span className="flex-1 h-12 max-w-[280px] overflow-hidden text-ellipsis line-clamp-2">
+  {item.productName}
+</span>
+
         </div>
         {item.review ? (
           <div className="flex items-center gap-4">
@@ -120,18 +126,21 @@ const ReviewItem = ({ item, onAddReview }) => {
             </button>
           </div>
         ) : (
-          <button 
+            <button 
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+            className="px-2 py-2 text-sm bg-gray-200 rounded-md hover:bg-gray-300 
+                       sm:px-4 sm:py-2 sm:text-sm whitespace-nowrap"
           >
             Leave a review
           </button>
+          
+          
         )}
       </div>
 
       {isExpanded && item.review && (
-        <div className="mt-4 pl-16">
-          <div className="bg-gray-50 p-4 rounded">
+        <div className="mt-4 pl-0 sm:pl-16">
+          <div className="bg-gray-50 p-2 sm:p-4 rounded">
             <div className="flex items-center gap-2 mb-2">
               <h3 className="font-medium">{item.review.userName}</h3>
               <StarRating rating={item.review.rating} />
@@ -197,7 +206,7 @@ const MyReviews = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">My Reviews</h1>
+        <h1 className="text-2xl font-bold">Reviews</h1>
         <select 
           value={selectedRating}
           onChange={(e) => setSelectedRating(e.target.value)}
