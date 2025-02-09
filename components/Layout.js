@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./admin/SideBar";
 import Navbar from "./admin/Navbar";
 import { useRouter } from "next/router";
@@ -7,6 +7,16 @@ export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
+
+
+  console.log("router", router);
+    useEffect(() => {
+      if(!localStorage.getItem("isAdmin") && !localStorage.getItem("buyer") || router.pathname === '/') {
+        router.push("/auth/login");
+      }
+  
+  
+    }, []);
 
   return (
     <>
