@@ -26,7 +26,7 @@ const ProductCard = ({ onClick }) => {
         <h3 className="text-gray-800 font-medium mt-2 text-sm truncate w-full">{product.title}</h3>
         <p className="text-lg font-semibold mt-1">${product.price}</p>
       </div>
-      <button className="absolute bottom-2 right-2 sm:right-4 sm:left-4 w-6 h-6 sm:w-10 sm:h-10 bg-gray-100 rounded flex justify-center items-center shadow">
+      <button className="absolute bottom-2 right-2 sm:right-4 sm:right-4 w-6 h-6 sm:w-10 sm:h-10 bg-gray-100 rounded flex justify-center items-center shadow">
         <FaShoppingCart className="text-gray-500" />
       </button>
     </div>
