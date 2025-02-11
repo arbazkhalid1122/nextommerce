@@ -1,4 +1,4 @@
-export default function PaymentModal({setPaymentModal}) {
+export default function PaymentModal({setPaymentModal,addPaymentMethod}) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div className="bg-white rounded-2xl p-6 w-96 shadow-lg">
@@ -22,7 +22,9 @@ export default function PaymentModal({setPaymentModal}) {
                 <input type="text" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black" />
               </div>
             </div>
-            <button type="submit" className="w-full bg-black text-white py-2 rounded-md font-medium hover:bg-opacity-80" onClick={() => setPaymentModal(false)}>
+            <button type="submit" className="w-full bg-black text-white py-2 rounded-md font-medium hover:bg-opacity-80" onClick={() =>{ 
+              addPaymentMethod({type: 'Mastercard', last4: '1456', expiry: '02/2028', primary: false});
+              setPaymentModal(false)}}>
               Add Payment Method
             </button>
           </form>
