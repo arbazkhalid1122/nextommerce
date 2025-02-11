@@ -99,7 +99,7 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>  
 
       <div className="mt-8">
         <h2 className="font-medium mb-4">Additional Details</h2>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { productImage } from '../../../components/constant';
-// import { X } from 'lucide-react';
+import { reviewsData } from '@/components/data/fakeData';
 
 const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
-  
+
   const handleSubmit = () => {
     if (rating === 0) return;
     onSubmit({
@@ -26,7 +26,6 @@ const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Leave a Review</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-            {/* <X size={24} /> */}
             X
           </button>
         </div>
@@ -43,9 +42,7 @@ const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
                   className="focus:outline-none"
                 >
                   <svg
-                    className={`w-8 h-8 ${
-                      star <= rating ? 'text-yellow-400' : 'text-gray-300'
-                    }`}
+                    className={`w-8 h-8 ${star <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -55,7 +52,7 @@ const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
               ))}
             </div>
           </div>
-          
+
           <div className="mb-4">
             <label className="block mb-2">Description (optional)</label>
             <textarea
@@ -106,15 +103,14 @@ const ReviewItem = ({ item, onAddReview }) => {
             <img src={productImage} alt={item.productName} className="w-full h-full object-cover" />
           </div>
           <span className="flex-1 h-12 max-w-[280px] overflow-hidden text-ellipsis line-clamp-2">
-  {item.productName}
-</span>
-
+            {item.productName}
+          </span>
         </div>
         {item.review ? (
           <div className="flex items-center gap-4">
             <StarRating rating={item.review.rating} />
             <button onClick={() => setIsExpanded(!isExpanded)}>
-              <svg 
+              <svg
                 className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                 viewBox="0 0 24 24"
                 fill="none"
@@ -126,15 +122,12 @@ const ReviewItem = ({ item, onAddReview }) => {
             </button>
           </div>
         ) : (
-            <button 
+          <button
             onClick={() => setIsModalOpen(true)}
-            className="px-2 py-2 text-sm bg-gray-200 rounded-md hover:bg-gray-300 
-                       sm:px-4 sm:py-2 sm:text-sm whitespace-nowrap"
+            className="px-2 py-2 text-sm bg-gray-200 rounded-md hover:bg-gray-300 sm:px-4 sm:py-2 sm:text-sm whitespace-nowrap"
           >
             Leave a review
           </button>
-          
-          
         )}
       </div>
 
@@ -150,7 +143,7 @@ const ReviewItem = ({ item, onAddReview }) => {
         </div>
       )}
 
-      <ReviewModal 
+      <ReviewModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={(review) => onAddReview(item.id, review)}
@@ -161,53 +154,35 @@ const ReviewItem = ({ item, onAddReview }) => {
 };
 
 const MyReviews = () => {
-
-    const reviewsData = [
-        {
-          id: 1,
-          productName: "Apple watch water resistance with 3000 mAh rechargeable battery",
-          productImage: "/watch.jpg",
-          review: {
-            rating: 4,
-            userName: "John Doe",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          }
-        },
-        {
-          id: 2,
-          productName: "Apple watch water resistance with 3000 mAh rechargeable battery",
-          productImage: "/watch.jpg",
-          review: null
-        },
-        {
-          id: 3,
-          productName: "Apple watch water resistance with 3000 mAh rechargeable battery",
-          productImage: "/watch.jpg",
-          review: {
-            rating: 5,
-            userName: "Jane Smith",
-            text: "Great product, highly recommended!"
-          }
-        }
-      ];
-
+ 
 
   const [selectedRating, setSelectedRating] = useState('all');
   const [reviews, setReviews] = useState(reviewsData);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleAddReview = (productId, review) => {
-    setReviews(reviews.map(item => 
-      item.id === productId 
+    setReviews(reviews.map(item =>
+      item.id === productId
         ? { ...item, review }
         : item
     ));
   };
+  const filteredReviews = selectedRating === 'all'
+    ? reviews
+    : reviews.filter(item => item.review && item.review.rating === parseInt(selectedRating));
+
+  const reviewsPerPage = 5; // Updated to show 5 items per page
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = filteredReviews.slice(indexOfFirstReview, indexOfLastReview);
+
+  const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Reviews</h1>
-        <select 
+        <select
           value={selectedRating}
           onChange={(e) => setSelectedRating(e.target.value)}
           className="border p-2 rounded"
@@ -222,29 +197,23 @@ const MyReviews = () => {
       </div>
 
       <div className="mb-6 max-w-6xl">
-        {/* <div className="grid grid-cols-6 gap-4 py-2 border-b">
-          <div className="col-span-4">Products</div>
-          <div className="col-span-2 text-right">Review</div>
-        </div> */}
-
-        {reviews.map((item) => (
-          <ReviewItem 
-            key={item.id} 
-            item={item} 
+        {currentReviews.map((item) => (
+          <ReviewItem
+            key={item.id}
+            item={item}
             onAddReview={handleAddReview}
           />
         ))}
       </div>
 
       <div className="flex justify-center gap-2">
-        {[1, 2, 3, 4].map((page) => (
+        {Array.from({ length: totalPages }, (_, index) => (
           <button
-            key={page}
-            className={`w-8 h-8 rounded ${
-              page === 1 ? 'bg-gray-200' : 'hover:bg-gray-100'
-            }`}
+            key={index + 1}
+            onClick={() => setCurrentPage(index + 1)}
+            className={`w-8 h-8 rounded ${index + 1 === currentPage ? 'bg-gray-200' : 'hover:bg-gray-100'}`}
           >
-            {page}
+            {index + 1}
           </button>
         ))}
       </div>

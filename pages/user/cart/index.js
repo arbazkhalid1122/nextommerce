@@ -2,14 +2,9 @@ import React from 'react';
 // import { X } from 'lucide-react';
 import { useRouter } from 'next/router';
 import OrderSummary from '../OrderSummary'
+import { cartData } from '@/components/data/fakeData';
 
-const cartData = [
-  { id: 1, name: 'Product 1', price: 200.00, image: '/cart-item', qty: 1 },
-  { id: 2, name: 'Product 2', price: 200.00, image: '/placeholder.jpg', qty: 1 },
-  { id: 3, name: 'Product 2', price: 200.00, image: '/placeholder.jpg', qty: 1 },
-  { id: 4, name: 'Product 5', price: 200.00, image: '/placeholder.jpg', qty: 1 },
-  { id: 5, name: 'Product 3', price: 200.00, image: '/placeholder.jpg', qty: 1 }
-];
+
 
 const CartItem = ({ item, onUpdateQty, onRemove }) => (
   <tr className="border-b">

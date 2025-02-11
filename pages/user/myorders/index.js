@@ -1,27 +1,7 @@
 import React, { useState } from 'react';
 import { productImage } from '../../../components/constant';
+import { ordersData } from '@/components/data/fakeData';
 
-const ordersData = [
-  {
-    id: '6754327DA23',
-    date: 'Feb 02, 2025 07:34 pm',
-    status: 'pending',
-    amount: 2034.00,
-    items: [
-      { id: 1, name: 'Product Name', price: 230.00, image: '/product1.jpg', quantity: 1 },
-      { id: 2, name: 'Product Name', price: 230.00, image: '/product2.jpg', quantity: 1 },
-      { id: 3, name: 'Product Name', price: 230.00, image: '/product3.jpg', quantity: 1 }
-    ],
-    customerDetails: {
-      name: 'Coach Name',
-      email: 'coachemail@gmail.com',
-      phone: '+1 234 5678 901',
-      address: 'Street No # House No Town, City, Zip Code',
-      shipping: 7.2,
-      gst: 7.2
-    }
-  }
-];
 
 const OrderItem = ({ order }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,7 +51,7 @@ const OrderItem = ({ order }) => {
             {items.slice(0, 2).map((item, idx) => (
               <div key={idx} className="w-8 h-8 bg-gray-200 rounded overflow-hidden">
                 <img src={productImage} alt="product" className="w-full h-full object-cover" />
-              </div>
+              </div> 
             ))}
             {items.length > 2 && (
               <span className="text-sm text-gray-600">+{items.length - 2}</span>
@@ -152,6 +132,10 @@ const OrderItem = ({ order }) => {
 const MyOrders = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
 
+  const filteredOrders = selectedStatus === 'all' 
+    ? ordersData 
+    : ordersData.filter(order => order.status === selectedStatus);
+
   return (
     <div className="">
       <div className="flex flex-wrap justify-between items-center mb-6">
@@ -169,7 +153,7 @@ const MyOrders = () => {
       </div>
 
       <div className="space-y-4">
-        {Array(8).fill(ordersData[0]).map((order, index) => (
+        {filteredOrders.map((order, index) => (
           <OrderItem key={index} order={order} />  
         ))}
       </div>
