@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import ProductCard from "../../../components/Product";
+import React from "react";
 
 const Products = () => {
   const router = useRouter();
-
+const [isOpen, setIsOpen] = React.useState(false);
     const products = [
       { img: "../assets/watch.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
       { img: "../assets/phone.png", title: "Title of the Product will be here", price: "$234.00", rating: 4.0 },
