@@ -1,15 +1,15 @@
 import "../styles/globals.css";
 import React from "react";
 import Layout from "../components/Layout";
-import { AppProvider } from "@/components/context/context";
+import { CartProvider } from "@/components/context/context";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <AppProvider>
+    <CartProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </AppProvider>
+    </CartProvider>
   );
 };
 

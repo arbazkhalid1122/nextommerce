@@ -1,20 +1,25 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductGrid from "../../../components/Product";
 import { products } from "@/components/data/fakeData";
+import { useCart } from "@/components/context/context";
 
 const Products = () => {
+  const { newlyProducts } = useCart();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Number of products per page
 
+const allProducts = [...products, ...newlyProducts];  
+
+console.log("allProducts", allProducts);
 
 
   // Calculate the current products to display
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const currentProducts = allProducts.slice(startIndex, endIndex);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
@@ -23,7 +28,7 @@ const Products = () => {
       <div className="flex flex-col justify-start md:flex-row justify-between items-center">
         <h2 className="text-2xl font-bold mb-4 md:mb-0">Products</h2>
         <div className="flex items-center gap-2">
-          <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={() => setIsOpen(true)}>
+          <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={() => router.push("/vender/addProduct")}>
             Add Product
           </button>
           <select className="border px-3 py-2 rounded-lg">

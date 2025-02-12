@@ -1,16 +1,13 @@
 import React from 'react';
-// import { X } from 'lucide-react';
-import { useRouter } from 'next/router';
-import OrderSummary from '../OrderSummary'
-import { cartData } from '@/components/data/fakeData';
-
-
+import OrderSummary from '../OrderSummary';
+import { useCart } from '@/components/context/context';
+import { productImage } from '@/components/constant';
 
 const CartItem = ({ item, onUpdateQty, onRemove }) => (
   <tr className="border-b">
     <td className="py-4">
       <div className="flex items-center">
-        <div className="w-12 h-12 bg-gray-200 rounded"></div>
+        <img src={productImage} alt={item.title} className="w-12 h-12 rounded"/>
       </div>
     </td>
     <td className="py-4">${item.price.toFixed(2)}</td>
@@ -23,30 +20,15 @@ const CartItem = ({ item, onUpdateQty, onRemove }) => (
     </td>
     <td className="py-4">${(item.price * item.qty).toFixed(2)}</td>
     <td className="py-4">
-      <button onClick={() => onRemove(item.id)}>
-        {/* <X className="w-5 h-5 text-gray-500" /> */}
-        X
-      </button>
+      <button onClick={() => onRemove(item.id)}>X</button>
     </td>
   </tr>
 );
 
-
-
 const ShoppingCart = () => {
-  const [items, setItems] = React.useState(cartData);
+  const { cart, updateQty, removeFromCart } = useCart();
 
-  const handleUpdateQty = (id, newQty) => {
-    if (newQty < 1) return;
-    setItems(items.map(item => 
-      item.id === id ? { ...item, qty: newQty } : item
-    ));
-  };
-
-  const handleRemove = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  };
-
+console.log("cart", cart);
   return (
     <div className="container mx-auto p-3">
       <div className="text-sm breadcrumbs mb-4">
@@ -67,12 +49,12 @@ const ShoppingCart = () => {
                 </tr>
               </thead>
               <tbody>
-                {items.map(item => (
+                {cart.map(item => (
                   <CartItem 
                     key={item.id} 
                     item={item}
-                    onUpdateQty={handleUpdateQty}
-                    onRemove={handleRemove}
+                    onUpdateQty={updateQty}
+                    onRemove={removeFromCart}
                   />
                 ))}
               </tbody>
@@ -81,7 +63,7 @@ const ShoppingCart = () => {
         </div>
 
         <div className="lg:w-1/3 mt-8 lg:mt-0">
-          <OrderSummary items={items} />
+          <OrderSummary items={cart} />
         </div>
       </div>
     </div>

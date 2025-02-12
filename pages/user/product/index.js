@@ -31,7 +31,7 @@ const Products = () => {
 
       {/* Product Grid */}
       <div className="flex flex-wrap justify-center gap-4 mt-6">
-        <ProductGrid products={currentProducts} onClick={() => router.push(`product/1`)} />
+        <ProductGrid products={currentProducts} onClick={(index) => router.push(`product/${index}`)} />
       </div>
 
       {/* Pagination */}

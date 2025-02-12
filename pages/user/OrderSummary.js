@@ -2,11 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 
 const OrderSummary = ({ items }) => {
+  let router = useRouter();
 
-    let router = useRouter(); 
-  const cartTotal =items.length>1? items.reduce((sum, item) => sum + (item.price * item.qty), 0):22;
+  const cartTotal = items.length > 0 ? items.reduce((sum, item) => sum + item.price * item.qty, 0) : 0;
   const gst = cartTotal * 0.01;
-  const shippingFee = 4.00;
+  const shippingFee = cartTotal > 0 ? 4.00 : 0; // No shipping fee if cart is empty
   const totalPrice = cartTotal + gst + shippingFee;
 
   return (
@@ -30,8 +30,10 @@ const OrderSummary = ({ items }) => {
           <span>${totalPrice.toFixed(2)}</span>
         </div>
       </div>
-      <button className="w-full bg-black text-white py-3 rounded mt-6"
-       onClick={()=>router.push('/user/checkout')}
+      <button
+        className="w-full bg-black text-white py-3 rounded mt-6 disabled:opacity-50"
+        onClick={() => router.push("/user/checkout")}
+        disabled={cartTotal === 0} // Disable button if cart is empty
       >
         Proceed to checkout
       </button>

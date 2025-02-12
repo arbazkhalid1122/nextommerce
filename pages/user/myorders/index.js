@@ -1,12 +1,10 @@
+import { productImage } from '@/components/constant';
+import { useCart } from '@/components/context/context';
 import React, { useState } from 'react';
-import { productImage } from '../../../components/constant';
-import { ordersData } from '@/components/data/fakeData';
-
 
 const OrderItem = ({ order }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [items, setItems] = useState(order.items);
-
+  const [items, setItems] = useState(order?.cart || []);
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return 'bg-yellow-400';
@@ -17,51 +15,34 @@ const OrderItem = ({ order }) => {
   };
 
   const calculateSubtotal = (items) => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-
-  const calculateTotalAmount = (order) => {
-    const subtotal = calculateSubtotal(items);
-    return subtotal + order.customerDetails.shipping + order.customerDetails.gst;
+    return items?.reduce((total, item) => total + item.price * item.qty, 0);
   };
 
   const handleQuantityChange = (index, delta) => {
     const newItems = [...items];
-    newItems[index].quantity += delta;
-    if (newItems[index].quantity < 1) newItems[index].quantity = 1;
+    newItems[index].qty += delta;
+    if (newItems[index].qty < 1) newItems[index].qty = 1;
     setItems(newItems);
   };
 
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = items.reduce((total, item) => total + item.qty, 0);
   const subtotal = calculateSubtotal(items);
-  const totalAmount = calculateTotalAmount(order);
+  const totalAmount = subtotal;
 
   return (
-    <div className="border rounded-lg mb-4 overflow-x-auto">
-      <div className="flex items-center justify-between p-4 min-w-max">
+    <div className="border rounded-lg mb-4">
+      <div className="flex items-center justify-between p-4">
         <div className="flex gap-8 w-full">
-          <span className="text-gray-600 mt-1 flex-1">{order.id}</span>
-          <span className="text-gray-600 mt-1 flex-1">{order.date}</span>
+          <span className="text-gray-600 mt-1 flex-1">99999111001001</span>
+          <span className="text-gray-600 mt-1 flex-1">Feb 02, 2025 07:34 pm</span>
           <div className="flex items-center gap-2 flex-1">
-            <span className={`w-2 h-2 rounded-full ${getStatusColor(order.status)}`}></span>
-            <span className="capitalize">{order.status}</span>
+            <span className={`w-2 h-2 rounded-full ${getStatusColor('pending')}`}></span>
+            <span className="capitalize">Pending</span>
           </div>
+          <span className="text-gray-600 mt-1 flex-1">{order.paymentMethod}</span>
           <span className='mt-1 flex-1'>${totalAmount.toFixed(2)}</span>
-          <div className="flex items-center gap-2 flex-1">
-            {items.slice(0, 2).map((item, idx) => (
-              <div key={idx} className="w-8 h-8 bg-gray-200 rounded overflow-hidden">
-                <img src={productImage} alt="product" className="w-full h-full object-cover" />
-              </div> 
-            ))}
-            {items.length > 2 && (
-              <span className="text-sm text-gray-600">+{items.length - 2}</span>
-            )}
-          </div>
         </div>
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="p-2"
-        >
+        <button onClick={() => setIsExpanded(!isExpanded)} className="p-2">
           <svg 
             className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
             viewBox="0 0 24 24"
@@ -75,16 +56,14 @@ const OrderItem = ({ order }) => {
       </div>
 
       {isExpanded && (
-        <div className="p-4 border-t overflow-x-auto">
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 min-w-max">
+        <div className="p-4 border-t">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8">
             <div className="space-y-2">
               <h3 className="font-medium">Order Details</h3>
-              <p>Order Placed By: {order.customerDetails.name}</p>
-              <p>Email: {order.customerDetails.email}</p>
-              <p>Phone No: {order.customerDetails.phone}</p>
-              <p>Shipping Address: {order.customerDetails.address}</p>
-              <p>Shipping Cost: ${order.customerDetails.shipping.toFixed(2)}</p>
-              <p>GST: ${order.customerDetails.gst.toFixed(2)}</p>
+              <p>Name: {order.fullName}</p>
+              <p>Email: {order.email}</p>
+              <p>Phone: {order.phone}</p>
+              <p>Address: {order.address}, {order.city}, {order.country}</p>
               <p>Subtotal: ${subtotal.toFixed(2)}</p>
               <p>Total Items: {totalItems}</p>
               <p>Total Amount: ${totalAmount.toFixed(2)}</p>
@@ -99,7 +78,7 @@ const OrderItem = ({ order }) => {
                         <img src={productImage} alt="product" className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="font-medium">{item.name}</p>
+                        <p className="font-medium">{item.title}</p>
                         <p>${item.price.toFixed(2)}</p>
                       </div>
                     </div>
@@ -110,7 +89,7 @@ const OrderItem = ({ order }) => {
                       >
                         -
                       </button>
-                      <span>{item.quantity}</span>
+                      <span>{item.qty}</span>
                       <button 
                         onClick={() => handleQuantityChange(idx, 1)} 
                         className="px-2 border rounded"
@@ -129,36 +108,51 @@ const OrderItem = ({ order }) => {
   );
 };
 
-const MyOrders = () => {
-  const [selectedStatus, setSelectedStatus] = useState('all');
-
-  const filteredOrders = selectedStatus === 'all' 
-    ? ordersData 
-    : ordersData.filter(order => order.status === selectedStatus);
-
+const MyOrders = ({ ordersData }) => {
   return (
-    <div className="">
-      <div className="flex flex-wrap justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">My Orders</h1>
-        <select 
-          value={selectedStatus}
-          onChange={(e) => setSelectedStatus(e.target.value)}
-          className="border p-2 rounded"
-        >
-          <option value="all">Select status</option>
-          <option value="pending">Pending</option>
-          <option value="in-process">In Process</option>
-          <option value="delivered">Delivered</option>
-        </select>
-      </div>
-
+    <div>
+      <h1 className="text-2xl font-bold mb-4">My Orders</h1>
       <div className="space-y-4">
-        {filteredOrders.map((order, index) => (
-          <OrderItem key={index} order={order} />  
+        {ordersData.map((order, index) => (
+          <OrderItem key={index} order={order} />
         ))}
       </div>
     </div>
   );
 };
 
-export default MyOrders;
+export default function OrdersPage() {
+  const { ordersData } = useCart();
+  console.log("ordersData", ordersData);
+
+  const fakeData = [
+    {
+      email: "fake@example.com",
+      paymentMethod: "Credit Card",
+      fullName: "John Doe",
+      phone: "123-456-7890",
+      address: "123 Fake Street",
+      city: "Faketown",
+      country: "Fakecountry",
+      cart: [
+        {
+          title: "Fake Product 1",
+          price: 10.0,
+          qty: 1,
+          img: "https://via.placeholder.com/150"
+        },
+        {
+          title: "Fake Product 2",
+          price: 20.0,
+          qty: 2,
+          img: "https://via.placeholder.com/150"
+        }
+      ]
+    },
+    // Add more fake orders if needed
+  ];
+
+  const dataToShow = ordersData && ordersData.length > 0 ? ordersData : fakeData;
+
+  return <MyOrders ordersData={dataToShow} />;
+}

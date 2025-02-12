@@ -1,28 +1,49 @@
-import React from 'react';
-import { useForm } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import OrderSummary from '../OrderSummary';
+import { useCart } from '@/components/context/context';
 
 const CheckoutForm = () => {
-  const [paymentMethod, setPaymentMethod] = React.useState('stripe');
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
+  const router = useRouter();
+  const { cart, clearCart,addOrders } = useCart();
+
+console.log("cart", cart);  const [paymentMethod, setPaymentMethod] = useState('stripe');
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    zip: '',
+    country: '',
+    cardHolder: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-let items = {
-    name: 'Product 1',
-    price: 200.00,
-    image: '/cart-item',
-    qty: 3
-}
-     
+  const handleSubmit = (e) => {
+    e.preventDefault();    
+    if (!formData.fullName || !formData.email || !formData.address) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+ addOrders({ ...formData, cart, paymentMethod });
+    clearCart();
+    router.push('/user/myorders');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="lg:flex lg:gap-8">
         <div className="lg:w-2/3">
           <h1 className="text-2xl font-semibold mb-6">Checkout Detail</h1>
-          
+
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
@@ -32,6 +53,9 @@ let items = {
                     <label className="block text-sm mb-2">Full Name</label>
                     <input
                       type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
                       required
                       className="w-full border rounded-md p-2"
                     />
@@ -42,6 +66,9 @@ let items = {
                       <label className="block text-sm mb-2">Email</label>
                       <input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -50,6 +77,9 @@ let items = {
                       <label className="block text-sm mb-2">Phone Number</label>
                       <input
                         type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -60,6 +90,9 @@ let items = {
                     <label className="block text-sm mb-2">Street Address</label>
                     <input
                       type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
                       required
                       className="w-full border rounded-md p-2"
                     />
@@ -70,6 +103,9 @@ let items = {
                       <label className="block text-sm mb-2">City</label>
                       <input
                         type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -78,6 +114,9 @@ let items = {
                       <label className="block text-sm mb-2">Zip Code</label>
                       <input
                         type="text"
+                        name="zip"
+                        value={formData.zip}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -88,6 +127,9 @@ let items = {
                     <label className="block text-sm mb-2">Country</label>
                     <input
                       type="text"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
                       required
                       className="w-full border rounded-md p-2"
                     />
@@ -106,7 +148,7 @@ let items = {
                     }`}
                   >
                     <div className="w-16 h-8 flex items-center justify-center text-indigo-600 font-bold">
-                      stripe
+                      Stripe
                     </div>
                   </button>
                   <button
@@ -127,6 +169,9 @@ let items = {
                     <label className="block text-sm mb-2">Card Holder Name</label>
                     <input
                       type="text"
+                      name="cardHolder"
+                      value={formData.cardHolder}
+                      onChange={handleChange}
                       required
                       className="w-full border rounded-md p-2"
                     />
@@ -135,6 +180,9 @@ let items = {
                     <label className="block text-sm mb-2">Card Number</label>
                     <input
                       type="text"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleChange}
                       required
                       className="w-full border rounded-md p-2"
                     />
@@ -144,7 +192,10 @@ let items = {
                       <label className="block text-sm mb-2">Expiry Date</label>
                       <input
                         type="text"
+                        name="expiryDate"
                         placeholder="MM/YY"
+                        value={formData.expiryDate}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -153,6 +204,9 @@ let items = {
                       <label className="block text-sm mb-2">CVV</label>
                       <input
                         type="text"
+                        name="cvv"
+                        value={formData.cvv}
+                        onChange={handleChange}
                         required
                         className="w-full border rounded-md p-2"
                       />
@@ -161,17 +215,22 @@ let items = {
                 </div>
               </div>
             </div>
+
+            <button 
+              type="submit" 
+              className="w-full bg-black text-white py-3 rounded mt-6"
+            >
+              Place Order
+            </button>
           </form>
         </div>
 
         <div className="lg:w-1/3 mt-8 lg:mt-0">
-          <OrderSummary items={items} />
+          <OrderSummary items={cart} />
         </div>
       </div>
     </div>
   );
 };
-
-
 
 export default CheckoutForm;

@@ -1,21 +1,29 @@
+import { useCart } from '@/components/context/context';
 import React, { useEffect } from 'react';
 import { FaStar, FaStripe, FaPaypal } from 'react-icons/fa';
+import { products } from "@/components/data/fakeData";
+import { useRouter } from 'next/router';
 
 const ProductPage = () => {
   const [selectedImage, setSelectedImage] = React.useState(0);
-  const [isAdmin, setIsAdmin] = React.useState(false);  
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const { addToCart } = useCart(); // Access cart context
+const router = useRouter();
 
-  useEffect(() => {
+console.log("router", router);  useEffect(() => {
     let user = JSON.parse(localStorage.getItem('isAdmin'));
     if (user) {
       setIsAdmin(true);
     }
   }, []);
+
   const images = [
     '/api/placeholder/400/400',
     '/api/placeholder/400/400',
     '/api/placeholder/400/400'
   ];
+
+  const product = products[router.query.id];
 
   return (
     <div className="max-w-7xl mx-auto p-4">
@@ -83,21 +91,27 @@ const ProductPage = () => {
            {isAdmin ? <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
               Edit Product
             </button>:
-            <><button className="w-full bg-black text-white py-3 rounded-lg font-medium">
+            <><button className="w-full bg-black text-white py-3 rounded-lg font-medium" onClick={() =>{
+              addToCart(product);
+              router.push('/user/checkout');
+            }}>
                 Buy Now
-              </button><button className="w-full bg-white text-black border py-3 rounded-lg font-medium">
-                  Add to Cart
-                </button></>}
+              </button>   <button
+                className="w-full bg-white text-black border py-3 rounded-lg font-medium"
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </button></>}
 
-            <div>
-              <p className="font-medium mb-2">Payment Methods</p>
-              <div className="flex items-center space-x-4">
-                <FaPaypal className="text-blue-600 text-2xl" />
-                <FaStripe className="text-purple-600 text-2xl" />
-                <button className="text-sm text-gray-600">+ Add more methods</button>
-              </div>
+          <div>
+            <p className="font-medium mb-2">Payment Methods</p>
+            <div className="flex items-center space-x-4">
+              <FaPaypal className="text-blue-600 text-2xl" />
+              <FaStripe className="text-purple-600 text-2xl" />
+              <button className="text-sm text-gray-600">+ Add more methods</button>
             </div>
           </div>
+        </div>
         </div>
       </div>  
 
@@ -106,7 +120,7 @@ const ProductPage = () => {
         <p className="text-gray-600">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
-      </div>
+      </div>  
     </div>
   );
 };

@@ -1,48 +1,58 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
-const AppContext = createContext();
+// Create Context
+const CartContext = createContext();
+// Custom Hook for easy usage
+export const useCart = () => useContext(CartContext);
 
-export const AppProvider = ({ children }) => {
-  const [cart, setCart] = useState([]); // Cart State
-  const [orders, setOrders] = useState([]); // Orders State
-  const [paymentMethod, setPaymentMethod] = useState("COD"); // Default Payment Method
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+const [ordersData, setOrdersData] = useState([])
+const [newlyProducts, setNewlyProducts] = useState([])
 
-  // Add item to cart
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+        );
+      } else {
+        return [...prev, { ...product, qty: 1 }];
+      }
+    });
   };
 
-  // Remove item from cart
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  const addOrders = (product) => {
+    setOrdersData((prev) => [...prev, product]);
   };
 
-  // Place order
-  const placeOrder = () => {
-    if (cart.length === 0) return;
-    setOrders([...orders, { id: Date.now(), items: cart, paymentMethod }]);
-    setCart([]); // Clear Cart after order
+
+  const addProduct = (product) => {
+    setNewlyProducts((prev) => [...prev, product]);
   };
 
-  // Change Payment Method
-  const changePaymentMethod = (method) => {
-    setPaymentMethod(method);
+  console.log(ordersData,'ordersData');
+  
+
+  const updateQty = (id, qty) => {
+    setCart((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, qty } : item))
+    );
+  };
+
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
-    <AppContext.Provider
-      value={{
-        cart,
-        addToCart,
-        removeFromCart,
-        orders,
-        placeOrder,
-        paymentMethod,
-        changePaymentMethod,
-      }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, updateQty, removeFromCart,addOrders,clearCart,ordersData,addProduct,newlyProducts }}>
       {children}
-    </AppContext.Provider>
+    </CartContext.Provider>
   );
 };
 
