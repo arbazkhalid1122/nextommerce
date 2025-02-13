@@ -1,9 +1,11 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { productImage } from "./constant";
 import { useRouter } from "next/router";
+import { useCart } from "./context/context";
 
 const ProductCard = ({ product, onClick }) => {
   const router = useRouter()
+  const {addToCart} = useCart()
 console.log("product", product);
   
   return (
@@ -24,7 +26,7 @@ console.log("product", product);
         <p className="text-lg font-semibold mt-1 mb-2">${product.price || '200'}</p>
       </div>
       <button className="absolute bottom-2 right-2 sm:right-4 w-6 h-6 sm:w-10 sm:h-10 bg-gray-100 rounded flex justify-center items-center shadow">
-        <FaShoppingCart className="text-gray-500" />
+        <FaShoppingCart className="text-gray-500" onClick={()=>addToCart(product)} />
       </button>
     </div>
   );

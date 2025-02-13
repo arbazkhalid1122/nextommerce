@@ -93,7 +93,7 @@ const PaymentMethods = () => {
                   <td className="py-3 px-4">${transaction.totalAmount.toFixed(2)}</td>
                   <td className="py-3 px-4">${transaction.deliveryCost.toFixed(2)}</td>
                   <td className="py-3 px-4">${transaction.gst.toFixed(2)}</td>
-                  <td className="py-3 px-4 text-green-500">+${transaction.status.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-red-500">-${transaction.status.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>

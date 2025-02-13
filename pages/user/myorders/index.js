@@ -1,6 +1,7 @@
 import { productImage } from '@/components/constant';
 import { useCart } from '@/components/context/context';
 import React, { useState } from 'react';
+import { CartProvider } from '@/components/context/context';
 
 const OrderItem = ({ order }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,7 +14,12 @@ const OrderItem = ({ order }) => {
       default: return 'bg-gray-400';
     }
   };
-
+  // console.log(CartProvider );
+  
+     console.log(order);
+     
+     
+   
   const calculateSubtotal = (items) => {
     return items?.reduce((total, item) => total + item.price * item.qty, 0);
   };
@@ -75,27 +81,18 @@ const OrderItem = ({ order }) => {
                   <div key={idx} className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-100 rounded overflow-hidden">
-                        <img src={productImage} alt="product" className="w-full h-full object-cover" />
+                        <img src={item.image?item.image:productImage} alt="product" className="w-full h-full object-contain" />
                       </div>
                       <div>
                         <p className="font-medium">{item.title}</p>
                         <p>${item.price.toFixed(2)}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <button 
-                        onClick={() => handleQuantityChange(idx, -1)} 
-                        className="px-2 border rounded"
-                      >
-                        -
-                      </button>
-                      <span>{item.qty}</span>
-                      <button 
-                        onClick={() => handleQuantityChange(idx, 1)} 
-                        className="px-2 border rounded"
-                      >
-                        +
-                      </button>
+                    <div className="flex items-center flex-col gap-2">
+                    
+                      
+                      <span className=' p-2 text-[15px]  rounded-[50%]'>{item.qty}</span>
+                     
                     </div>
                   </div>
                 ))}

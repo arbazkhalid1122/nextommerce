@@ -25,7 +25,7 @@ console.log("allProducts", allProducts);
 
   return (
     <div>
-      <div className="flex flex-col justify-start md:flex-row justify-between items-center">
+      <div className="flex flex-col  md:flex-row justify-between items-center">
         <h2 className="text-2xl font-bold mb-4 md:mb-0">Products</h2>
         <div className="flex items-center gap-2">
           <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={() => router.push("/vender/addProduct")}>

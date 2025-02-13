@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import OrderSummary from '../OrderSummary';
 import { useCart } from '@/components/context/context';
@@ -21,6 +21,18 @@ console.log("cart", cart);  const [paymentMethod, setPaymentMethod] = useState('
     expiryDate: '',
     cvv: '',
   });
+
+  function setcardData(){
+    localStorage.setItem('userCheckOut',JSON.stringify(formData))
+  }
+
+  useEffect(()=>{
+     let usercarddata =  JSON.parse(localStorage.getItem('userCheckOut'))  
+     if (usercarddata) {
+         setFormData(usercarddata)
+     } 
+
+  },[])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -219,6 +231,7 @@ console.log("cart", cart);  const [paymentMethod, setPaymentMethod] = useState('
             <button 
               type="submit" 
               className="w-full bg-black text-white py-3 rounded mt-6"
+              onClick={()=>{setcardData()}}
             >
               Place Order
             </button>
