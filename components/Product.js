@@ -8,7 +8,7 @@ console.log("product", product);
   return (
     <div className="border rounded-lg shadow-md bg-white flex flex-col relative cursor-pointer" onClick={onClick}>
       <div className="flex justify-center items-center h-64">
-        <img src={product?.featureImage || productImage} alt={product.title} className="h-full w-full object-cover bg-gray-100" />
+        <img src={product?.featureImage || product.image} alt={product.title} className="h-full w-full object-contain bg-gray-100" />
       </div>
       <div className="mt-4 w-full text-center">
         <div className="flex justify-center items-center text-yellow-500 text-sm">
@@ -16,7 +16,7 @@ console.log("product", product);
             <span key={index}>{index < Math.floor(product.rating) ? "★" : "☆"}</span>
           ))}
           <span className="ml-1 text-gray-700 text-xs font-semibold">
-            {product.rating}
+            {product.rating.rate}
           </span>
         </div>
         <h3 className="text-gray-800 font-medium mt-1 text-sm truncate w-full">{product.title || product?.productTitle}</h3>

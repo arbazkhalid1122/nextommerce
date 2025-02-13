@@ -4,6 +4,8 @@ import ProductGrid from "../../../components/Product";
 import { products } from "@/components/data/fakeData";
 
 const Products = () => {
+  console.log(products);
+  
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +22,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-start md:flex-row justify-between items-center">
+      <div className="flex flex-col justify-between md:flex-row  items-center">
         <h2 className="text-2xl font-bold mb-4 md:mb-0">Products</h2>
         <div className="flex items-center gap-2">
           <select className="border px-3 py-2 rounded-lg">

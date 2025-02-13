@@ -4,7 +4,7 @@ import { FaStar, FaStripe, FaPaypal } from 'react-icons/fa';
 import { products } from "@/components/data/fakeData";
 import { useRouter } from 'next/router';
 
-const ProductPage = () => {
+const ProductPage = (prodsuct) => {
   const [selectedImage, setSelectedImage] = React.useState(0);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const { addToCart } = useCart(); // Access cart context
@@ -32,9 +32,10 @@ console.log("router", router);  useEffect(() => {
         <div className="space-y-4">
           <div className="aspect-square w-full rounded-lg overflow-hidden bg-gray-100">
             <img
-              src={'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600'}
+              // src={'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600'}
+              src={product.image}
               alt="Product"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
           <div className="grid grid-cols-3 gap-4">
@@ -62,11 +63,11 @@ console.log("router", router);  useEffect(() => {
               <FaStar />
               <FaStar className="text-gray-300" />
             </div>
-            <span className="text-gray-600">(4.0/5)</span>
+            <span className="text-gray-600">{product.rating.rate}({product.rating.count})</span>
           </div>
 
-          <h1 className="text-2xl font-semibold">Title of the Product will be here</h1>
-          <p className="text-3xl font-bold">${'234.00'}</p>
+          <h1 className="text-2xl font-semibold">{product.title}</h1>
+          <p className="text-3xl font-bold">${product.price}</p>
 
           <div className="space-y-4">
             <div>
@@ -82,9 +83,10 @@ console.log("router", router);  useEffect(() => {
             <div>
               <p className="font-medium mb-2">Short Description</p>
               <p className="text-gray-600">
-                Elevate your style with our stunning product. Whether you prefer classic shades or bold hues, 
+                {/* Elevate your style with our stunning product. Whether you prefer classic shades or bold hues, 
                 this set offers a diverse palette to suit any style and occasion. Each piece is crafted for 
-                durability and a flawless finish, ensuring that quality meets style.
+                durability and a flawless finish, ensuring that quality meets style. */}
+                {product.description}
               </p>
             </div>
 
