@@ -1,12 +1,13 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { productImage } from "./constant";
+import { useRouter } from "next/router";
 
 const ProductCard = ({ product, onClick }) => {
- 
+  const router = useRouter()
 console.log("product", product);
   
   return (
-    <div className="border rounded-lg shadow-md bg-white flex flex-col relative cursor-pointer" onClick={onClick}>
+    <div className="border rounded-lg shadow-md bg-white flex flex-col relative cursor-pointer" onClick={()=>router.push(`product/${product.id}`)}>
       <div className="flex justify-center items-center h-64">
         <img src={product?.featureImage || product.image} alt={product.title} className="h-full w-full object-contain bg-gray-100" />
       </div>
@@ -33,7 +34,7 @@ const ProductGrid = ({ onClick,products }) => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {products.map((product, index) => (
-        <ProductCard key={index} product={product} onClick={()=>onClick(index)} />
+        <ProductCard key={index} product={product} onClick={()=>onClick(product.id)} />
       ))}
     </div>
   );

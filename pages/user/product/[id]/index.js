@@ -23,7 +23,7 @@ console.log("router", router);  useEffect(() => {
     '/api/placeholder/400/400'
   ];
 
-  const product = products[router.query.id];
+  const product = products[router.query.id-1];
 
   return (
     <div className="max-w-7xl mx-auto p-4">
@@ -120,7 +120,7 @@ console.log("router", router);  useEffect(() => {
       <div className="mt-8">
         <h2 className="font-medium mb-4">Additional Details</h2>
         <p className="text-gray-600">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          {product.description}
         </p>
       </div>  
     </div>
