@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ProfileForm = () => {
   const [formData, setFormData] = useState({
-    fullName: 'Customer Name',
-    email: 'customer@email.com',
-    phone: '+1 234 5678 901',
-    address: 'Street no 2 house no 2 town',
-    city: 'New York',
-    zipCode: '100001',
-    country: 'United State of America',
-    useForShipping: true
+    fullName: "Customer Name",
+    email: "customer@email.com",
+    phone: "+1 234 5678 901",
+    address: "Street no 2 house no 2 town",
+    city: "New York",
+    zipCode: "100001",
+    country: "United State of America",
+    useForShipping: true,
   });
 
   const [profileImage, setProfileImage] = useState(null);
@@ -17,12 +17,15 @@ const ProfileForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.fullName) newErrors.fullName = 'Name is required';
+    if (!formData.fullName) newErrors.fullName = "Name is required";
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Valid email is required';
+      newErrors.email = "Valid email is required";
     }
-    if (!formData.phone || !/^\+?\d{10,}$/.test(formData.phone.replace(/\s/g, ''))) {
-      newErrors.phone = 'Valid phone number is required';
+    if (
+      !formData.phone ||
+      !/^\+?\d{10,}$/.test(formData.phone.replace(/\s/g, ""))
+    ) {
+      newErrors.phone = "Valid phone number is required";
     }
     return newErrors;
   };
@@ -31,8 +34,6 @@ const ProfileForm = () => {
     e.preventDefault();
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
-      // Handle form submission
-      console.log('Form submitted:', formData);
     } else {
       setErrors(newErrors);
     }
@@ -40,9 +41,9 @@ const ProfileForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -56,8 +57,8 @@ const ProfileForm = () => {
   };
 
   return (
-<div className="flex-1 mt-2">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+    <div className="flex-1 mt-2">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-8">
         <div className="w-full md:w-2/3">
           <h1 className="text-2xl font-bold mb-8">Profile</h1>
 
@@ -69,14 +70,18 @@ const ProfileForm = () => {
                   <div>
                     <label className="block text-sm mb-2">Full Name</label>
                     <input
-                      type="text" 
+                      type="text"
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${errors.fullName ? 'border-red-500' : ''}`}
+                      className={`w-full p-2 border rounded-md ${
+                        errors.fullName ? "border-red-500" : ""
+                      }`}
                     />
                     {errors.fullName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.fullName}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -92,10 +97,14 @@ const ProfileForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${errors.email ? 'border-red-500' : ''}`}
+                      className={`w-full p-2 border rounded-md ${
+                        errors.email ? "border-red-500" : ""
+                      }`}
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -105,10 +114,14 @@ const ProfileForm = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${errors.phone ? 'border-red-500' : ''}`}
+                      className={`w-full p-2 border rounded-md ${
+                        errors.phone ? "border-red-500" : ""
+                      }`}
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.phone}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -169,7 +182,6 @@ const ProfileForm = () => {
                 />
                 <label className="text-sm">Use this Address for shipping</label>
               </div>
-
             </div>
           </form>
         </div>
@@ -191,7 +203,14 @@ const ProfileForm = () => {
                 stroke="currentColor"
                 className="w-full h-full text-gray-400"
               >
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                />
                 <path d="M12 16l4-4h-3V8h-2v4H8z" />
               </svg>
             )}
@@ -207,15 +226,15 @@ const ProfileForm = () => {
           </label>
         </div>
       </div>
-      
+
       <div className="flex justify-start mt-10">
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-                >
-                  Save Changes
-                </button>
-              </div>
+        <button
+          type="submit"
+          className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
   );
 };

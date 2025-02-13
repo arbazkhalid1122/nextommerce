@@ -4,13 +4,12 @@ import { PiTrashSimple, PiShoppingBagThin } from "react-icons/pi";
 import { SlCreditCard } from "react-icons/sl";
 import { ImStarEmpty } from "react-icons/im";
 import { RxAvatar, RxPerson } from "react-icons/rx";
-import { MdOutlineLogout, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineLogout } from "react-icons/md";
 
-const Sidebar = ({collapsed,setCollapsed}) => {
+const Sidebar = ({collapsed}) => {
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
 
-  console.log("admin", admin);
   useEffect(() => {
     if (localStorage.getItem("isAdmin")) {
       setAdmin(true);
@@ -18,8 +17,7 @@ const Sidebar = ({collapsed,setCollapsed}) => {
   }, []);
 
   const handleItemClick = (route) => {
-
-    console.log("route", route);    if(route === "/auth/login") {
+       if(route === "/auth/login") {
           localStorage.removeItem("isAdmin");
           localStorage.removeItem("buyer");
         }

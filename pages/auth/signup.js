@@ -57,7 +57,9 @@ export default function Signup() {
                 })}
               />
               {errors.name && (
-                <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
@@ -76,7 +78,9 @@ export default function Signup() {
                 })}
               />
               {errors.email && (
-                <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -90,12 +94,15 @@ export default function Signup() {
                   required: "Please enter your password",
                   pattern: {
                     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,40}$/,
-                    message: "Must be 6+ chars, include uppercase, lowercase & numbers",
+                    message:
+                      "Must be 6+ chars, include uppercase, lowercase & numbers",
                   },
                 })}
               />
               {errors.password && (
-                <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.password.message}
+                </p>
               )}
             </div>
           </div>
@@ -115,7 +122,9 @@ export default function Signup() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-white text-gray-500">
+                Or continue with
+              </span>
             </div>
           </div>
 
@@ -128,7 +137,10 @@ export default function Signup() {
 
         <p className="text-center text-sm text-gray-500">
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-blue-500 hover:text-blue-600 font-semibold">
+          <Link
+            href="/auth/login"
+            className="text-blue-500 hover:text-blue-600 font-semibold"
+          >
             Login
           </Link>
         </p>

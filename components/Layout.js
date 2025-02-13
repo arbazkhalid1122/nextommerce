@@ -8,15 +8,14 @@ export default function Layout({ children }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
 
-
-  console.log("router", router);
-    useEffect(() => {
-      if(!localStorage.getItem("isAdmin") && !localStorage.getItem("buyer") || router.pathname === '/') {
-        router.push("/auth/login");
-      }
-  
-  
-    }, []);
+  useEffect(() => {
+    if (
+      (!localStorage.getItem("isAdmin") && !localStorage.getItem("buyer")) ||
+      router.pathname === "/"
+    ) {
+      router.push("/auth/login");
+    }
+  }, []);
 
   return (
     <>

@@ -16,16 +16,13 @@ export default function Login() {
 
   const submitHandler = async (form) => {
     localStorage.setItem("user", JSON.stringify(form));
-    console.log("Form data: ", form);
-    
-    if(form.role === "buyer") {
+    if (form.role === "buyer") {
       localStorage.setItem("buyer", true);
       router.push("/user/product");
-    }else{
+    } else {
       localStorage.setItem("isAdmin", true);
       router.push("/vender/product");
-  }
-    
+    }
   };
 
   return (
@@ -58,7 +55,9 @@ export default function Login() {
                 })}
               />
               {errors.email && (
-                <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -72,12 +71,15 @@ export default function Login() {
                   required: "Please enter your password",
                   pattern: {
                     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,40}$/,
-                    message: "Must be 6+ chars, include uppercase, lowercase & numbers",
+                    message:
+                      "Must be 6+ chars, include uppercase, lowercase & numbers",
                   },
                 })}
               />
               {errors.password && (
-                <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
@@ -94,7 +96,9 @@ export default function Login() {
                 <option value="supplier">Supplier</option>
               </select>
               {errors.role && (
-                <p className="text-sm text-red-500 mt-1">{errors.role.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.role.message}
+                </p>
               )}
             </div>
           </div>
@@ -107,11 +111,17 @@ export default function Login() {
                 type="checkbox"
                 className="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="remember-me" className="ml-2 text-sm text-gray-600">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 text-sm text-gray-600"
+              >
                 Remember me
               </label>
             </div>
-            <Link href="/auth/forgotPassword" className="text-sm text-blue-500 hover:text-blue-600">
+            <Link
+              href="/auth/forgotPassword"
+              className="text-sm text-blue-500 hover:text-blue-600"
+            >
               Forgot password?
             </Link>
           </div>
@@ -131,7 +141,9 @@ export default function Login() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-white text-gray-500">
+                Or continue with
+              </span>
             </div>
           </div>
 
@@ -144,7 +156,10 @@ export default function Login() {
 
         <p className="text-center text-sm text-gray-500">
           Don't have an account?{" "}
-          <Link href="/auth/signup" className="text-blue-500 hover:text-blue-600 font-semibold">
+          <Link
+            href="/auth/signup"
+            className="text-blue-500 hover:text-blue-600 font-semibold"
+          >
             Sign up
           </Link>
         </p>

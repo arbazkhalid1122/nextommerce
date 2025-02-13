@@ -1,13 +1,8 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ProductGrid from "../../../components/Product";
 import { products } from "@/components/data/fakeData";
 
 const Products = () => {
-  console.log(products);
-  
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Number of products per page
 

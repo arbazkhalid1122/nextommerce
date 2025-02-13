@@ -6,8 +6,7 @@ import { useCart } from '@/components/context/context';
 const CheckoutForm = () => {
   const router = useRouter();
   const { cart, clearCart,addOrders } = useCart();
-
-console.log("cart", cart);  const [paymentMethod, setPaymentMethod] = useState('stripe');
+  const [paymentMethod, setPaymentMethod] = useState('stripe');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',

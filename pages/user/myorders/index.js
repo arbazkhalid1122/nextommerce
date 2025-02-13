@@ -14,11 +14,7 @@ const OrderItem = ({ order }) => {
       default: return 'bg-gray-400';
     }
   };
-  // console.log(CartProvider );
-  
-     console.log(order);
-     
-     
+         
    
   const calculateSubtotal = (items) => {
     return items?.reduce((total, item) => total + item.price * item.qty, 0);
@@ -120,7 +116,6 @@ const MyOrders = ({ ordersData }) => {
 
 export default function OrdersPage() {
   const { ordersData } = useCart();
-  console.log("ordersData", ordersData);
 
   const fakeData = [
     {

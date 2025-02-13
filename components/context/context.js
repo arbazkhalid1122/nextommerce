@@ -30,10 +30,7 @@ const [newlyProducts, setNewlyProducts] = useState([])
 
   const addProduct = (product) => {
     setNewlyProducts((prev) => [...prev, product]);
-  };
-
-  console.log(ordersData,'ordersData');
-  
+  };  
 
   const updateQty = (id, qty) => {
     setCart((prev) =>

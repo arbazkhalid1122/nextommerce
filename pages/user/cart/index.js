@@ -28,7 +28,6 @@ const CartItem = ({ item, onUpdateQty, onRemove }) => (
 const ShoppingCart = () => {
   const { cart, updateQty, removeFromCart } = useCart();
 
-console.log("cart", cart);
   return (
     <div className="container mx-auto p-3">
       <div className="text-sm breadcrumbs mb-4">

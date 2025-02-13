@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { FaShoppingCart, FaUser, FaBars } from "react-icons/fa";
+import { IoLogoXing } from "react-icons/io";
 
 const Navbar = ({ setIsDrawerOpen }) => {
   const router = useRouter();
@@ -22,11 +23,15 @@ const Navbar = ({ setIsDrawerOpen }) => {
         <FaBars />
       </button>
 
-        <div className="w-24 h-10 bg-gray-600 text-white hidden sm:flex items-center justify-center rounded-md">
+      {/* <div className="w-24 h-10 bg-gray-600 text-white hidden sm:flex items-center justify-center rounded-md">
           Logo
-        </div>
+        </div> */}
 
-        {/* Search Bar */}
+      <div className="text-white hidden sm:flex items-center justify-center rounded-md">
+        <IoLogoXing color="black" size={35} />
+      </div>
+
+      {/* Search Bar */}
       <div className="flex-grow flex justify-center">
         <input
           type="text"

@@ -1,12 +1,22 @@
+import { products } from '@/components/data/fakeData';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaStar, FaStripe, FaPaypal } from 'react-icons/fa';
 
 const ProductPage = () => {
   const [selectedImage, setSelectedImage] = React.useState(0);
+  const router = useRouter();
+  const { id } = router.query;
+  const product = products.find(p => p.id === parseInt(id));
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   const images = [
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400'
+    product.image,
+    product.image,
+    product.image
   ];
 
   return (
@@ -14,15 +24,15 @@ const ProductPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Column - Images */}
         <div className="space-y-4">
-          <div className="aspect-square w-full rounded-lg overflow-hidden bg-gray-100">
+          <div className="aspect-square w-full rounded-lg overflow-hidden bg-white">
             <img
-              src={'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600'}
+              src={images[selectedImage]}
               alt="Product"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="grid grid-cols-3 gap-4">
-            {images.map((img, idx) => (
+            {/* {images.map((img, idx) => (
               <button
                 key={idx}
                 onClick={() => setSelectedImage(idx)}
@@ -30,9 +40,9 @@ const ProductPage = () => {
                   selectedImage === idx ? 'border-green-400' : 'border-gray-200'
                 }`}
               >
-                <img src={'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600'} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
               </button>
-            ))}
+            ))} */}
           </div>
         </div>
 
@@ -40,17 +50,15 @@ const ProductPage = () => {
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <div className="flex text-yellow-400">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar className="text-gray-300" />
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className={i < Math.floor(product.rating.rate) ? '' : 'text-gray-300'} />
+              ))}
             </div>
-            <span className="text-gray-600">(4.0/5)</span>
+            <span className="text-gray-600">({product.rating.rate}/5)</span>
           </div>
 
-          <h1 className="text-2xl font-semibold">Title of the Product will be here</h1>
-          <p className="text-3xl font-bold">${'234.00'}</p>
+          <h1 className="text-2xl font-semibold">{product.title}</h1>
+          <p className="text-3xl font-bold">${product.price.toFixed(2)}</p>
 
           <div className="space-y-4">
             <div>
@@ -66,9 +74,7 @@ const ProductPage = () => {
             <div>
               <p className="font-medium mb-2">Short Description</p>
               <p className="text-gray-600">
-                Elevate your style with our stunning product. Whether you prefer classic shades or bold hues, 
-                this set offers a diverse palette to suit any style and occasion. Each piece is crafted for 
-                durability and a flawless finish, ensuring that quality meets style.
+                {product.description}
               </p>
             </div>
 

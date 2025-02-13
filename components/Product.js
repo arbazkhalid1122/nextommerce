@@ -1,25 +1,24 @@
 import { FaShoppingCart } from "react-icons/fa";
-import { productImage } from "./constant";
 import { useRouter } from "next/router";
 import { useCart } from "./context/context";
 
-const ProductCard = ({ product, onClick }) => {
-  const router = useRouter()
+const ProductCard = ({ product }) => {
+
+console.log("product", product);  const router = useRouter()
   const {addToCart} = useCart()
-console.log("product", product);
   
   return (
     <div className="border rounded-lg shadow-md bg-white flex flex-col relative cursor-pointer" onClick={()=>router.push(`product/${product.id}`)}>
       <div className="flex justify-center items-center h-64">
-        <img src={product?.featureImage || product.image} alt={product.title} className="h-full w-full object-contain bg-gray-100" />
+        <img src={product?.featureImage || product.image} alt={product.title} className="h-full w-full object-contain bg-white" />
       </div>
       <div className="mt-4 w-full text-center">
         <div className="flex justify-center items-center text-yellow-500 text-sm">
           {[...Array(5)].map((_, index) => (
-            <span key={index}>{index < Math.floor(product.rating) ? "★" : "☆"}</span>
+            <span key={index}>{index < Math.floor(product?.rating?.rate) ? "★" : "☆"}</span>
           ))}
           <span className="ml-1 text-gray-700 text-xs font-semibold">
-            {product.rating.rate}
+            {product?.rating?.rate}
           </span>
         </div>
         <h3 className="text-gray-800 font-medium mt-1 text-sm truncate w-full">{product.title || product?.productTitle}</h3>

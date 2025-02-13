@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductGrid from "../../../components/Product";
 import { products } from "@/components/data/fakeData";
 import { useCart } from "@/components/context/context";
@@ -7,13 +7,11 @@ import { useCart } from "@/components/context/context";
 const Products = () => {
   const { newlyProducts } = useCart();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Number of products per page
 
 const allProducts = [...products, ...newlyProducts];  
 
-console.log("allProducts", allProducts);
 
 
   // Calculate the current products to display
