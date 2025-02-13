@@ -7,7 +7,7 @@ const CartItem = ({ item, onUpdateQty, onRemove }) => (
   <tr className="border-b">
     <td className="py-4">
       <div className="flex items-center">
-        <img src={productImage} alt={item.title} className="w-12 h-12 rounded"/>
+        <img src={item.image} alt={item.title} className="w-12 h-12 rounded"/>
       </div>
     </td>
     <td className="py-4">${item.price.toFixed(2)}</td>
