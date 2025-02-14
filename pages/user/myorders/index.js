@@ -32,8 +32,8 @@ const OrderItem = ({ order }) => {
   const totalAmount = subtotal;
 
   return (
-    <div className="border rounded-lg mb-4">
-      <div className="flex items-center justify-between p-4">
+    <div className="border overflow-hidden w-full rounded-lg ">
+      <div className="flex items-center overflow-auto justify-between p-4">
         <div className="flex gap-8 w-full">
           <span className="text-gray-600 mt-1 flex-1">99999111001001</span>
           <span className="text-gray-600 mt-1 flex-1">Feb 02, 2025 07:34 pm</span>
@@ -43,7 +43,6 @@ const OrderItem = ({ order }) => {
           </div>
           <span className="text-gray-600 mt-1 flex-1">{order.paymentMethod}</span>
           <span className='mt-1 flex-1'>${totalAmount.toFixed(2)}</span>
-        </div>
         <button onClick={() => setIsExpanded(!isExpanded)} className="p-2">
           <svg 
             className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
@@ -55,6 +54,7 @@ const OrderItem = ({ order }) => {
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </button>
+        </div>
       </div>
 
       {isExpanded && (
@@ -105,7 +105,7 @@ const MyOrders = ({ ordersData }) => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">My Orders</h1>
-      <div className="space-y-4">
+      <div className="space-y-4 overflow">
         {ordersData.map((order, index) => (
           <OrderItem key={index} order={order} />
         ))}
