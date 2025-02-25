@@ -26,20 +26,20 @@ export default function Layout({ children }) {
           <Navbar setIsDrawerOpen={setIsDrawerOpen} />
 
           {/* Sidebar for Large Screens */}
-          <div className="hidden sm:block fixed top-16 left-0 h-full w-64">
+          <div className="hidden md:block fixed top-16 left-0 h-full w-64">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
           </div>
 
           {/* Page Content (Add margin when sidebar is visible) */}
-          <div className={`flex-1 p-4 sm:ml-64 mt-16`}>{children}</div>
+          <div className={`flex-1 p-4 md:ml-64 mt-16`}>{children}</div>
 
           {/* Sidebar as Drawer for Small Screens */}
           {isDrawerOpen && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-50 sm:hidden"
+              className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
               onClick={() => setIsDrawerOpen(false)}
             >
-              <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg">
+              <div className="fixed top-0 left-0 h-full bg-white shadow-lg">
                 <Sidebar collapsed={false} setCollapsed={setCollapsed} />
               </div>
             </div>

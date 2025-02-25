@@ -6,7 +6,7 @@ import { ImStarEmpty } from "react-icons/im";
 import { RxAvatar, RxPerson } from "react-icons/rx";
 import { MdOutlineLogout } from "react-icons/md";
 
-const Sidebar = ({collapsed}) => {
+const Sidebar = ({ collapsed }) => {
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
 
@@ -17,17 +17,17 @@ const Sidebar = ({collapsed}) => {
   }, []);
 
   const handleItemClick = (route) => {
-       if(route === "/auth/login") {
-          localStorage.removeItem("isAdmin");
-          localStorage.removeItem("buyer");
-        }
-        router.push(route);
-      };
+    if (route === "/auth/login") {
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("buyer");
+    }
+    router.push(route);
+  };
   const isActive = (route) => router.pathname === route;
 
   return (
-    <div className={`fixed top-18 left-0 pl-4 h-screen bg-white transition-all duration-300 `}>
-  
+    <div className={`fixed top-18 left-0 md:pl-4 h-screen bg-white transition-all duration-300 `}>
+
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-4">
         {/* User Info */}

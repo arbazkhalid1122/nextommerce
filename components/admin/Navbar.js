@@ -17,7 +17,7 @@ const Navbar = ({ setIsDrawerOpen }) => {
     <div className="w-full h-16 flex items-center border-b border-gray-300 px-4 md:px-8 fixed top-0 left-0 z-10 bg-white">
       {/* Sidebar Toggle Button (Visible on Small Screens) */}
       <button
-        className="sm:hidden text-gray-700 text-xl mr-4"
+        className="md:hidden text-gray-700 text-xl mr-4"
         onClick={() => setIsDrawerOpen(true)}
       >
         <FaBars />
@@ -27,7 +27,7 @@ const Navbar = ({ setIsDrawerOpen }) => {
           Logo
         </div> */}
 
-      <div className="text-white hidden sm:flex items-center justify-center rounded-md">
+      <div className="text-white md:flex items-center justify-center rounded-md">
         <IoLogoXing color="black" size={35} />
       </div>
 
