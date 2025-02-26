@@ -10,7 +10,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Number of products per page
 
-const allProducts = [...products, ...newlyProducts];  
+  const allProducts = [...products, ...newlyProducts];
 
 
 
@@ -41,32 +41,16 @@ const allProducts = [...products, ...newlyProducts];
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-6 gap-2">
-        <button 
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          className="px-3 py-1 border rounded bg-gray-800 text-white"
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-
-        {[...Array(totalPages)].map((_, index) => (
+      <div className="flex justify-center gap-2 mt-6">
+        {Array.from({ length: totalPages }, (_, index) => (
           <button
-            key={index}
-            className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "bg-gray-800 text-white" : ""}`}
+            key={index + 1}
             onClick={() => setCurrentPage(index + 1)}
+            className={`w-8 h-8 rounded ${index + 1 === currentPage ? 'bg-gray-200' : 'hover:bg-gray-100'}`}
           >
             {index + 1}
           </button>
         ))}
-
-        <button 
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          className="px-3 py-1 border rounded bg-gray-800 text-white"
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
       </div>
     </div>
   );

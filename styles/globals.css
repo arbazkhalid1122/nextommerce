@@ -4,31 +4,35 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 @font-face {
   font-family: vazir;
   src: url("/fonts/vazir/Vazir-Regular-FD.eot") format("eot");
-   src: url("/fonts/vazir/Vazir-Regular-FD.woff") format("woff"),
+  src: url("/fonts/vazir/Vazir-Regular-FD.woff") format("woff"),
     url("/fonts/vazir/Vazir-Regular-FD.woff2") format("woff2"),
-      url("/fonts/vazir/Vazir-Regular-FD.ttf") format("truetype");
+    url("/fonts/vazir/Vazir-Regular-FD.ttf") format("truetype");
 }
+
 @font-face {
   font-family: tanha;
   src: url("/fonts/tanha/Tanha-WOL.eot") format("eot");
-  src:  url("/fonts/tanha/Tanha-WOL.woff") format("woff"),
+  src: url("/fonts/tanha/Tanha-WOL.woff") format("woff"),
     url("/fonts/tanha/Tanha-WOL.woff2") format("woff2"),
-      url("/fonts/tanha/Vazir-Regular-FD.ttf") format("truetype");
+    url("/fonts/tanha/Vazir-Regular-FD.ttf") format("truetype");
 }
 
 .font-en {
   font-family: "Roboto", sans-serif;
 }
+
 /* .font-en .curier {
   font-family: "Courier Prime", monospace !important;
 } */
 .font-fa {
   font-family: vazir;
 }
-.font-fa .curier{
+
+.font-fa .curier {
   font-family: tanha;
 }
 
@@ -87,6 +91,7 @@
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
 }
+
 /* animation-diretion: reverse ;
     because to triiger animation more than twice we need two diffrent animation clip
     so there is 4 animation clip over all for side bar
@@ -94,43 +99,54 @@
 .sidebar-right {
   animation-name: roundright;
 }
+
 @keyframes roundright {
   from {
     border-radius: 0 0 999px 0;
   }
+
   to {
     border-radius: 0;
   }
 }
+
 .sidebar-right-reverse {
   animation-name: roundrightreverse;
 }
+
 @keyframes roundrightreverse {
   from {
     border-radius: 0;
   }
+
   to {
     border-radius: 0 0 999px 0;
   }
 }
+
 .sidebar-left {
   animation-name: roundleft;
 }
+
 @keyframes roundleft {
   from {
     border-radius: 0 0 0 999px;
   }
+
   to {
     border-radius: 0;
   }
 }
+
 .sidebar-left-reverse {
   animation-name: roundleftreverse;
 }
+
 @keyframes roundleftreverse {
   from {
     border-radius: 0;
   }
+
   to {
     border-radius: 0 0 0 999px;
   }
@@ -140,10 +156,12 @@
   background: inherit;
   backdrop-filter: blur(5px);
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px; /* Add height for horizontal scrollbar */
+  height: 8px;
+  /* Add height for horizontal scrollbar */
 }
 
 /* Track */
@@ -160,4 +178,11 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #d1d1d1;
+}
+
+
+
+body {
+  max-width: 2200px;
+  margin: 0 auto;
 }

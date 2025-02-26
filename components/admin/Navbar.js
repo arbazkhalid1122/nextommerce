@@ -23,10 +23,6 @@ const Navbar = ({ setIsDrawerOpen }) => {
         <FaBars />
       </button>
 
-      {/* <div className="w-24 h-10 bg-gray-600 text-white hidden sm:flex items-center justify-center rounded-md">
-          Logo
-        </div> */}
-
       <div className="text-white md:flex items-center justify-center rounded-md">
         <IoLogoXing color="black" size={35} />
       </div>
@@ -36,13 +32,13 @@ const Navbar = ({ setIsDrawerOpen }) => {
         <input
           type="text"
           placeholder="Search products"
-          className="w-3/4 md:w-1/3 h-10 bg-gray-100 text-gray-700 rounded-lg px-3 outline-none"
+          className="w-3/4 md:w-1/3 h-10 bg-gray-300 text-gray-700 rounded-full px-3 outline-none"
         />
       </div>
 
-      {/* Icons (Hidden for Admins) */}
+      {/* Icons (Hidden for Admins and on Medium/Small Screens) */}
       {!isAdmin && (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 hidden lg:flex">
           <FaShoppingCart
             className="text-gray-700 text-xl cursor-pointer hover:text-gray-900"
             onClick={() => router.push("/user/cart")}

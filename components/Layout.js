@@ -22,11 +22,11 @@ export default function Layout({ children }) {
       {!["/auth/login", "/auth/signup", "/auth/forgotPassword"].includes(
         router.pathname
       ) ? (
-        <div className="relative min-h-screen bg-white">
+        <div className="relative min-h-screen bg-white  ">
           <Navbar setIsDrawerOpen={setIsDrawerOpen} />
 
           {/* Sidebar for Large Screens */}
-          <div className="hidden md:block fixed top-16 left-0 h-full w-64">
+          <div className="hidden md:block fixed top-16 left-0 h-full">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
           </div>
 
@@ -40,13 +40,13 @@ export default function Layout({ children }) {
               onClick={() => setIsDrawerOpen(false)}
             >
               <div className="fixed top-0 left-0 h-full bg-white shadow-lg">
-                <Sidebar collapsed={false} setCollapsed={setCollapsed} />
+                <Sidebar setIsDrawerOpen={setIsDrawerOpen} collapsed={false} setCollapsed={setCollapsed} />
               </div>
             </div>
           )}
         </div>
       ) : (
-        <div className="relative min-h-screen bg-white">{children}</div>
+        <div className="relative min-h-screen bg-white ">{children}</div>
       )}
     </>
   );
