@@ -186,3 +186,7 @@ body {
   max-width: 2200px;
   margin: 0 auto;
 }
+
+.buynow{
+  transform:skewX(10deg)
+}
