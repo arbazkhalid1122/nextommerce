@@ -58,8 +58,8 @@ const ProfileForm = () => {
 
   return (
     <div className="flex-1 mt-2">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-        <div className="w-full md:w-2/3">
+      <div className="flex flex-col md:flex-row gap-4 items-start">
+        <div className="w-full md:w-1/2 lg:w-[75%] ">
           <h1 className="text-2xl font-bold mb-8">Profile</h1>
 
           <form onSubmit={handleSubmit}>
@@ -74,9 +74,8 @@ const ProfileForm = () => {
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${
-                        errors.fullName ? "border-red-500" : ""
-                      }`}
+                      className={`w-full p-2 border rounded-md ${errors.fullName ? "border-red-500" : ""
+                        }`}
                     />
                     {errors.fullName && (
                       <p className="text-red-500 text-sm mt-1">
@@ -97,9 +96,8 @@ const ProfileForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${
-                        errors.email ? "border-red-500" : ""
-                      }`}
+                      className={`w-full p-2 border rounded-md ${errors.email ? "border-red-500" : ""
+                        }`}
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm mt-1">
@@ -114,9 +112,8 @@ const ProfileForm = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full p-2 border rounded-md ${
-                        errors.phone ? "border-red-500" : ""
-                      }`}
+                      className={`w-full p-2 border rounded-md ${errors.phone ? "border-red-500" : ""
+                        }`}
                     />
                     {errors.phone && (
                       <p className="text-red-500 text-sm mt-1">
@@ -187,7 +184,7 @@ const ProfileForm = () => {
         </div>
 
         {/* Profile Image Section */}
-        <div className="w-full md:w-1/3">
+        <div className="w-full md:w-1/4 lg:w-1/5">
           <div className="relative w-full aspect-square bg-gray-100 rounded-md overflow-hidden">
             {profileImage ? (
               <img
@@ -225,6 +222,7 @@ const ProfileForm = () => {
             />
           </label>
         </div>
+
       </div>
 
       <div className="flex justify-start mt-10">

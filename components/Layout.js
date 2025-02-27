@@ -26,12 +26,12 @@ export default function Layout({ children }) {
           <Navbar setIsDrawerOpen={setIsDrawerOpen} />
 
           {/* Sidebar for Large Screens */}
-          <div className="hidden md:block fixed top-16 left-0 h-full">
+          <div className="hidden md:block">
             <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
           </div>
 
           {/* Page Content (Add margin when sidebar is visible) */}
-          <div className={`flex-1 p-4 md:ml-64 mt-16`}>{children}</div>
+          <div className={`flex-1 p-4 md:ml-64 mt-14`}>{children}</div>
 
           {/* Sidebar as Drawer for Small Screens */}
           {isDrawerOpen && (

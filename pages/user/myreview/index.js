@@ -154,7 +154,7 @@ const ReviewItem = ({ item, onAddReview }) => {
 };
 
 const MyReviews = () => {
- 
+
 
   const [selectedRating, setSelectedRating] = useState('all');
   const [reviews, setReviews] = useState(reviewsData);
@@ -180,7 +180,7 @@ const MyReviews = () => {
 
   return (
     <div className='flex flex-col items-center w-full'>
-      <div className="flex w-[90%] justify-between items-center mb-6">
+      <div className="flex w-full justify-between items-center mb-2">
         <h1 className="text-2xl font-bold">Reviews</h1>
         <select
           value={selectedRating}

@@ -14,8 +14,8 @@ const PaymentDetails = () => {
 
   return (
     <div className="">
-      <h2 className="text-2xl font-semibold mb-6">Payment Methods</h2>
-      
+      <h2 className="text-2xl font-semibold mb-2">Payment Methods</h2>
+
       <div className="flex gap-4 mb-8">
         {/* Mastercard Payment Method */}
         <div className="bg-white rounded-lg shadow-md p-4 w-80">

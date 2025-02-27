@@ -27,7 +27,7 @@ const Sidebar = ({ collapsed, setIsDrawerOpen }) => {
   const isActive = (route) => router.pathname === route;
 
   return (
-    <div className={`fixed top-18 left-0 md:pl-4 h-screen bg-white transition-all duration-300 `}>
+    <div className={`"w-full  max-w-[2200px] fixed top-16  md:pl-4 h-screen bg-white transition-all duration-300 `}>
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-2 md:p-4">
         <button
@@ -74,7 +74,7 @@ const Sidebar = ({ collapsed, setIsDrawerOpen }) => {
         {/* Account Management */}
         {!collapsed && <div className="mt-4 text-gray-600 font-semibold">Account Management</div>}
         {!admin && (
-          <div className="flex flex-col mt-4 items-center gap-4">
+          <div className="flex flex-col mt-4 hidden lg:hidden md:flex items-center gap-4">
             <div className="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-200" onClick={() => handleItemClick("/user/cart")}>
               <FaShoppingCart
                 className="text-gray-700 text-xl cursor-pointer hover:text-gray-900"

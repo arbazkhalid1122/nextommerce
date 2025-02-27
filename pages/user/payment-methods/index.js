@@ -40,10 +40,10 @@ const PaymentMethods = () => {
   return (
     <div className="">
       <h1 className="text-2xl font-bold mb-6 mt-2">Payment Methods</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         {paymentMethods.map((method) => (
           <div key={method.id} className="border rounded-lg p-4 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-2">
               {method.type === 'Mastercard' ? <SiMastercard size={40} className="text-red-500" /> : <SiVisa size={40} className="text-blue-500" />}
               {method.primary ? (
                 <span className="text-sm text-white bg-blue-500 px-2 py-1 rounded">Primary</span>
