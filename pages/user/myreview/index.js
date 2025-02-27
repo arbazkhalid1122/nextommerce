@@ -21,7 +21,7 @@ const ReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50  flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Leave a Review</h2>
@@ -96,7 +96,7 @@ const ReviewItem = ({ item, onAddReview }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="border-b py-4">
+    <div className="border-b py-4 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-gray-200 rounded">
@@ -179,8 +179,8 @@ const MyReviews = () => {
   const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
+    <div className='flex flex-col items-center w-full'>
+      <div className="flex w-[90%] justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Reviews</h1>
         <select
           value={selectedRating}
@@ -196,7 +196,7 @@ const MyReviews = () => {
         </select>
       </div>
 
-      <div className="mb-6 max-w-6xl">
+      <div className="mb-6 w-full max-w-6xl">
         {currentReviews.map((item) => (
           <ReviewItem
             key={item.id}

@@ -17,8 +17,8 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-between md:flex-row  items-center">
-        <h2 className="text-2xl font-bold mb-4 md:mb-0">Products</h2>
+      <div className="flex  justify-between md:flex-row  items-center">
+        <h2 className="lg:text-2xl text-lg font-bold mb-4 md:mb-0">Products</h2>
         <div className="flex items-center gap-2">
           <select className="border px-3 py-2 rounded-lg">
             <option>By Date</option>
