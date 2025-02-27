@@ -46,7 +46,7 @@ export default function Layout({ children }) {
           )}
         </div>
       ) : (
-        <div className="relative min-h-screen bg-white ">{children}</div>
+        <div className="relative min-h-screen bg-white">{children}</div>
       )}
     </>
   );

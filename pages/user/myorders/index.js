@@ -14,8 +14,8 @@ const OrderItem = ({ order }) => {
       default: return 'bg-gray-400';
     }
   };
-         
-   
+
+
   const calculateSubtotal = (items) => {
     return items?.reduce((total, item) => total + item.price * item.qty, 0);
   };
@@ -32,30 +32,32 @@ const OrderItem = ({ order }) => {
   const totalAmount = subtotal;
 
   return (
-    <div className="border overflow-hidden w-full rounded-lg ">
-      <div className="flex items-center overflow-auto justify-between p-4">
-        <div className="flex gap-8 w-full">
-          <span className="text-gray-600 mt-1 flex-1">99999111001001</span>
-          <span className="text-gray-600 mt-1 flex-1">Feb 02, 2025 07:34 pm</span>
-          <div className="flex items-center gap-2 flex-1">
+    <div className="border w-full rounded-lg ">
+      <div className="overflow-x-auto">
+        <div className="flex items-center justify-between p-4 min-w-max whitespace-nowrap">
+          <span className="text-gray-600 mt-1 w-[150px]">99999111001001</span>
+          <span className="text-gray-600 mt-1 w-[100px]">Feb 2025</span>
+          <div className="flex items-center gap-2 w-[120px]">
             <span className={`w-2 h-2 rounded-full ${getStatusColor('pending')}`}></span>
             <span className="capitalize">Pending</span>
           </div>
-          <span className="text-gray-600 mt-1 flex-1">{order.paymentMethod}</span>
-          <span className='mt-1 flex-1'>${totalAmount.toFixed(2)}</span>
-        <button onClick={() => setIsExpanded(!isExpanded)} className="p-2">
-          <svg 
-            className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+          <span className="text-gray-600 mt-1 w-[150px]">{order.paymentMethod}</span>
+          <span className="mt-1 w-[100px]">${totalAmount.toFixed(2)}</span>
+          <button onClick={() => setIsExpanded(!isExpanded)} className="p-2">
+            <svg
+              className={`w-4 h-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
       </div>
+
+
 
       {isExpanded && (
         <div className="p-4 border-t">
@@ -77,7 +79,7 @@ const OrderItem = ({ order }) => {
                   <div key={idx} className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-100 rounded overflow-hidden">
-                        <img src={item.image?item.image:productImage} alt="product" className="w-full h-full object-contain" />
+                        <img src={item.image ? item.image : productImage} alt="product" className="w-full h-full object-contain" />
                       </div>
                       <div>
                         <p className="font-medium">{item.title}</p>
@@ -85,10 +87,10 @@ const OrderItem = ({ order }) => {
                       </div>
                     </div>
                     <div className="flex items-center flex-col gap-2">
-                    
-                      
+
+
                       <span className=' p-2 text-[15px]  rounded-[50%]'>{item.qty}</span>
-                     
+
                     </div>
                   </div>
                 ))}

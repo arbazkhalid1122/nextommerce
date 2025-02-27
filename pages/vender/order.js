@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const sampleOrders = [
   {
     id: "6754327DA23",
-    date: "Feb 02, 2025 07:34 pm",
+    date: "Feb 2025",
     status: "delivered",
     amount: 2034.0,
     items: 6,
@@ -63,8 +63,8 @@ const Order = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const filteredOrders = selectedStatus
     ? sampleOrders.filter(
-        (order) => order.status.toLowerCase() === selectedStatus.toLowerCase()
-      )
+      (order) => order.status.toLowerCase() === selectedStatus.toLowerCase()
+    )
     : sampleOrders;
 
   const getStatusColor = (status) => {

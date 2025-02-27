@@ -29,21 +29,22 @@ const Sidebar = ({ collapsed, setIsDrawerOpen }) => {
   return (
     <div className={`fixed top-18 left-0 md:pl-4 h-screen bg-white transition-all duration-300 `}>
       {/* Sidebar */}
-      <div className="h-full flex flex-col items-start p-4">
+      <div className="h-full flex flex-col items-start p-2 md:p-4">
         <button
-          className="absolute top-5 right-4 text-gray-500 hover:text-gray-700 md:hidden"
+          className="absolute top-3 right-4 text-gray-500 hover:text-gray-700 md:hidden"
           onClick={() => setIsDrawerOpen(false)}
         >
-          <RxCross1 size={20} />
+          <RxCross1 size={15} />
         </button>
         {/* User Info */}
         <div className="flex items-center gap-4 pb-4 border-b border-gray-200 w-full">
           <RxAvatar className="w-10 h-10 rounded-full" />
           {!collapsed && (
             <div>
-              <p className="text-lg font-semibold truncate">
+              <p className="text-sm md:text-lg font-semibold truncate">
                 {admin ? "Seller Name" : "Customer Name"}
               </p>
+
               <p className="text-gray-500 text-sm">
                 {admin ? "Seller" : "Customer"}
               </p>
