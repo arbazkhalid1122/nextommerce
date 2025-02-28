@@ -8,7 +8,7 @@ const ProductRating = () => {
   const products = [
     {
       id: 1,
-      name: "Apple watch water resistance with 3000 mAh rechargeable battery",
+      name: "Apple watch water resistance with 3000 mAh battery",
       rating: 4,
       image: "/api/placeholder/48/48"
     },
@@ -78,9 +78,7 @@ const ProductRating = () => {
         {[...Array(5)].map((_, index) => (
           <FaStar
             key={index}
-            className={`w-4 h-4 ${
-              index < rating ? 'text-yellow-400' : 'text-gray-300'
-            }`}
+            className={`w-3 h-3 sm:w-4 sm:h-4 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
           />
         ))}
       </div>
@@ -88,47 +86,47 @@ const ProductRating = () => {
   };
 
   return (
-    <div className="w-full mx-auto ">
-      <div className="flex justify-between items-center mb-4">
-        <div className="space-y-1">
-          <h2 className="text-2xl mt-2 font-bold">Rating</h2>
-          <p className="text-sm text-gray-500">4.9 (100 reviews)</p>
+    <div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
+        <div>
+          <h2 className="responsive-header">Rating</h2>
+          <p className="text-xs sm:text-sm text-gray-500">4.9 (100 reviews)</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <select
-            className="p-2 border rounded-md"
+            className="p-1 sm:p-2 border rounded-md text-xs sm:text-sm"
             value={selectedRating}
             onChange={(e) => setSelectedRating(Number(e.target.value))}
           >
-            <option value={0}>All ratings</option>
-            <option value={4}>4 stars</option>
-            <option value={3}>3 stars</option>
-            <option value={2}>2 stars</option>
-            <option value={1}>1 star</option>
+            <option value={0}>All</option>
+            <option value={4}>4⭐</option>
+            <option value={3}>3⭐</option>
+            <option value={2}>2⭐</option>
+            <option value={1}>1⭐</option>
           </select>
-          <button className="px-4 py-2 text-gray-600">Review</button>
+          <button className="px-2 py-1 sm:px-4 sm:py-2 text-gray-600 text-xs sm:text-sm">Review</button>
         </div>
       </div>
 
-      <div className="space-y-4">
-        <h3 className="font-medium mb-2">Products</h3>
+      <div className="space-y-2 sm:space-y-4 mt-2">
+        <h3 className="font-medium text-sm sm:text-base">Products</h3>
         {filteredProducts.map((product) => (
           <div
             key={product.id}
             onClick={() => router.push('/vender/rating/1')}
             className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg transition-colors"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <img
                 src={'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZHVjdHN8ZW58MHx8MHx8fDA%3D'}
                 alt="Product"
-                className="w-12 h-12 rounded-lg object-cover"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover"
               />
-              <span className="text-sm md:text-base">{product.name}</span>
+              <span className="text-xs sm:text-sm truncate max-w-[180px] sm:max-w-none">{product.name}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <RatingStars rating={product.rating} />
-              <FaChevronRight className="w-5 h-5 text-gray-400" />
+              <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
             </div>
           </div>
         ))}

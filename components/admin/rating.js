@@ -35,7 +35,7 @@ const RatingComponent = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-semibold">Rating</h2>
+          <h2 className="responsive-header">Rating</h2>
           <p className="text-gray-500 text-sm">4.5/1100 reviews</p>
         </div>
         <div className="flex items-center gap-8">
@@ -49,7 +49,7 @@ const RatingComponent = () => {
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
               </svg>
             </div>
           </div>
@@ -62,8 +62,8 @@ const RatingComponent = () => {
         {products.map((product) => (
           <div key={product.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
             <div className="flex items-center gap-4">
-              <img 
-                src={product.image} 
+              <img
+                src={product.image}
                 alt={product.name}
                 className="w-10 h-10 object-cover rounded-md"
               />

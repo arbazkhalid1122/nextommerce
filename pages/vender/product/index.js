@@ -24,7 +24,7 @@ const Products = () => {
   return (
     <div>
       <div className="flex flex-col  md:flex-row justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4 md:mb-0">Products</h2>
+        <h2 className="responsive-header">Products</h2>
         <div className="flex items-center gap-2">
           <button className="bg-gray-800 text-white px-4 py-2 rounded-lg" onClick={() => router.push("/vender/addProduct")}>
             Add Product
@@ -36,7 +36,7 @@ const Products = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="flex flex-wrap justify-center gap-4 mt-6">
+      <div className="flex flex-wrap justify-center gap-4 mt-2">
         <ProductGrid products={currentProducts} onClick={() => router.push(`product/1`)} />
       </div>
 

@@ -82,8 +82,8 @@ const Order = () => {
 
   return (
     <div className="rounded-lg w-full">
-      <div className="flex justify-between items-center border-b w-full pb-4 mb-4">
-        <h2 className="text-2xl font-bold mb-4 md:mb-0">Orders</h2>
+      <div className="flex justify-between items-center border-b w-full pb-4">
+        <h2 className="responsive-header">Orders</h2>
         <select
           className="border rounded-md p-2 outline-none cursor-pointer"
           value={selectedStatus}

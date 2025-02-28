@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const ProductPage = () => {
   const [isAdmin, setIsAdmin] = React.useState(false);
-  const { addToCart } = useCart(); // Access cart context
+  const { addToCart } = useCart();
   const router = useRouter();
 
   useEffect(() => {
@@ -16,117 +16,105 @@ const ProductPage = () => {
     }
   }, []);
 
-
   const product = products[router.query.id - 1];
 
   return (
-    <div className="max-w-7xl mx-auto p-4 ">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left Column - Images */}
-        <div className="space-y-4">
-          <div className="aspect-square w-full rounded-lg overflow-hidden bg-white">
-            <img
-              src={product.image}
-              alt="Product"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            {/* {images.map((img, idx) => (
-              <button
-                key={idx}
-                onClick={() => setSelectedImage(idx)}
-                className={`aspect-square rounded-lg overflow-hidden border-2 ${
-                  selectedImage === idx ? "border-green-400" : "border-gray-200"
-                }`}
-              >
-                <img
-                  src={product.image}
-                  alt={`Thumbnail ${idx + 1}`}
-                  className="w-full h-full object-contain"
-                />
-              </button>
-            ))} */}
-          </div>
+    <div className="">
+      {/* Grid layout with responsive behavior */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Left - Image */}
+        <div className="flex justify-center items-center bg-white rounded-lg overflow-hidden w-full">
+          <img
+            src={product.image}
+            alt="Product"
+            className="w-full h-auto max-h-[450px] lg:max-h-[550px] object-contain"
+          />
         </div>
 
-        {/* Right Column - Product Info */}
+        {/* Right - Product Info */}
         <div className="space-y-6">
+          {/* Rating */}
           <div className="flex items-center space-x-2">
-            <div className="flex text-yellow-400">
+            <div className="flex text-yellow-400 text-lg">
               <FaStar />
               <FaStar />
               <FaStar />
               <FaStar />
               <FaStar className="text-gray-300" />
             </div>
-            <span className="text-gray-600">
-              {product.rating.rate}({product.rating.count})
+            <span className="text-gray-600 text-sm">
+              {product.rating.rate} ({product.rating.count})
             </span>
           </div>
 
-          <h1 className="text-2xl font-semibold">{product.title}</h1>
-          <p className="text-3xl font-bold">${product.price}</p>
+          {/* Title & Price */}
+          <h1 className="responsive-header">{product.title}</h1>
+          <p className="responsive-header">${product.price}</p>
 
-          <div className="space-y-4">
-            <div>
-              <p className="font-medium mb-2">Color</p>
-              <div className="flex space-x-2">
-                <button className="w-6 h-6 rounded-full bg-green-200 ring-2 ring-offset-2 ring-green-200" />
-                <button className="w-6 h-6 rounded-full bg-gray-200" />
-                <button className="w-6 h-6 rounded-full bg-gray-300" />
-                <button className="w-6 h-6 rounded-full bg-gray-400" />
-              </div>
+          {/* Color Options */}
+          <div>
+            <p className="font-medium text-lg mb-3">Color</p>
+            <div className="flex space-x-3">
+              {["bg-green-200", "bg-gray-200", "bg-gray-300", "bg-gray-400"].map(
+                (color, index) => (
+                  <button
+                    key={index}
+                    className={`w-8 h-8 rounded-full border-2 border-gray-300 hover:ring-2 hover:ring-black transition ${color}`}
+                  />
+                )
+              )}
             </div>
+          </div>
 
-            <div>
-              <p className="font-medium mb-2">Short Description</p>
-              <p className="text-gray-600">
-                {product.description}
-              </p>
-            </div>
+          {/* Description */}
+          <div>
+            <p className="font-medium text-lg mb-2">Short Description</p>
+            <p className="text-gray-600 leading-relaxed">{product.description}</p>
+          </div>
 
-            {isAdmin ? (
-              <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
-                Edit Product
+          {/* Buttons */}
+          {isAdmin ? (
+            <button className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg shadow-md hover:opacity-80 transition">
+              Edit Product
+            </button>
+          ) : (
+            <>
+              <button
+                className="w-full bg-black text-white py-4 rounded-lg font-semibold text-lg shadow-md hover:opacity-80 transition"
+                onClick={() => {
+                  addToCart(product);
+                  router.push("/user/checkout");
+                }}
+              >
+                Buy Now
               </button>
-            ) : (
-              < div className="  fixed lg:static  flex  left-[-10px] lg:flex-col lg:gap-3 lg:w-full  bottom-0 w-[110%]">
-                <button
-                  className="w-full bg-black buynow lg:transform text-white py-3 lg:rounded-lg font-medium"
-                  onClick={() => {
-                    addToCart(product);
-                    router.push("/user/checkout");
-                  }}
-                >
-                  Buy Now
-                </button>{" "}
-                <button
-                  className="w-full bg-white  buynow lg:transform text-black border py-3 lg:rounded-lg font-medium"
-                  onClick={() => addToCart(product)}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            )}
+              <button
+                className="w-full bg-gray-200 text-black border py-4 rounded-lg font-semibold text-lg shadow-md hover:bg-gray-300 transition"
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </button>
+            </>
+          )}
 
-            <div>
-              <p className="font-medium mb-2">Payment Methods</p>
-              <div className="flex items-center space-x-4">
-                <FaPaypal className="text-blue-600 text-2xl" />
-                <FaStripe className="text-purple-600 text-2xl" />
-                <button className="text-sm text-gray-600">
-                  + Add more methods
-                </button>
-              </div>
+          {/* Payment Methods */}
+          <div>
+            <p className="font-medium text-lg mb-3">Payment Methods</p>
+            <div className="flex items-center space-x-5">
+              <FaPaypal className="text-blue-600 text-3xl" />
+              <FaStripe className="text-purple-600 text-3xl" />
+              <button className="text-sm text-gray-600 hover:underline">
+                + Add more methods
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8">
-        <h2 className="font-medium mb-4">Additional Details</h2>
-        <p className="text-gray-600">{product.description}</p>
+      {/* Additional Details */}
+      <div className="mt-12">
+        <h2 className="font-semibold text-xl mb-4">Additional Details</h2>
+        <p className="text-gray-600 leading-relaxed">{product.description}</p>
       </div>
     </div>
   );

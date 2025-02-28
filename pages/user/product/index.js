@@ -17,17 +17,17 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex  justify-between md:flex-row  items-center">
-        <h2 className="lg:text-2xl text-lg font-bold mb-4 md:mb-0">Products</h2>
+      <div className="flex justify-between md:flex-row items-center">
+        <h2 className="responsive-header">Products</h2>
         <div className="flex items-center gap-2">
-          <select className="border px-3 py-2 rounded-lg">
+          <select className="border px-3 py-2 rounded-lg mb-2">
             <option>By Date</option>
           </select>
         </div>
       </div>
 
       {/* Product Grid */}
-      <div className="flex flex-wrap justify-center gap-4 mt-6">
+      <div className="flex flex-wrap justify-center gap-4">
         <ProductGrid products={currentProducts}
         // onClick={(id) => router.push(`product/${id}`)} 
         />

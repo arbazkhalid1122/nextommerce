@@ -38,9 +38,9 @@ const PaymentMethods = () => {
   ];
 
   return (
-    <div className="">
-      <h1 className="text-2xl font-bold mb-6 mt-2">Payment Methods</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+    <>
+      <h1 className="responsive-header">Payment Methods</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         {paymentMethods.map((method) => (
           <div key={method.id} className="border rounded-lg p-4 shadow-sm">
             <div className="flex items-center justify-between mb-2">
@@ -101,8 +101,7 @@ const PaymentMethods = () => {
         </div>
       </div>
       {paymentModal && <PaymentModal setPaymentModal={setPaymentModal} addPaymentMethod={addPaymentMethod} />}
-
-    </div>
+    </>
   );
 };
 

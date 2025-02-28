@@ -187,6 +187,11 @@ body {
   margin: 0 auto;
 }
 
-.buynow{
-  transform:skewX(10deg)
+.buynow {
+  transform: skewX(10deg)
+}
+
+
+.responsive-header {
+  @apply text-lg sm:text-xl lg:text-2xl font-bold mb-4;
 }

@@ -179,9 +179,9 @@ const MyReviews = () => {
   const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
 
   return (
-    <div className='flex flex-col items-center w-full'>
-      <div className="flex w-full justify-between items-center mb-2">
-        <h1 className="text-2xl font-bold">Reviews</h1>
+    <div className='flex flex-col items-center'>
+      <div className="flex w-full justify-between items-center">
+        <h1 className="responsive-header">Reviews</h1>
         <select
           value={selectedRating}
           onChange={(e) => setSelectedRating(e.target.value)}

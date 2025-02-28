@@ -3,7 +3,7 @@ import ProfileForm from "../../../components/ProfileForm";
 
 const Dashboard = ({ children }) => {
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex">
       <ProfileForm />
     </div>
   );

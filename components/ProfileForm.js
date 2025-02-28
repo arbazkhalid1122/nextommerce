@@ -57,10 +57,10 @@ const ProfileForm = () => {
   };
 
   return (
-    <div className="flex-1 mt-2">
-      <div className="flex flex-col md:flex-row gap-4 items-start">
-        <div className="w-full md:w-1/2 lg:w-[75%] ">
-          <h1 className="text-2xl font-bold mb-8">Profile</h1>
+    <div className="flex-1">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-2">
+        <div className="w-full md:w-2/3">
+          <h1 className="responsive-header">Profile</h1>
 
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
@@ -184,7 +184,7 @@ const ProfileForm = () => {
         </div>
 
         {/* Profile Image Section */}
-        <div className="w-full md:w-1/4 lg:w-1/5">
+        <div className="w-3/4 md:w-1/4 mx-auto min-w-[150px]">
           <div className="relative w-full aspect-square bg-gray-100 rounded-md overflow-hidden">
             {profileImage ? (
               <img

@@ -13,18 +13,19 @@ const ProductCard = ({ product }) => {
       onClick={() => router.push(`product/${product.id}`)}
     >
       {/* Image Container with Min and Max Height */}
-      <div className="flex justify-center items-center min-h-32 max-h-40 sm:max-h-64">
+      <div className="flex justify-center items-center h-40 sm:h-64 w-full">
         <img
           src={product?.featureImage || product.image}
           alt={product.title}
-          className="h-full w-full object-contain bg-white"
+          className="h-full w-auto max-w-full object-contain bg-white"
         />
       </div>
+
       {/* Product Details */}
       <div className="mt-2 sm:mt-4 w-full text-center">
         <div className="flex justify-center items-center text-yellow-500 text-xs sm:text-sm">
           {[...Array(5)].map((_, index) => (
-            <span key={index}>{index < Math.floor(product?.rating?.rate) ? "★" : "☆"}</span>
+            <span className="text-[20px]" key={index}>{index < Math.floor(product?.rating?.rate) ? "★" : "☆"}</span>
           ))}
           <span className="ml-1 text-gray-700 text-xs font-semibold">
             {product?.rating?.rate}

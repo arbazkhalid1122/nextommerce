@@ -39,11 +39,8 @@ const ShoppingCart = () => {
   const { cart, updateQty, removeFromCart } = useCart();
 
   return (
-    <div className="container mx-auto p-3">
-      <div className="text-sm breadcrumbs mb-4">
-        <span className="text-2xl font-bold">Cart</span>
-      </div>
-
+    <div>
+      <span className="responsive-header">Cart</span>
       <div className="lg:flex lg:gap-8">
         {/* Cart Items */}
         <div className="lg:w-2/3">

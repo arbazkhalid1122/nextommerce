@@ -31,7 +31,7 @@ export default function Layout({ children }) {
           </div>
 
           {/* Page Content (Add margin when sidebar is visible) */}
-          <div className={`flex-1 p-4 md:ml-64 mt-14`}>{children}</div>
+          <div className={`flex-1 p-4 md:ml-64 mt-16`}>{children}</div>
 
           {/* Sidebar as Drawer for Small Screens */}
           {isDrawerOpen && (
