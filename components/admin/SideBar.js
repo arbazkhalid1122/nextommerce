@@ -27,7 +27,7 @@ const Sidebar = ({ collapsed, setIsDrawerOpen }) => {
   const isActive = (route) => router.pathname === route;
 
   return (
-    <div className={`"w-full  max-w-[2200px] fixed top-16  md:pl-4 h-screen bg-white transition-all duration-300 `}>
+    <div className={`"w-full  max-w-[2200px] fixed md:pl-4 h-screen bg-white transition-all duration-300 `}>
       {/* Sidebar */}
       <div className="h-full flex flex-col items-start p-2 md:p-4">
         <button
